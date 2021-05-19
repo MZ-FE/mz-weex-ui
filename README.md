@@ -1,8 +1,7 @@
-# Weex Ui
-[中文](README_cn.md) | [English](README.md)
+# MZ Weex Ui
 
 [![Build Status](https://img.shields.io/travis/apache/incubator-weex-ui.svg?style=flat-square)](https://travis-ci.org/apache/incubator-weex-ui)
-[![npm](https://img.shields.io/npm/v/weex-ui.svg?maxAge=3600&style=flat-square)](https://www.npmjs.com/package/weex-ui?_blank)
+[![npm](https://img.shields.io/npm/v/weex-ui.svg?maxAge=3600&style=flat-square)](https://www.npmjs.com/package/weex-ui)
 [![NPM downloads](https://img.shields.io/npm/dm/weex-ui.svg?style=flat-square)](https://npmjs.org/package/weex-ui)
 [![NPM all downloads](https://img.shields.io/npm/dt/weex-ui.svg?style=flat-square)](https://npmjs.org/package/weex-ui)
 [![CNPM all downloads](http://npm.taobao.org/badge/d/weex-ui.svg?style=flat-square)](https://npm.taobao.org/package/weex-ui)
@@ -11,27 +10,24 @@
 [![Package Quality](http://npm.packagequality.com/shield/weex-ui.svg?style=flat-square)](http://packagequality.com/#?package=weex-ui)
 [![Join the chat at https://gitter.im/alibaba-weex-ui/chat](https://img.shields.io/gitter/room/apache/incubator-weex-ui.svg?style=flat-square)](https://gitter.im/alibaba-weex-ui/chat?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
-> A rich interactive, lightweight, high performance UI library based on [Weex](https://github.com/apache/incubator-weex).
+## 文档
 
-## Docs
+* **[主页](https://apache.github.io/incubator-weex-ui/#/cn/)**
+* [搭配 weex-toolkit 使用 Weex Ui](https://apache.github.io/incubator-weex-ui/#/cn/with-weex-toolkit)
 
-* [**Home Page**](https://apache.github.io/incubator-weex-ui/)
-* [中文文档](https://apache.github.io/incubator-weex-ui/#/cn/)
-* [Use Weex Ui with weex-toolkit](https://apache.github.io/incubator-weex-ui/#/docs/with-weex-toolkit)
-
-## Demo
+## 预览
 
 <img src="https://img.alicdn.com/tfs/TB1O2ulhgoQMeJjy0FoXXcShVXa-1282-986.jpg" width=540/>
 
-Try [**it**](https://h5.m.taobao.com/trip/weex-ui/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fweex-ui%2Fdemo%2Findex.native-min.js) with Fliggy, Taobao, Tmall, Weex Playground or any browsers now!
+你可以通过飞猪、淘宝、天猫、Weex Playground 或者浏览器扫码[体验](https://h5.m.taobao.com/trip/weex-ui/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fweex-ui%2Fdemo%2Findex.native-min.js)
 
-## Installation
+## 安装
 
 ```shell
 npm i weex-ui -S
 ```
 
-## Usage
+## 使用
 
 ```html
 <template>
@@ -49,7 +45,7 @@ npm i weex-ui -S
 
 <script>
   import { WxcButton, WxcPopup } from 'weex-ui';
-  // or
+  // 或者分开引用（不是很推荐）
   // import WxcButton from 'weex-ui/packages/wxc-button';
   // import WxcPopup from 'weex-ui/packages/wxc-popup';
   module.exports = {
@@ -69,13 +65,12 @@ npm i weex-ui -S
 </script>
 ```
 
-### Before use
+### 使用前
 
-In order to not pack all the components, you need to use [`babel-plugin-component`](https://www.npmjs.com/package/babel-plugin-component) to import the specified component.
-At the same time, if you haven't installed `babel-preset-stage-0`, it's necessary to install it.
+为了不打包所有的组件，你需要使用 [`babel-plugin-component`](https://www.npmjs.com/package/babel-plugin-component) 来只引入需要的组件打包，同时如果没有安装 `babel-preset-stage-0`，也需一并安装。
 
 ```shell
-npm i babel-preset-stage-0 babel-plugin-component -D
+npm i babel-preset-stage-0 babel-plugin-component  -D
 ```
 
 ```json
@@ -94,39 +89,25 @@ npm i babel-preset-stage-0 babel-plugin-component -D
 }
 ```
 
-### More
+### 更多
 
-* If babel-loader in `webpack.config.js` has a exclude for node_modules, please turn on for weex-ui as `exclude: /node_modules(?!(\/|\\).*(weex).*)/`.
-* In order to get the latest features, please focus on the [ChangeLog](https://github.com/apache/incubator-weex-ui/releases) and often update `weex-ui` to the latest.
-* Many questions can be found in the [faq](https://apache.github.io/incubator-weex-ui/#/docs/faq) and [issue list](https://github.com/apache/incubator-weex-ui/issues?utf8=%E2%9C%93&q=), if you find a new bug, just file an [issue](https://github.com/apache/incubator-weex-ui/issues/new).
-* More experience in Weex construction can be learned from [Weex + Ui - Weex Conf 2018](https://apache.github.io/incubator-weex-ui/#/docs/weex-ui-weex-conf-2018), welcome to translate it.
+* 如果 `webpack.config.js`中 babel-loader 有对 node_modules 进行 exclude 处理，请修改成这样 `exclude: /node_modules(?!(\/|\\).*(weex).*)/`
+* 更多使用可见：[在 weex-toolkit 创建的项目中使用 Weex Ui](/docs/with-weex-toolkit_cn.md) 和 [weex-ui-demo](https://github.com/tw93/weex-ui-demo)
+* 为了获取最新特性, 请常查看 [升级日志](https://github.com/apache/incubator-weex-ui/releases) 并更新组件到最新版本
+* 很多常见问题可以从 [faq](https://apache.github.io/incubator-weex-ui/#/cn/faq) 和 [issue 列表](https://github.com/apache/incubator-weex-ui/issues?utf8=%E2%9C%93&q=) 获得答案，假如发现了新 Bug，可以给我们提一个[issue](https://github.com/apache/incubator-weex-ui/issues/new)
+* 更多的 Weex 建设经验可以从 [Weex + Ui - Weex Conf 2018](https://apache.github.io/incubator-weex-ui/#/docs/weex-ui-weex-conf-2018) 这篇文章了解，欢迎翻译~
 
-## Development
+## 调试
 
 ```shell
 npm i
 npm run start
 ```
 
-Once it has been compiled, a browser window will be opened automatically. You can switch to developer mode to see the demo. And there will be a QR code that you can use to try the demo on your phone in the console.
+一旦它编译完成后，将会自动打开一个浏览器，你可以将浏览器切换到开发者模式，这时候在 console 中你可以看到一个预览二维码，直接使用你的 Weex App 扫码就可以看到 Demo 效果。
 
-## Support
 
-* Use Weex Ui in your daily work.
-* **Star it** if you like.
-* Join the chat at DingTalk to help solve weex problems.
+## 协议
 
- <table><tr><td><img src="https://img.alicdn.com/tfs/TB1AEsZf7T2gK0jSZPcXXcKkpXa-750-990.jpg" width="190"></td><td><img  src="https://img.alicdn.com/tfs/TB1tpS2LxnaK1RjSZFtXXbC2VXa-606-799.png" width="190"></td><td><img src="https://img.alicdn.com/tfs/TB1lf1CLCzqK1RjSZFpXXakSXXa-1125-1485.png" width="190"></td></tr></table>
-
-## Contribution
-
-Want to file a bug, contribute some code, or improve documentation? Excellent! Read up on our [Contributing Guide](https://github.com/apache/incubator-weex-ui/blob/master/CONTRIBUTING.md) before making a pull request.
-
-Thank you to all the people who already contributed to Weex Ui!
-
-<a href="https://github.com/apache/incubator-weex-ui/graphs/contributors"><img src="https://opencollective.com/weex-ui/contributors.svg?width=890&button=false"/></a>
-
-## License
-
-* The [Apache License](https://apache.org/)
-* Please feel free to use and contribute to the development.
+* 遵循 [Apache 协议](https://apache.org/)
+* 请自由地享受和参与开源

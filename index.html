@@ -50,55 +50,55 @@
           var url = 'https://github.com/apache/incubator-weex-ui/blob/master/' + vm.route.file;
           var github = "<div  data-tooltip-title=\"Star it if you like\" data-tooltip-position=\"top\" class=\"tool-tip\"><iframe src=\"https://ghbtns.com/github-btn.html?user=alibaba&amp;repo=weex-ui&amp;type=watch&amp;count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"110\" height=\"20\" style='margin:0 10px -6px'></iframe></div>";
 
-          var editHtml = '<a href='+ url +' data-tooltip-title=\"Correct this doc\" data-tooltip-position=\"top\" class=\"tool-tip\" target=\"_blank\"><img class=\"emoji\" src=\"https://img.alicdn.com/tfs/TB1ica2lcLJ8KJjy0FnXXcFDpXa-128-128.png\" alt=\"Edit\"></a>';
-          return "<div class=\"tool-docs-header\">"
-            + editHtml
-            + github
-            + "</div>"
-            + '\n\n'
-            + html
-            + '\n----\n'
-            + '**Please feel free to use and contribute to the development.**'
+          var editHtml = '<a href=' + url + ' data-tooltip-title=\"Correct this doc\" data-tooltip-position=\"top\" class=\"tool-tip\" target=\"_blank\"><img class=\"emoji\" src=\"https://img.alicdn.com/tfs/TB1ica2lcLJ8KJjy0FnXXcFDpXa-128-128.png\" alt=\"Edit\"></a>';
+          return '<div class="tool-docs-header">' +
+          editHtml +
+          github +
+          '</div>' +
+          '\n\n' +
+          html +
+          '\n----\n' +
+          '**Please feel free to use and contribute to the development.**'
         })
       },
       function (hook, vm) {
         hook.doneEach(function () {
-          var codeBlocks = document.querySelectorAll("pre[v-pre]");
+          var codeBlocks = document.querySelectorAll('pre[v-pre]');
           codeBlocks.forEach((element, i, obj) => {
-            var button = document.createElement("button");
-            button.appendChild(document.createTextNode("Click to copy"));
-            button.classList.add("docsify-copy-code-button");
+            var button = document.createElement('button');
+            button.appendChild(document.createTextNode('Click to copy'));
+            button.classList.add('docsify-copy-code-button');
 
             if (vm.config.themeColor) {
               button.style.background = vm.config.themeColor;
             }
 
-            button.addEventListener("click", function (event) {
+            button.addEventListener('click', function (event) {
               var range = document.createRange();
-              var codeBlock = element.querySelector("code");
+              var codeBlock = element.querySelector('code');
               range.selectNode(codeBlock);
               window.getSelection().addRange(range);
 
               try {
                 // Now that we've selected the anchor text, execute the copy command
-                var successful = document.execCommand("copy");
+                var successful = document.execCommand('copy');
                 if (successful) {
-                  button.classList.add("success");
+                  button.classList.add('success');
                   setTimeout(function () {
-                    button.classList.remove("success");
+                    button.classList.remove('success');
                   }, 1000);
                 }
               } catch (err) {
-                button.classList.add("error");
+                button.classList.add('error');
                 setTimeout(function () {
-                  button.classList.remove("error");
+                  button.classList.remove('error');
                 }, 1000);
               }
 
               var selection = window.getSelection();
-              if (typeof selection.removeRange === "function") {
+              if (typeof selection.removeRange === 'function') {
                 selection.removeRange(range);
-              } else if (typeof selection.removeAllRanges === "function") {
+              } else if (typeof selection.removeAllRanges === 'function') {
                 selection.removeAllRanges();
               }
             });
@@ -113,6 +113,6 @@
     navigator.serviceWorker.register('./docs/dist/sw.js')
   }
 </script>
-<script src="//h5.m.taobao.com/js/trip/weex-ui/docsify.min.js"></script>
+<script src="docs/dist/docsify.min.js"></script>
 </body>
 </html>

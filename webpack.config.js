@@ -43,6 +43,8 @@ const getEntry = dir => {
       ret[scriptPath.replace(/^(.*)\.js$/, '$1')] = './' + scriptPath;
     }
   });
+
+  console.log('getEntry', ret);
   return ret;
 };
 
