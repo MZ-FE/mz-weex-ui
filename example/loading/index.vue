@@ -19,72 +19,72 @@ under the License.
 <!-- Created by Tw93 on 16/10/26. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-loading"></title>
+      <title title="mz-loading"></title>
       <category title="局部Loading配置"></category>
       <div class="demo">
-        <wxc-part-loading :show="partShow"
+        <mz-part-loading :show="partShow"
                           :width="width"
-                          :height="height"></wxc-part-loading>
+                          :height="height"></mz-part-loading>
       </div>
-      <wxc-cell :has-top-border="true"
+      <mz-cell :has-top-border="true"
                 :auto-accessible="false"
                 title="开启局部Loading">
         <switch :checked="partShow"
                 slot="value"
                 @change="partShow= !partShow"></switch>
-      </wxc-cell>
-      <wxc-cell :has-top-border="false"
+      </mz-cell>
+      <mz-cell :has-top-border="false"
                 title="长度">
         <input class="input"
                slot="value"
                placeholder="局部Loading长度，默认36"
                :value="width"
                @input="width=$event.value"/>
-      </wxc-cell>
-      <wxc-cell :has-top-border="false"
+      </mz-cell>
+      <mz-cell :has-top-border="false"
                 title="高度">
         <input class="input"
                slot="value"
                placeholder="局部Loading高度，默认36"
                :value="height"
                @input="height=$event.value"/>
-      </wxc-cell>
+      </mz-cell>
       <div class="blank"></div>
       <category title="页面Loading配置"></category>
-      <wxc-cell :has-top-border="false"
+      <mz-cell :has-top-border="false"
                 :auto-accessible="false"
                 title="开启Loading">
         <switch :checked="isShow"
                 slot="value"
                 @change="isShow= !isShow"></switch>
-      </wxc-cell>
-      <wxc-cell :has-top-border="false"
+      </mz-cell>
+      <mz-cell :has-top-border="false"
                 :auto-accessible="false"
                 title="自定义Loading">
         <switch :checked="type === 'trip'"
                 slot="value"
                 @change="type=(type === 'trip'? 'default' : 'trip')"></switch>
-      </wxc-cell>
-      <wxc-cell :has-top-border="false"
+      </mz-cell>
+      <mz-cell :has-top-border="false"
                 :has-arrow="true"
                 @wxcCellClicked="openIntervalLoading"
-                title="延迟加载"></wxc-cell>
+                title="延迟加载"></mz-cell>
 
-      <wxc-cell :has-top-border="false"
+      <mz-cell :has-top-border="false"
                 title="配置文案">
         <input class="input"
                slot="value"
                placeholder="配置文案，默认无"
                :value="loadingText"
                @input="loadingText=$event.value"/>
-      </wxc-cell>
+      </mz-cell>
     </scroller>
-    <wxc-loading :show="isShow"
+    <mz-loading :show="isShow"
                  :type="type"
                  :loading-text="loadingText"
-                 :interval="interval"></wxc-loading>
+                 :interval="interval"></mz-loading>
   </div>
 </template>
 
@@ -138,7 +138,7 @@ under the License.
 
 <style scoped>
 
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     right: 0;

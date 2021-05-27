@@ -1,6 +1,6 @@
 ## 常见问题
 
-#### wxc-ep-slider、wxc-slider-bar 不能正常滑动
+#### mz-ep-slider、mz-slider-bar 不能正常滑动
 - 目前 Weex Ui 中这两个组件依赖于一个创新交互特性 [BindingX](https://alibaba.github.io/bindingx/)，目前已经开源，Native 请参考仓库进行 [引入](https://github.com/alibaba/bindingx#installation)。
 
 #### Weex 中图片使用建议
@@ -8,7 +8,7 @@
 - 使用本地图片：Weex 的原生运行机制支持从设备中加载图片，你只需要设置文件 url，例如 file:///sdcard/image_new0.png 这样的格式，具体使用可见[【这里】](http://blog.csdn.net/codingfire/article/details/79528639)，同时Weex 暂时还不支持加载你工程中的图片文件，也不支持降级版本直接使用本地图片，故建议使用 CDN 图片链接
 - 使用Base64：这个取决于底层图片库解析功能，但是不建议在 Weex 中使用超过 2k 的 Base64，容易让bundle体积过大，影响性能
 
-#### Module not found: Error: Can't resolve 'weex-ui/packages/wxc-button/style.css'
+#### Module not found: Error: Can't resolve 'weex-ui/packages/mz-button/style.css'
 - 此错误应该babel配置babel-plugin-component时候缺少style配置，详细可见 [Weex-toolkit](https://apache.github.io/incubator-weex-ui/#/cn/?id=weex-toolkit)
 
 #### Uncaught SyntaxError: Unexpected token export；

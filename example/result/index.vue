@@ -19,17 +19,17 @@ under the License.
 <!-- Created by Tw93 on 16/10/26. -->
 
 <template>
-  <div class="wxc-demo">
-    <wxc-result :type="type"
+  <div class="mz-demo">
+    <mz-result :type="type"
                 padding-top="232"
                 :custom-set="customSet"
                 @wxcResultButtonClicked="resultButtonClick"
-                :show="show"></wxc-result>
+                :show="show"></mz-result>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     right: 0;

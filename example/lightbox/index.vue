@@ -19,9 +19,9 @@ under the License.
 <!-- Created by Tw93 on 17/07/31. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-lightbox"></title>
+      <title title="mz-lightbox"></title>
       <category title="使用案例"></category>
       <div class="wrapper">
         <image class="demo-image"
@@ -36,21 +36,21 @@ under the License.
           <text class="btn-txt">点击按钮弹出全屏图片</text>
         </div>
       </div>
-      <wxc-lightbox
-        ref="wxc-lightbox"
+      <mz-lightbox
+        ref="mz-lightbox"
         height="800"
         :index="1"
         :image-list="imageList"
         @wxcLightboxOverlayClicked="lightboxOverlayClick"
         :show="show">
-      </wxc-lightbox>
+      </mz-lightbox>
     </scroller>
   </div>
 </template>
 
 <style scoped>
 
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

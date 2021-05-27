@@ -20,9 +20,9 @@ under the License.
 
 <template>
   <div class="tag-list">
-    <wxc-tag v-for="(item,index) in demoData"
+    <mz-tag v-for="(item,index) in demoData"
              :key="index"
-             v-bind="item"></wxc-tag>
+             v-bind="item"></mz-tag>
   </div>
 </template>
 

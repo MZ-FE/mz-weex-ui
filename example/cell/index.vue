@@ -19,106 +19,106 @@ under the License.
 <!-- Created by Tw93 on 16/11/03. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="container">
-      <title title="wxc-cell"></title>
+      <title title="mz-cell"></title>
       <category title="Basic Style"></category>
       <div class="demo">
-        <wxc-cell label="Title"
+        <mz-cell label="Title"
                   @wxcCellClicked="wxcCellClicked"
                   :has-margin="false"
-                  extraContent="extra content"></wxc-cell>
+                  extraContent="extra content"></mz-cell>
       </div>
       <category title="Subtitle"></category>
       <div class="demo">
-        <wxc-cell title="Title"
+        <mz-cell title="Title"
                   desc="subtitle"
                   :has-arrow="true"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-top-border="true"></wxc-cell>
-        <wxc-cell title="Listltem (Android)"
+                  :has-top-border="true"></mz-cell>
+        <mz-cell title="Listltem (Android)"
                   desc="There may have water ripple effect of material if you set the click event."
                   :has-arrow="true"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-top-border="true"></wxc-cell>
+                  :has-top-border="true"></mz-cell>
       </div>
       <category title="Customized Right Side（Empty Content / Text）"></category>
       <div class="demo">
-        <wxc-cell label="Title"
+        <mz-cell label="Title"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-margin="false"></wxc-cell>
-        <wxc-cell label="Title"
+                  :has-margin="false"></mz-cell>
+        <mz-cell label="Title"
                   :has-arrow="true"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-top-border="false"></wxc-cell>
-        <wxc-cell title="Title"
+                  :has-top-border="false"></mz-cell>
+        <mz-cell title="Title"
                   :has-arrow="true"
                   @wxcCellClicked="wxcCellClicked"
                   :has-top-border="true"
-                  extraContent="extra content"></wxc-cell>
+                  extraContent="extra content"></mz-cell>
       </div>
       <category title="Align Vertical Center"></category>
       <div class="demo">
-        <wxc-cell title="Title"
+        <mz-cell title="Title"
                   desc="subtitle"
                   @wxcCellClicked="wxcCellClicked"
                   :has-top-border="true"
-                  extraContent="extra content"></wxc-cell>
+                  extraContent="extra content"></mz-cell>
       </div>
       <category title="Text Wrapping"></category>
       <div class="demo">
-        <wxc-cell desc="Multiple line，long text will wrap；Long Text Long Text Long Text Long Text Long Text Long Text"
+        <mz-cell desc="Multiple line，long text will wrap；Long Text Long Text Long Text Long Text Long Text Long Text"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-top-border="true"></wxc-cell>
-        <wxc-cell desc="Multiple line，long text will wrap；Long Text Long Text Long Text Long Text Long Text Long Text"
+                  :has-top-border="true"></mz-cell>
+        <mz-cell desc="Multiple line，long text will wrap；Long Text Long Text Long Text Long Text Long Text Long Text"
                   @wxcCellClicked="wxcCellClicked"
                   :has-top-border="true"
-                  extraContent="extra content"></wxc-cell>
+                  extraContent="extra content"></mz-cell>
       </div>
       <category title="Text content"></category>
       <div class="demo">
-        <wxc-cell label="title"
+        <mz-cell label="title"
                   title="content title"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-margin="false"></wxc-cell>
+                  :has-margin="false"></mz-cell>
 
-        <wxc-cell label="title"
+        <mz-cell label="title"
                   title="link"
                   :has-arrow="true"
                   :link="link"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-top-border="false"></wxc-cell>
+                  :has-top-border="false"></mz-cell>
 
-        <wxc-cell label="title"
+        <mz-cell label="title"
                   title="content title"
                   :has-arrow="true"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-top-border="false"></wxc-cell>
+                  :has-top-border="false"></mz-cell>
 
-        <wxc-cell title="content title"
+        <mz-cell title="content title"
                   :has-arrow="true"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-top-border="false"></wxc-cell>
+                  :has-top-border="false"></mz-cell>
       </div>
       <category title="Custom cell" class="category"></category>
       <div class="demo">
-        <wxc-cell title="title content"
+        <mz-cell title="title content"
                   desc="desc"
                   :has-arrow="true"
                   @wxcCellClicked="wxcCellClicked"
-                  :has-top-border="true"></wxc-cell>
+                  :has-top-border="true"></mz-cell>
       </div>
 
       <div class="demo">
-        <wxc-cell :has-arrow="false"
+        <mz-cell :has-arrow="false"
                   :has-top-border="false"
                   :auto-accessible="false">
           <text :style="{color:color}"
                 slot="title">custom title content</text>
           <switch slot="value"
                   @change="color= color==='#000' ? '#FFC900' : '#000'"></switch>
-        </wxc-cell>
-        <wxc-cell :has-arrow="false"
+        </mz-cell>
+        <mz-cell :has-arrow="false"
                   :cell-style="cellStyle"
                   :has-top-border="false"
                   :auto-accessible="false">
@@ -128,14 +128,14 @@ under the License.
           <text class="red"
                 slot="title">A custom title, style can also be added to the picture
           </text>
-        </wxc-cell>
+        </mz-cell>
       </div>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     width: 750px;
     position: absolute;
     top: 0;

@@ -21,11 +21,11 @@ under the License.
 
 <template>
   <div class="container">
-    <wxc-indexlist :normal-list="list.normalList"
+    <mz-indexlist :normal-list="list.normalList"
                    :hot-list-config="hotListConfig"
                    :city-location-config="cityLocationConfig"
                    :show-index="showIndex"
-                   @wxcIndexlistItemClicked="wxcIndexlistItemClicked"></wxc-indexlist>
+                   @wxcIndexlistItemClicked="wxcIndexlistItemClicked"></mz-indexlist>
   </div>
 </template>
 

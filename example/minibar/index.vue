@@ -19,38 +19,38 @@ under the License.
 <!-- Created by Tw93 on 16/10/26. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-minibar"></title>
+      <title title="mz-minibar"></title>
       <category title="使用案例"></category>
       <div>
         <div class="demo">
-          <wxc-minibar title="Minibar" background-color="#F2F3F4"></wxc-minibar>
+          <mz-minibar title="Minibar" background-color="#F2F3F4"></mz-minibar>
         </div>
         <div class="demo">
-          <wxc-minibar left-text="返回"
+          <mz-minibar left-text="返回"
                        @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
-                       @wxcMinibarRightButtonClicked="minibarRightButtonClick"></wxc-minibar>
+                       @wxcMinibarRightButtonClicked="minibarRightButtonClick"></mz-minibar>
         </div>
         <div class="demo">
-          <wxc-minibar title="右侧带文字的导航栏"
+          <mz-minibar title="右侧带文字的导航栏"
                        background-color="#009ff0"
                        text-color="#FFFFFF"
                        :left-button="leftButton"
                        @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
                        @wxcMinibarRightButtonClicked="minibarRightButtonClick"
-                       right-text="更多"></wxc-minibar>
+                       right-text="更多"></mz-minibar>
         </div>
         <div class="demo">
-          <wxc-minibar title="右侧带icon的导航栏"
+          <mz-minibar title="右侧带icon的导航栏"
                        @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
                        @wxcMinibarRightButtonClicked="minibarRightButtonClick"
-                       :right-button="rightButton"></wxc-minibar>
+                       :right-button="rightButton"></mz-minibar>
         </div>
       </div>
 
       <div class="demo">
-        <wxc-minibar background-color="#FFF3CD"
+        <mz-minibar background-color="#FFF3CD"
                      @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
                      @wxcMinibarRightButtonClicked="minibarRightButtonClick">
           <image src="https://img.alicdn.com/tfs/TB1QN8pdlHH8KJjy0FbXXcqlpXa-220-80.png"
@@ -60,14 +60,14 @@ under the License.
           <image slot="right"
                  src="https://img.alicdn.com/tfs/TB1j39Uc0fJ8KJjy0FeXXXKEXXa-160-128.png"
                  style="height: 32px;width: 40px"></image>
-        </wxc-minibar>
+        </mz-minibar>
       </div>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

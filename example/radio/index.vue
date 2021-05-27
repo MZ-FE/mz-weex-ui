@@ -17,21 +17,21 @@ specific language governing permissions and limitations
 under the License.
 -->
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-radio"></title>
+      <title title="mz-radio"></title>
       <category title="Radio可选"></category>
-      <wxc-radio :list="list"
-                 @wxcRadioListChecked="wxcRadioListChecked"></wxc-radio>
+      <mz-radio :list="list"
+                 @wxcRadioListChecked="wxcRadioListChecked"></mz-radio>
       <text class="radio-text">checkedItem: {{checkedInfo}}</text>
       <category title="Radio不可选"></category>
-      <wxc-radio :list="list2"></wxc-radio>
+      <mz-radio :list="list2"></mz-radio>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     right: 0;

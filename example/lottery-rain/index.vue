@@ -19,12 +19,12 @@ under the License.
 <!-- Created by Tw93 on 17/07/28. -->
 
 <template>
-  <wxc-lottery-rain :config="config"
+  <mz-lottery-rain :config="config"
                     :pic-list="images"
-                    ref="wxc-lottery-rain"
+                    ref="mz-lottery-rain"
                     :wrap-style="wrapStyle"
                     @wxcLotteryRainCaught="wxcLotteryRainCaught">
-  </wxc-lottery-rain>
+  </mz-lottery-rain>
 </template>
 
 <style scoped>

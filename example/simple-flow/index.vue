@@ -19,21 +19,21 @@ under the License.
 <!-- Created by Tw93 on 17/07/28. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-simple-flow"></title>
+      <title title="mz-simple-flow"></title>
       <category title="使用案例"></category>
       <text class="title">含标题、描述、时间的简易流程图</text>
-      <wxc-simple-flow :list="testData1"></wxc-simple-flow>
+      <mz-simple-flow :list="testData1"></mz-simple-flow>
 
       <text class="title">可只显示标题，也支持显示多个高亮</text>
-      <wxc-simple-flow :list="testData2"></wxc-simple-flow>
+      <mz-simple-flow :list="testData2"></mz-simple-flow>
 
       <text class="title">可配置主题色</text>
-      <wxc-simple-flow :list="testData1" :themeColor="themeColor1"></wxc-simple-flow>
+      <mz-simple-flow :list="testData1" :themeColor="themeColor1"></mz-simple-flow>
 
       <text class="title">支持流程图动态更新</text>
-      <wxc-simple-flow :list="folding ? testData3 : testData3.slice(0, 4)"></wxc-simple-flow>
+      <mz-simple-flow :list="folding ? testData3 : testData3.slice(0, 4)"></mz-simple-flow>
       <div class="btn">
         <text class="btn-txt" @click="()=>folding=!folding">{{folding ? '模拟动态更新-减少' : '模拟动态更新-增加'}}</text>
       </div>
@@ -43,7 +43,7 @@ under the License.
 
 <style scoped>
 
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

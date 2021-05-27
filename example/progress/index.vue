@@ -19,26 +19,26 @@ under the License.
 <!-- Created by Tw93 on 17/07/31. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-progress"></title>
+      <title title="mz-progress"></title>
       <category title="使用案例"></category>
       <div class="demo first-demo">
         <text class="demo-text">默认</text>
-        <wxc-progress></wxc-progress>
+        <mz-progress></mz-progress>
       </div>
       <div class="demo">
         <text class="demo-text">设置value</text>
-        <wxc-progress :value=50
-                      :bar-width=600></wxc-progress>
+        <mz-progress :value=50
+                      :bar-width=600></mz-progress>
       </div>
       <div class="demo">
         <text class="demo-text">自定义</text>
-        <wxc-progress :value=70
+        <mz-progress :value=70
                       bar-color='#9B7B56'
                       :bar-height=16
                       :bar-radius="16"
-                      :bar-width=640></wxc-progress>
+                      :bar-width=640></mz-progress>
       </div>
       <div class="btn"
            @click="uploadFile">
@@ -47,8 +47,8 @@ under the License.
       <div class="up-demo"
            v-if="progressVisible">
         <text class="progress-text left">0%</text>
-        <wxc-progress :value="value"
-                      :bar-width=540></wxc-progress>
+        <mz-progress :value="value"
+                      :bar-width=540></mz-progress>
         <text class="progress-text right">{{value}}%</text>
       </div>
     </scroller>
@@ -56,7 +56,7 @@ under the License.
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     left: 0;

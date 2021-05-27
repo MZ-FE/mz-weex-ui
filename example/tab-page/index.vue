@@ -19,7 +19,7 @@ under the License.
 <!-- Created by Tw93 on 17/03/31. -->
 
 <template>
-  <wxc-tab-page ref="wxc-tab-page"
+  <mz-tab-page ref="mz-tab-page"
                 :tab-titles="tabTitles"
                 :tab-styles="tabStyles"
                 title-type="icon"
@@ -40,19 +40,19 @@ under the License.
             :key="key"
             :accessible="true"
             aria-label="卡片测试｜四川成都出发到九寨沟牟尼沟 温泉3天2晚纯玩跟团旅游,价格219元">
-        <wxc-pan-item url="https://h5.m.taobao.com/trip/ticket/detail/index.html?scenicId=2675"
+        <mz-pan-item url="https://h5.m.taobao.com/trip/ticket/detail/index.html?scenicId=2675"
                       @wxcPanItemPan="wxcPanItemPan">
-          <wxc-item image="https://gw.alicdn.com/i1/2935198750/TB26GMgeOC9MuFjSZFoXXbUzFXa_!!2935198750.jpg"
+          <mz-item image="https://gw.alicdn.com/i1/2935198750/TB26GMgeOC9MuFjSZFoXXbUzFXa_!!2935198750.jpg"
                     :image-text="tabTitles[index].title"
                     title="卡片测试｜四川成都出发到九寨沟牟尼沟 温泉3天2晚纯玩跟团旅游"
                     :desc="desc"
                     :tags="tags"
                     price="666"
                     price-desc="月售58笔｜999+条评论"/>
-        </wxc-pan-item>
+        </mz-pan-item>
       </cell>
     </list>
-  </wxc-tab-page>
+  </mz-tab-page>
 </template>
 
 <style scoped>
@@ -83,7 +83,7 @@ under the License.
 </style>
 <script>
   import { WxcTabPage, WxcPanItem, Utils, BindEnv } from '../../index';
-  import WxcItem from './wxc-item.vue';
+  import WxcItem from './mz-item.vue';
 
   import Config from './config'
   import { setTitle } from '../_mods/set-nav';
@@ -129,7 +129,7 @@ under the License.
       },
       wxcPanItemPan (e) {
         if (BindEnv.supportsEBForAndroid()) {
-          this.$refs['wxc-tab-page'].bindExp(e.element);
+          this.$refs['mz-tab-page'].bindExp(e.element);
         }
       }
     }

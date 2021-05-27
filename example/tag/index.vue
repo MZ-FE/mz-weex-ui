@@ -19,9 +19,9 @@ under the License.
 <!-- Created by Tw93 on 17/07/31. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-tag"></title>
+      <title title="mz-tag"></title>
       <category title="默认使用"></category>
       <regular></regular>
       <category title="文字标签配置"></category>
@@ -35,7 +35,7 @@ under the License.
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     right: 0;

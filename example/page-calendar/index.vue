@@ -19,9 +19,9 @@ under the License.
 <!-- Created by Tw93 on 17/07/28. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-page-calendar"></title>
+      <title title="mz-page-calendar"></title>
       <category title="使用案例"></category>
       <div class="btn"
            @click="showCalendarPush">
@@ -48,7 +48,7 @@ under the License.
               class="text">当前日期: {{currentDate}}</text>
       </div>
 
-      <wxc-page-calendar ref="wxcPageCalendarPush"
+      <mz-page-calendar ref="wxcPageCalendarPush"
                          :animationType="animationTypePush"
                          :date-range="dateRange"
                          :selected-date="selectedDate"
@@ -61,8 +61,8 @@ under the License.
                          :desc-list="descList"
                          @wxcPageCalendarBackClicked="wxcPageCalendarBackClicked"
                          @wxcPageCalendarDateSelected="wxcPageCalendarDateSelected"
-      ></wxc-page-calendar>
-      <wxc-page-calendar ref="wxcPageCalendarModel"
+      ></mz-page-calendar>
+      <mz-page-calendar ref="wxcPageCalendarModel"
                          :animationType="animationTypeModel"
                          :date-range="dateRange"
                          :selected-date="selectedDate"
@@ -73,13 +73,13 @@ under the License.
                          :desc-list="descList"
                          @wxcPageCalendarBackClicked="wxcPageCalendarBackClicked"
                          @wxcPageCalendarDateSelected="wxcPageCalendarDateSelected"
-      ></wxc-page-calendar>
+      ></mz-page-calendar>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

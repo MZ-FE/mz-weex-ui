@@ -19,22 +19,22 @@ under the License.
 <!-- Created by Tw93 on 17/07/31. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-checkbox"></title>
+      <title title="mz-checkbox"></title>
       <category title="Checkbox"></category>
-      <wxc-checkbox title="默认"></wxc-checkbox>
-      <wxc-checkbox title="默认选中"
-                    :checked="true"></wxc-checkbox>
-      <wxc-checkbox title="未选中不可更改"
-                    :disabled="true"></wxc-checkbox>
-      <wxc-checkbox title="选中不可更改"
+      <mz-checkbox title="默认"></mz-checkbox>
+      <mz-checkbox title="默认选中"
+                    :checked="true"></mz-checkbox>
+      <mz-checkbox title="未选中不可更改"
+                    :disabled="true"></mz-checkbox>
+      <mz-checkbox title="选中不可更改"
                     :disabled="true"
-                    :checked="true"></wxc-checkbox>
+                    :checked="true"></mz-checkbox>
       <div class="margin">
         <category title="CheckboxList"></category>
-        <wxc-checkbox-list :list="list"
-                           @wxcCheckBoxListChecked="wxcCheckBoxListChecked"></wxc-checkbox-list>
+        <mz-checkbox-list :list="list"
+                           @wxcCheckBoxListChecked="wxcCheckBoxListChecked"></mz-checkbox-list>
         <text class="checked-text">选中项 {{checkedList.toString()}}</text>
       </div>
     </scroller>
@@ -42,7 +42,7 @@ under the License.
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     right: 0;

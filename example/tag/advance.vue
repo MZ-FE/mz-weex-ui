@@ -20,41 +20,41 @@ under the License.
 
 <template>
   <div class="sub-demo">
-    <wxc-cell :has-top-border="false"
+    <mz-cell :has-top-border="false"
               :auto-accessible="false"
               title="是否为实心">
       <switch :checked="type==='solid'"
               @change="type= type==='solid' ?'hollow' : 'solid'"></switch>
-    </wxc-cell>
-    <wxc-cell :has-top-border="false"
+    </mz-cell>
+    <mz-cell :has-top-border="false"
               :auto-accessible="false"
               title="标签颜色">
       <input class="input"
              placeholder="请输入标签色值"
              :value="tagColor"
              @input="tagColor=$event.value"/>
-    </wxc-cell>
-    <wxc-cell :has-top-border="false"
+    </mz-cell>
+    <mz-cell :has-top-border="false"
               :auto-accessible="false"
               title="文字颜色">
       <input class="input"
              placeholder="请输入文字色值"
              :value="fontColor"
              @input="fontColor=$event.value"/>
-    </wxc-cell>
-    <wxc-cell :has-top-border="false"
+    </mz-cell>
+    <mz-cell :has-top-border="false"
               :auto-accessible="false"
               title="标签内容">
       <input class="input"
              placeholder="请输入tag文字内容"
              :value="value"
              @input="value=$event.value"/>
-    </wxc-cell>
+    </mz-cell>
     <div class="demo">
-      <wxc-tag :type="type"
+      <mz-tag :type="type"
                :tag-color="tagColor"
                :font-color="fontColor"
-               :value="value"></wxc-tag>
+               :value="value"></mz-tag>
     </div>
   </div>
 </template>

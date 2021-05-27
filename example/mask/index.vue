@@ -19,9 +19,9 @@ under the License.
 <!-- Created by Tw93 on 17/07/31. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-mask"></title>
+      <title title="mz-mask"></title>
       <category title="使用案例"></category>
       <div class="btn"
            @click="openMask">
@@ -31,7 +31,7 @@ under the License.
            @click="openNoAnimationMask">
         <text class="btn-txt">点击弹出无动画面板</text>
       </div>
-      <wxc-mask height="800"
+      <mz-mask height="800"
                 width="702"
                 border-radius="0"
                 duration="300"
@@ -49,13 +49,13 @@ under the License.
             HTML、CSS、JavaScript 可以构建原生应用，上手非常简单。但实际上，应用的底层是 Objective-C 或 Java， 同时，Weex 提供很多 native
             组件或模块供开发人员使用。 </text>
         </div>
-      </wxc-mask>
+      </mz-mask>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

@@ -19,9 +19,9 @@ under the License.
 <!-- Created by Tw93 on 17/12/27. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-city" class="title"></title>
+      <title title="mz-city" class="title"></title>
       <category title="使用案例"></category>
       <div class="btn" @click="showListCityPush">
       <text class="btn-txt">列 城市选择(push)</text>
@@ -40,27 +40,27 @@ under the License.
       </div>
     </scroller>
     <!-- push方式演示 -->
-    <wxc-city ref="wxcCityPush"
+    <mz-city ref="wxcCityPush"
               :animationType="animationTypePush"
               :currentLocation="location"
               :cityStyleType="cityStyleType"
               :sourceData="sourceData"
               :showNavHeader="true"
               @wxcCityItemSelected="citySelect"
-              @wxcCityOnInput="onInput"></wxc-city>
+              @wxcCityOnInput="onInput"></mz-city>
     <!-- model方式演示 -->
-    <wxc-city ref="wxcCityModel"
+    <mz-city ref="wxcCityModel"
               :animationType="animationTypeModel"
               :currentLocation="location"
               :cityStyleType="cityStyleType"
               :showNavHeader="true"
               @wxcCityItemSelected="citySelect"
-              @wxcCityOnInput="onInput"></wxc-city>
+              @wxcCityOnInput="onInput"></mz-city>
   </div>
 </template>
 <script>
   import sourceData from './data';
-  import * as Util from '../../packages/wxc-city/util';
+  import * as Util from '../../packages/mz-city/util';
   import { WxcCity } from '../../index';
   import Title from '../_mods/title.vue';
   import Category from '../_mods/category.vue';
@@ -114,7 +114,7 @@ under the License.
 </script>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

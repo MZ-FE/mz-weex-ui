@@ -19,165 +19,165 @@ under the License.
 <!-- Created by Tw93 on 17/07/31. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-button"></title>
+      <title title="mz-button"></title>
       <category title="类型样式"></category>
       <div class="button-list">
         <text class="button-text">white</text>
-        <wxc-button text="确定"
+        <mz-button text="确定"
                     type="white"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                    @wxcButtonClicked="wxcButtonClicked"></mz-button>
         <text class="button-text">white && disabled</text>
-        <wxc-button text="确定"
+        <mz-button text="确定"
                     type="white"
                     :disabled="true"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                    @wxcButtonClicked="wxcButtonClicked"></mz-button>
         <text class="button-text">blue</text>
-        <wxc-button text="确定"
+        <mz-button text="确定"
                     type="blue"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                    @wxcButtonClicked="wxcButtonClicked"></mz-button>
         <text class="button-text">blue && disabled</text>
-        <wxc-button text="确定"
+        <mz-button text="确定"
                     type="blue"
                     :disabled="true"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                    @wxcButtonClicked="wxcButtonClicked"></mz-button>
         <text class="button-text">red</text>
-        <wxc-button text="确定"
+        <mz-button text="确定"
                     type="red"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                    @wxcButtonClicked="wxcButtonClicked"></mz-button>
         <text class="button-text">red && disabled</text>
-        <wxc-button text="确定"
+        <mz-button text="确定"
                     type="red"
                     :disabled="true"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                    @wxcButtonClicked="wxcButtonClicked"></mz-button>
         <text class="button-text">yellow</text>
-        <wxc-button text="确定"
+        <mz-button text="确定"
                     type="yellow"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                    @wxcButtonClicked="wxcButtonClicked"></mz-button>
         <text class="button-text">yellow && disabled</text>
-        <wxc-button text="确定"
+        <mz-button text="确定"
                     type="yellow"
                     :disabled="true"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                    @wxcButtonClicked="wxcButtonClicked"></mz-button>
       </div>
       <category title="尺寸"></category>
       <div>
         <text class="button-size-text">big</text>
         <div class="size">
-          <wxc-button text="确定"
+          <mz-button text="确定"
                       type="white"
                       size="big"
-                      @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-          <wxc-button text="确定"
+                      @wxcButtonClicked="wxcButtonClicked"></mz-button>
+          <mz-button text="确定"
                       type="white"
                       size="big"
                       :disabled="true"
-                      @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                      @wxcButtonClicked="wxcButtonClicked"></mz-button>
 
         </div>
         <text class="button-size-text">medium</text>
         <div class="size">
-          <wxc-button text="确定"
+          <mz-button text="确定"
                       type="blue"
                       :disabled="disabled"
                       size="medium"
-                      @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-          <wxc-button text="确定"
+                      @wxcButtonClicked="wxcButtonClicked"></mz-button>
+          <mz-button text="确定"
                       type="blue"
                       :disabled="true"
                       size="medium"
-                      @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-          <wxc-button text="确定"
+                      @wxcButtonClicked="wxcButtonClicked"></mz-button>
+          <mz-button text="确定"
                       type="red"
                       size="medium"
-                      @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                      @wxcButtonClicked="wxcButtonClicked"></mz-button>
         </div>
         <text class="button-size-text">small</text>
         <div class="size">
-          <wxc-button text="确定"
+          <mz-button text="确定"
                       type="red"
                       size="small"
-                      @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-          <wxc-button text="确定"
+                      @wxcButtonClicked="wxcButtonClicked"></mz-button>
+          <mz-button text="确定"
                       type="red"
                       size="small"
                       :disabled="true"
-                      @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-          <wxc-button text="确定"
+                      @wxcButtonClicked="wxcButtonClicked"></mz-button>
+          <mz-button text="确定"
                       type="yellow"
                       size="small"
-                      @wxcButtonClicked="wxcButtonClicked"></wxc-button>
-          <wxc-button text="确定"
+                      @wxcButtonClicked="wxcButtonClicked"></mz-button>
+          <mz-button text="确定"
                       type="yellow"
                       :disabled="true"
                       size="small"
-                      @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                      @wxcButtonClicked="wxcButtonClicked"></mz-button>
         </div>
       </div>
       <category title="自定义样式"></category>
-      <wxc-cell :has-top-border="false" title="按钮的文字">
+      <mz-cell :has-top-border="false" title="按钮的文字">
         <input class="input"
                slot="value"
                placeholder="文字"
                :value="text"
                @input="text=$event.value" />
-      </wxc-cell>
-      <wxc-cell :has-top-border="false" title="是否禁用">
+      </mz-cell>
+      <mz-cell :has-top-border="false" title="是否禁用">
         <switch :checked="disabled"
                 slot="value"
                 @change="disabled = !disabled"></switch>
-      </wxc-cell>
+      </mz-cell>
 
-      <wxc-cell :has-top-border="false" title="按钮宽度">
+      <mz-cell :has-top-border="false" title="按钮宽度">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现, 默认宽度702px"
                :value="width"
                @input="width=$event.value" />
-      </wxc-cell>
-      <wxc-cell :has-top-border="false" title="按钮高度">
+      </mz-cell>
+      <mz-cell :has-top-border="false" title="按钮高度">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现, 默认高度88px"
                :value="height"
                @input="height=$event.value" />
-      </wxc-cell>
-      <wxc-cell :has-top-border="false" title="背景颜色">
+      </mz-cell>
+      <mz-cell :has-top-border="false" title="背景颜色">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现"
                :value="backgroundColor"
                @input="backgroundColor=$event.value" />
-      </wxc-cell>
-      <wxc-cell :has-top-border="false" title="边框颜色">
+      </mz-cell>
+      <mz-cell :has-top-border="false" title="边框颜色">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现"
                :value="borderColor"
                @input="borderColor=$event.value" />
-      </wxc-cell>
-      <wxc-cell :has-top-border="false" title="边框圆角">
+      </mz-cell>
+      <mz-cell :has-top-border="false" title="边框圆角">
         <input class="input"
                slot="value"
                placeholder="自定义样式实现,默认12px"
                :value="borderRadius"
                @input="borderRadius=$event.value" />
-      </wxc-cell>
+      </mz-cell>
       <div class="demo">
-        <wxc-button :text="text"
+        <mz-button :text="text"
                     :type="type"
                     :disabled="disabled"
                     :btn-style="btnStyle"
                     :text-style="textStyle"
-                    @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+                    @wxcButtonClicked="wxcButtonClicked"></mz-button>
       </div>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     right: 0;

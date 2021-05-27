@@ -69,14 +69,14 @@ npm --version
 ```vue
 <template>
   <div>
-    <wxc-button text="Open Popup"
+    <mz-button text="Open Popup"
                 @wxcButtonClicked="buttonClicked">
-    </wxc-button>
-    <wxc-popup width="500"
+    </mz-button>
+    <mz-popup width="500"
                pos="left"
                :show="isShow"
                @wxcPopupOverlayClicked="overlayClicked">
-    </wxc-popup>
+    </mz-popup>
   </div>
 </template>
 

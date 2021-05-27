@@ -19,12 +19,12 @@ under the License.
 <!-- Created by Tw93 on 17/10/31. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-ep-slider"></title>
+      <title title="mz-ep-slider"></title>
       <category title="基础使用"></category>
       <div class="wrapper">
-        <wxc-ep-slider :slider-id="sliderId"
+        <mz-ep-slider :slider-id="sliderId"
                        :card-length='cardLength'
                        :card-s="cardSize"
                        :select-index="2"
@@ -43,19 +43,19 @@ under the License.
           <div class="more-slider" slot="pull-more" :style="{left: `${cardLength * (cardSize.width + cardSize.spacing)+60}px`,marginLeft:`${(750 - cardSize.width) / 2}px`}">
             <text>加载更多</text>
           </div>
-        </wxc-ep-slider>
+        </mz-ep-slider>
       </div>
       <category title="Android点击滑动冲突"></category>
       <div class="wrapper">
-        <wxc-ep-slider :slider-id="autoSliderId"
+        <mz-ep-slider :slider-id="autoSliderId"
                        :card-length='cardLength'
-                       ref="wxc-ep-slider"
+                       ref="mz-ep-slider"
                        :card-s="cardSize"
                        :auto-play="true"
                        :select-index="2"
                        @wxcEpSliderCurrentIndexSelected="wxcEpSliderCurrentIndexSelected">
           <!--自动生成demo-->
-          <wxc-pan-item v-for="(v,index) in [1,2,3,4,5]"
+          <mz-pan-item v-for="(v,index) in [1,2,3,4,5]"
                         :key="index"
                         :ext-id="index"
                         :class="['slider',`slider${index}`]"
@@ -66,8 +66,8 @@ under the License.
                         :accessible="true"
                         :aria-label="`这里是第${index + 1}个滑块`">
             <text class="text">这里是第{{index + 1}}个滑块</text>
-          </wxc-pan-item>
-        </wxc-ep-slider>
+          </mz-pan-item>
+        </mz-ep-slider>
         <div class="btn" @click="onClick">
           <text class="btn-text">手动切换2滑块</text>
         </div>
@@ -77,7 +77,7 @@ under the License.
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     left: 0;
@@ -176,7 +176,7 @@ under the License.
       },
       onClick () {
         // 手动切换到第2张
-        this.$refs['wxc-ep-slider'].manualSetPage(1);
+        this.$refs['mz-ep-slider'].manualSetPage(1);
       },
       pullMore () {
         modal.toast({
@@ -186,8 +186,8 @@ under the License.
       },
       wxcPanItemPan (e) {
         if (BindEnv.supportsEBForAndroid()) {
-          this.$refs['wxc-ep-slider'].clearAutoPlay();
-          this.$refs['wxc-ep-slider'].bindExp(e.element)
+          this.$refs['mz-ep-slider'].clearAutoPlay();
+          this.$refs['mz-ep-slider'].bindExp(e.element)
         }
       },
       wxcPanItemClicked (e) {

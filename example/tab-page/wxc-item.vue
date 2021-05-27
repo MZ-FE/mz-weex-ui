@@ -19,7 +19,7 @@ under the License.
 <!-- Created by Tw93 on 17/03/31. -->
 
 <template>
-  <div class="wxc-item">
+  <div class="mz-item">
     <image :src="image"
            class="item-image"
            resize="cover"></image>
@@ -34,14 +34,14 @@ under the License.
 
     <div class="item-content">
       <text class="item-text" v-if="isTitleString">{{title}}</text>
-      <wxc-special-rich-text :config-list="title" v-else></wxc-special-rich-text>
+      <mz-special-rich-text :config-list="title" v-else></mz-special-rich-text>
 
-      <wxc-rich-text :config-list="desc"></wxc-rich-text>
+      <mz-rich-text :config-list="desc"></mz-rich-text>
 
-      <wxc-rich-text :config-list="tags"></wxc-rich-text>
+      <mz-rich-text :config-list="tags"></mz-rich-text>
 
       <div class="item-price">
-        <wxc-rich-text :config-list="priceDesc"></wxc-rich-text>
+        <mz-rich-text :config-list="priceDesc"></mz-rich-text>
         <div class="price-num">
           <text class="yen">{{yenSymbol}}</text>
           <text class="price">{{price}}</text>
@@ -53,7 +53,7 @@ under the License.
 </template>
 
 <style scoped>
-  .wxc-item {
+  .mz-item {
     width: 750px;
     height: 246px;
     flex-direction: row;

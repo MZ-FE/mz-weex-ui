@@ -19,29 +19,29 @@ under the License.
 <!-- Created by Tw93 on 16/10/28. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-slider-bar"></title>
+      <title title="mz-slider-bar"></title>
       <category title="使用案例"></category>
       <div class="wrapper">
         <div class="demo-container">
           <text class="label">单滑块水平选择条</text>
           <text class="value-text">取值：{{barValue}}</text>
-          <wxc-slider-bar v-bind="sliderBarCfg1" @updateValue="updateValue"
-                          @wxcSliderBarTouchEnd="wxcSliderBarTouchEnd"></wxc-slider-bar>
+          <mz-slider-bar v-bind="sliderBarCfg1" @updateValue="updateValue"
+                          @wxcSliderBarTouchEnd="wxcSliderBarTouchEnd"></mz-slider-bar>
         </div>
         <div class="demo-container">
           <text class="label">双滑块范围水平选择条</text>
           <text class="value-text">取值范围：{{minValue}} --- {{maxValue}}</text>
-          <wxc-slider-bar v-bind="sliderBarCfg2" @updateValue="updateValue" @wxcSliderBarTouchEnd="wxcSliderBarTouchEnd"></wxc-slider-bar>
+          <mz-slider-bar v-bind="sliderBarCfg2" @updateValue="updateValue" @wxcSliderBarTouchEnd="wxcSliderBarTouchEnd"></mz-slider-bar>
         </div>
         <div class="demo-container">
           <text class="label">单滑块水平选择条禁用</text>
-          <wxc-slider-bar v-bind="sliderBarCfg3"></wxc-slider-bar>
+          <mz-slider-bar v-bind="sliderBarCfg3"></mz-slider-bar>
         </div>
         <div class="demo-container">
           <text class="label">双滑块水平范围选择条禁用</text>
-          <wxc-slider-bar v-bind="sliderBarCfg4"></wxc-slider-bar>
+          <mz-slider-bar v-bind="sliderBarCfg4"></mz-slider-bar>
         </div>
       </div>
     </scroller>
@@ -50,7 +50,7 @@ under the License.
 
 <style scoped>
 
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

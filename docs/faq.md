@@ -1,6 +1,6 @@
 ## FAQ
 
-#### wxc-ep-slider, wxc-slider-bar Can't slide
+#### mz-ep-slider, mz-slider-bar Can't slide
 - The two components in Weex Ui now depend on an innovative interaction feature called [BindingX](https://alibaba.github.io/bindingx/), And this feature is already open source, please refer to github [to import](https://github.com/alibaba/bindingx#installation).
 
 
@@ -9,7 +9,7 @@
 - Use local image：Weex’s native runtime support load image file from device’s disk, all you have to do set the file url like file:///sdcard/image_new0.png. See more [here](http://blog.csdn.net/codingfire/article/details/79528639). At the same time, Weex does not support the loading of image files in your project, nor does it support the direct use of local images by downgrade Web version. Therefore, it is recommended to use the CDN image link.
 - Use Base64：This depends on native image library resolution, but it is not recommended to use more than 2k Base64 in Weex, which makes the bundle too large to affect performance.
 
-#### Module not found: Error: Can't resolve 'weex-ui/packages/wxc-button/style.css'
+#### Module not found: Error: Can't resolve 'weex-ui/packages/mz-button/style.css'
 - This error should be the `babel-plugin-component` lack of style configuration, You can refer to [Weex-toolkit](https://apache.github.io/incubator-weex-ui/#/?id=weex-toolkit) to fix it.
 
 

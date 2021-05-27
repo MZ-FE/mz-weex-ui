@@ -19,13 +19,13 @@ under the License.
 <!-- Created by Tw93 on 17/07/31. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-icon"></title>
+      <title title="mz-icon"></title>
       <category title="基本类型"></category>
       <div class="icon-total" v-for="(item,index) in chunkArr" :key="index">
         <div v-for="(v,i) in item" :key="i" class="icon-item">
-          <wxc-icon :name="v" @wxcIconClicked="clicked"></wxc-icon>
+          <mz-icon :name="v" @wxcIconClicked="clicked"></mz-icon>
           <text class="icon-text">{{v}}</text>
         </div>
       </div>
@@ -34,7 +34,7 @@ under the License.
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     right: 0;

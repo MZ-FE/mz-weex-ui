@@ -19,14 +19,14 @@ under the License.
 <!-- Created by Tw93 on 17/07/28. -->
 
 <template>
-  <div class="wxc-title" :aria-hidden="true">
+  <div class="mz-title" :aria-hidden="true">
     <image class="logo" src="https://gw.alicdn.com/tfs/TB1JpgJRFXXXXc7XpXXXXXXXXXX-800-800.png"></image>
     <text class="text">{{title}}</text>
   </div>
 </template>
 
 <style scoped>
-  .wxc-title {
+  .mz-title {
     margin-top: 20px;
     flex-direction: row;
     align-items: center;

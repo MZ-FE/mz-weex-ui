@@ -20,8 +20,8 @@ under the License.
 
 <template>
 <div>
-  <scroller class="wxc-demo">
-    <title title="wxc-swipe-action"></title>
+  <scroller class="mz-demo">
+    <title title="mz-swipe-action"></title>
     <category title="使用案例"></category>
     <WxcSwipeAction @onNodeClick='onTest' :data='data'>
       <text class="text" slot-scope="val">{{val.val.item.title}}{{val.val.index}}</text>

@@ -17,9 +17,9 @@ specific language governing permissions and limitations
 under the License.
 -->
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-overlay"></title>
+      <title title="mz-overlay"></title>
       <category title="使用案例"></category>
       <div class="btn"
            @click="openOverlay">
@@ -29,18 +29,18 @@ under the License.
            @click="openNoAniOverlay">
         <text class="btn-txt">点击打开无动画蒙层</text>
       </div>
-      <wxc-overlay :show="show"
+      <mz-overlay :show="show"
                    duration="300"
                    :hasAnimation="hasAnimation"
                    :timingFunction="timingFunction"
                    @wxcOverlayBodyClicked="wxcOverlayBodyClicked"
-                   opacity="0.6"></wxc-overlay>
+                   opacity="0.6"></mz-overlay>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

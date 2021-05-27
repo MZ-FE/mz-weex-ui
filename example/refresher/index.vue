@@ -19,11 +19,11 @@ under the License.
 <!-- Created by git@zwwill on 118/02/08. -->
 
 <template>
-  <div class="wxc-demo">
-    <title title="wxc-refresher"></title>
+  <div class="mz-demo">
+    <title title="mz-refresher"></title>
     <category title="使用案例"></category>
     <list class="scroller" ref="scroller">
-      <wxc-refresher ref="wxc-refresher"
+      <mz-refresher ref="mz-refresher"
                      scroller-ref="scroller"
                      main-text="下拉即可刷新(自定义)"
                      pulling-text="释放即可刷新(自定义)"
@@ -31,7 +31,7 @@ under the License.
                      :max-time="5000"
                      :text-width="240"
                      @wxcRefresh="onRefresh"
-                     @wxcTimeout="onTimeout"></wxc-refresher>
+                     @wxcTimeout="onTimeout"></mz-refresher>
       <cell class="cell" v-for="(num,key) in lists" :key="key">
         <div class="panel">
           <text class="text">{{num}}</text>
@@ -70,7 +70,7 @@ under the License.
         this.refreshTime = this.refreshTime === 3000 ? 10000 : 3000;
       },
       refreshSucc () {
-        this.$refs['wxc-refresher'].wxcCancel();
+        this.$refs['mz-refresher'].wxcCancel();
         modal.toast({ message: '刷新成功', duration: .5 });
       },
     }
@@ -78,7 +78,7 @@ under the License.
 </script>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

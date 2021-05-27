@@ -48,17 +48,17 @@ under the License.
       </cell>
     </list>
 
-    <wxc-slide-nav class="nav nav-top" ref="topNav" position="top">
+    <mz-slide-nav class="nav nav-top" ref="topNav" position="top">
       <div class="nav-cell"><text>前一天</text></div>
       <div class="nav-cell"><text>06-22</text></div>
       <div class="nav-cell"><text>后一天</text></div>
-    </wxc-slide-nav>
+    </mz-slide-nav>
 
-    <wxc-slide-nav class="nav nav-bottom" ref="bottomNav" position="bottom">
+    <mz-slide-nav class="nav nav-bottom" ref="bottomNav" position="bottom">
       <div class="nav-cell"><text class="nav-text">筛选</text></div>
       <div class="nav-cell"><text class="nav-text">时间</text></div>
       <div class="nav-cell"><text class="nav-text">从低到高</text></div>
-    </wxc-slide-nav>
+    </mz-slide-nav>
   </div>
 </template>
 

@@ -19,76 +19,76 @@ under the License.
 <!-- Created by git@zwwill on 118/02/08. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-popover"></title>
+      <title title="mz-popover"></title>
       <category title="使用案例"></category>
       <div>
 
         <div class="demo">
-          <wxc-minibar title="点击右方拓展按钮"
+          <mz-minibar title="点击右方拓展按钮"
                        background-color="#F2F3F4"
                        @wxcMinibarRightButtonClicked="minibarRightButtonClick"
-                       right-text="..."></wxc-minibar>
+                       right-text="..."></mz-minibar>
         </div>
 
         <div class="demo demo3">
-          <wxc-button text="向右弹出|无动画"
+          <mz-button text="向右弹出|无动画"
                       :btnStyle="btn3Style"
                       type="white"
-                      @wxcButtonClicked="wxcButtonClicked('wxc-popover3')"></wxc-button>
+                      @wxcButtonClicked="wxcButtonClicked('mz-popover3')"></mz-button>
 
-          <wxc-button text="向左弹出"
+          <mz-button text="向左弹出"
                       :btnStyle="btn4Style"
                       type="white"
-                      @wxcButtonClicked="wxcButtonClicked('wxc-popover4')"></wxc-button>
+                      @wxcButtonClicked="wxcButtonClicked('mz-popover4')"></mz-button>
 
         </div>
 
         <div class="demo demo2">
-          <wxc-button text="向上弹出"
-                      @wxcButtonClicked="wxcButtonClicked('wxc-popover2')"></wxc-button>
+          <mz-button text="向上弹出"
+                      @wxcButtonClicked="wxcButtonClicked('mz-popover2')"></mz-button>
         </div>
 
         <!-- demo 1 pop -->
-        <wxc-popover ref="wxc-popover1"
+        <mz-popover ref="mz-popover1"
                      :buttons="btns"
                      :position="popoverPosition"
                      :arrowPosition="popoverArrowPosition"
                      @wxcPopoverButtonClicked="popoverButtonClicked"
-        ></wxc-popover>
+        ></mz-popover>
 
         <!-- demo 2 pop -->
-        <wxc-popover ref="wxc-popover2"
+        <mz-popover ref="mz-popover2"
                      :buttons="btns2"
                      :position="popoverPosition2"
                      :arrowPosition="popoverArrowPosition2"
                      @wxcPopoverButtonClicked="popoverButtonClicked"
-        ></wxc-popover>
+        ></mz-popover>
 
         <!-- demo 3 pop -->
-        <wxc-popover ref="wxc-popover3"
+        <mz-popover ref="mz-popover3"
                      :buttons="btns3"
                      :position="popoverPosition3"
                      :hasAnimation="false"
                      :arrowPosition="popoverArrowPosition3"
                      @wxcPopoverButtonClicked="popoverButtonClicked"
-        ></wxc-popover>
+        ></mz-popover>
 
         <!-- demo 4 pop -->
-        <wxc-popover ref="wxc-popover4"
+        <mz-popover ref="mz-popover4"
                      :buttons="btns4"
                      :position="popoverPosition4"
                      :arrowPosition="popoverArrowPosition4"
                      @wxcPopoverButtonClicked="popoverButtonClicked"
-        ></wxc-popover>
+        ></mz-popover>
       </div>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -191,12 +191,12 @@ under the License.
     },
     methods: {
       minibarRightButtonClick () {
-        this.$refs['wxc-popover1'].wxcPopoverShow();
+        this.$refs['mz-popover1'].wxcPopoverShow();
       },
       popoverButtonClicked (obj) {
         modal.toast({ 'message': `key:${obj.key}, index:${obj.index}`, 'duration': 1 });
       },
-      wxcButtonClicked (ref = 'wxc-popover2') {
+      wxcButtonClicked (ref = 'mz-popover2') {
         this.$refs[ref].wxcPopoverShow();
       }
     }

@@ -19,55 +19,55 @@ under the License.
 <!-- Created by Tw93 on 16/10/28. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-noticebar"></title>
+      <title title="mz-noticebar"></title>
       <category title="使用案例"></category>
       <div class="demo">
-        <wxc-noticebar notice="不配置参数的通告栏"></wxc-noticebar>
+        <mz-noticebar notice="不配置参数的通告栏"></mz-noticebar>
       </div>
       <div class="demo">
-        <wxc-noticebar mode="link"
+        <mz-noticebar mode="link"
                        :notice-url="url"
-                       notice="测试通告,可跳转"></wxc-noticebar>
+                       notice="测试通告,可跳转"></mz-noticebar>
       </div>
       <div class="demo">
-        <wxc-noticebar :show="true"
+        <mz-noticebar :show="true"
                        mode="closable"
-                       notice="测试通告，可关闭"></wxc-noticebar>
+                       notice="测试通告，可关闭"></mz-noticebar>
       </div>
       <div class="demo">
-        <wxc-noticebar type="time"
-                       notice="请在14分25秒内完成支付，超时将取消订单"></wxc-noticebar>
+        <mz-noticebar type="time"
+                       notice="请在14分25秒内完成支付，超时将取消订单"></mz-noticebar>
       </div>
       <div class="demo">
-        <wxc-noticebar type="redbag"
-                       notice="亲，你有很多很多红包可以用"></wxc-noticebar>
+        <mz-noticebar type="redbag"
+                       notice="亲，你有很多很多红包可以用"></mz-noticebar>
       </div>
       <div class="demo">
-        <wxc-noticebar mode="link"
+        <mz-noticebar mode="link"
                        notice="一条测试通告,可跳转"
                        type="info"
                        @wxcNoticebarLinkClicked="wxcNoticebarLinkClicked"
-                       :notice-url="url"></wxc-noticebar>
+                       :notice-url="url"></mz-noticebar>
       </div>
       <div class="demo">
-        <wxc-noticebar mode="closable"
+        <mz-noticebar mode="closable"
                        notice="一条测试通告,关闭"
                        @wxcNoticebarCloseClicked="wxcNoticebarCloseClicked"
-                       type="success"></wxc-noticebar>
+                       type="success"></mz-noticebar>
       </div>
       <div class="demo">
-        <wxc-noticebar mode="link"
+        <mz-noticebar mode="link"
                        notice="一行过长自动...的测试通告,可跳转测试通告,可跳转测试通告,可跳转可跳转测试通告,可跳转"
                        type="question"
-                       :notice-url="url"></wxc-noticebar>
+                       :notice-url="url"></mz-noticebar>
       </div>
       <div class="demo last-demo">
-        <wxc-noticebar mode="closable"
+        <mz-noticebar mode="closable"
                        notice="测试通告,可跳转测试通告,可跳转测试通告,可跳转测试通告,可跳转测试通告,可跳转"
                        :lines="2"
-                       type="warn"></wxc-noticebar>
+                       type="warn"></mz-noticebar>
       </div>
     </scroller>
   </div>
@@ -75,7 +75,7 @@ under the License.
 
 <style scoped>
 
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

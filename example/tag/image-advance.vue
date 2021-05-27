@@ -20,14 +20,14 @@ under the License.
 
 <template>
   <div class="sub-demo">
-    <wxc-cell :has-top-border="false" title="标签内容">
+    <mz-cell :has-top-border="false" title="标签内容">
       <input class="input"
              placeholder="请输入tag图片链接"
              :value="img"
              @input="img=$event.value"/>
-    </wxc-cell>
+    </mz-cell>
     <div class="demo">
-      <wxc-tag type="image" :img="img"></wxc-tag>
+      <mz-tag type="image" :img="img"></mz-tag>
     </div>
   </div>
 </template>

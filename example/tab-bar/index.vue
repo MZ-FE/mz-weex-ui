@@ -19,7 +19,7 @@ under the License.
 <!-- Created by Tw93 on 17/03/31. -->
 
 <template>
-  <wxc-tab-bar :tab-titles="tabTitles"
+  <mz-tab-bar :tab-titles="tabTitles"
                :tab-styles="tabStyles"
                title-type="icon"
                @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
@@ -27,7 +27,7 @@ under the License.
     <div class="item-container" :style="contentStyle"><text>特别推荐</text></div>
     <div class="item-container" :style="contentStyle"><text>消息中心</text></div>
     <div class="item-container" :style="contentStyle"><text>我的主页</text></div>
-  </wxc-tab-bar>
+  </mz-tab-bar>
 </template>
 
 <style scoped>

@@ -19,56 +19,56 @@ under the License.
 <!-- Created by Tw93 on 16/10/28. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
       <div class="wrapper">
-        <title title="wxc-searchbar"></title>
+        <title title="mz-searchbar"></title>
         <category title="使用案例"></category>
       </div>
       <text class="value-text"
             @click="setValue">点我可设置输入框内容</text>
       <div class="demo">
-        <wxc-searchbar ref="wxc-searchbar"
+        <mz-searchbar ref="mz-searchbar"
                        @wxcSearchbarCancelClicked="wxcSearchbarCancelClicked"
                        @wxcSearchbarInputReturned="wxcSearchbarInputReturned"
                        @wxcSearchbarInputOnInput="wxcSearchbarInputOnInput"
                        @wxcSearchbarCloseClicked="wxcSearchbarCloseClicked"
                        @wxcSearchbarInputOnFocus="wxcSearchbarInputOnFocus"
-                       @wxcSearchbarInputOnBlur="wxcSearchbarInputOnBlur"></wxc-searchbar>
+                       @wxcSearchbarInputOnBlur="wxcSearchbarInputOnBlur"></mz-searchbar>
         <text class="value-text">{{value}}</text>
 
       </div>
 
       <text class="hint">禁用输入框</text>
       <div class="demo demo1">
-        <wxc-searchbar :disabled="isDisabled"
+        <mz-searchbar :disabled="isDisabled"
                        placeholder="无法输入"
-                       @wxcSearchbarInputDisabledClicked="wxcSearchbarInputDisabledClicked"></wxc-searchbar>
+                       @wxcSearchbarInputDisabledClicked="wxcSearchbarInputDisabledClicked"></mz-searchbar>
       </div>
 
       <text class="hint">一直显示取消按钮,同时theme="yellow"</text>
       <div class="demo demo1">
-        <wxc-searchbar :always-show-cancel="showCancel"
+        <mz-searchbar :always-show-cancel="showCancel"
                        theme="yellow"
-                       @searchbarCancelClick="searchbarCancelClick"></wxc-searchbar>
+                       @searchbarCancelClick="searchbarCancelClick"></mz-searchbar>
       </div>
 
       <text class="hint">带有目的地模式的输入框、theme="yellow"</text>
       <div class="demo demo1">
-        <wxc-searchbar class="searchbar"
+        <mz-searchbar class="searchbar"
                        placeholder="搜索目的地"
                        theme="yellow"
                        mod="hasDep"
                        dep-name="杭州出发"
                        @wxcSearchbarDepChooseClicked="wxcSearchbarDepChooseClicked"
-                       @wxcSearchbarInputDisabledClicked="wxcSearchbarInputDisabledClicked"></wxc-searchbar>
+                       @wxcSearchbarInputDisabledClicked="wxcSearchbarInputDisabledClicked"></mz-searchbar>
       </div>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -125,7 +125,7 @@ under the License.
     },
     methods: {
       setValue () {
-        this.$refs['wxc-searchbar'].setValue('点击了手动设置输入框内容的开关');
+        this.$refs['mz-searchbar'].setValue('点击了手动设置输入框内容的开关');
       },
 
       wxcSearchbarInputOnFocus () {

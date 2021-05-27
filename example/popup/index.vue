@@ -19,9 +19,9 @@ under the License.
 <!-- Created by Tw93 on 16/10/25. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-popup"></title>
+      <title title="mz-popup"></title>
       <category title="使用案例"></category>
       <div class="btn"
            @click="openTopPopup">
@@ -48,12 +48,12 @@ under the License.
         <text class="btn-txt">自动设置高度</text>
       </div>
 
-      <wxc-popup :show="isTopShow"
+      <mz-popup :show="isTopShow"
                  pos="top"
                  :animation="{timingFunction:'ease-out'}"
-                 @wxcPopupOverlayClicked="popupOverlayTopClick"></wxc-popup>
+                 @wxcPopupOverlayClicked="popupOverlayTopClick"></mz-popup>
 
-      <wxc-popup :have-overlay="isTrue"
+      <mz-popup :have-overlay="isTrue"
                  popup-color="rgb(92, 184, 92)"
                  :show="isBottomShow"
                  @wxcPopupOverlayClicked="popupOverlayBottomClick"
@@ -65,14 +65,14 @@ under the License.
           <text>与 Web App、HTML5 App 或 hybrid App 不同，您可以使用 Weex 构建一个真正的原生应用。更贴心的是你的代码只需使用 HTML、CSS、JavaScript
             可以构建原生应用，上手非常简单。</text>
         </div>
-      </wxc-popup>
+      </mz-popup>
 
-      <wxc-popup width="500"
+      <mz-popup width="500"
                  :show="isLeftShow"
                  @wxcPopupOverlayClicked="popupOverlayLeftClick"
-                 pos="left"></wxc-popup>
+                 pos="left"></mz-popup>
 
-      <wxc-popup width="400"
+      <mz-popup width="400"
                  :show="isRightShow"
                  pos="right"
                  ref="wxcPopup"
@@ -82,19 +82,19 @@ under the License.
              class="btn blue hide-auto">
           <text class="btn-txt">主动隐藏试试</text>
         </div>
-      </wxc-popup>
+      </mz-popup>
 
 
-      <wxc-popup :height="height"
+      <mz-popup :height="height"
                  :show="isAutoShow"
                  pos="bottom"
-                 @wxcPopupOverlayClicked="popupOverlayAutoClick"></wxc-popup>
+                 @wxcPopupOverlayClicked="popupOverlayAutoClick"></mz-popup>
     </scroller>
   </div>
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

@@ -62,12 +62,12 @@ const getCopyConfig = () => {
   return ret;
 };
 
-const example = getEntry('example');
+// const example = getEntry('example');
 const entry = Object.assign(
   {
     index: './index.js'
   },
-  example
+  // example
 );
 
 const plugins = [

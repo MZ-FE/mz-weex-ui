@@ -19,34 +19,34 @@ under the License.
 <!-- Created by Tw93 on 17/03/31. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-rich-text"></title>
+      <title title="mz-rich-text"></title>
       <category title="使用案例"></category>
       <div class="wrapper">
         <div class="type-container">
           <text class="type-text">Weex富文本混排方案：</text>
-          <wxc-rich-text class="special-rich"
+          <mz-rich-text class="special-rich"
                          :config-list="configList"
-                         @wxcRichTextLinkClick="wxcRichTextLinkClick"></wxc-rich-text>
+                         @wxcRichTextLinkClick="wxcRichTextLinkClick"></mz-rich-text>
         </div>
 
         <div class="type-container">
           <text class="type-text">纯字符串兼容：</text>
-          <wxc-rich-text class="special-rich"
-                         :config-list="configString"></wxc-rich-text>
+          <mz-rich-text class="special-rich"
+                         :config-list="configString"></mz-rich-text>
         </div>
 
         <div class="type-container">
           <text class="type-text">特殊富文本组件：(tag+2行文字)</text>
-          <wxc-special-rich-text class="special-rich"
-                                 :config-list="specialConfigList"></wxc-special-rich-text>
+          <mz-special-rich-text class="special-rich"
+                                 :config-list="specialConfigList"></mz-special-rich-text>
         </div>
 
         <div class="type-container">
           <text class="type-text">特殊富文本组件：(icon+2行文字)</text>
-          <wxc-special-rich-text class="special-rich"
-                                 :config-list="specialConfigList1"></wxc-special-rich-text>
+          <mz-special-rich-text class="special-rich"
+                                 :config-list="specialConfigList1"></mz-special-rich-text>
         </div>
       </div>
     </scroller>
@@ -55,7 +55,7 @@ under the License.
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

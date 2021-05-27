@@ -19,36 +19,36 @@ under the License.
 <!-- Created by Tw93 on 16/10/25. -->
 
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-stepper"></title>
+      <title title="mz-stepper"></title>
       <category title="使用案例"></category>
       <div class="demo">
         <text class="text">无配置:</text>
-        <wxc-stepper></wxc-stepper>
+        <mz-stepper></mz-stepper>
       </div>
       <div class="demo">
         <text class="text">{min:2,max:10,step:2,defaultValue:4}</text>
-        <wxc-stepper :default-value="value"
+        <mz-stepper :default-value="value"
                      step="2"
                      max="10"
                      min="2"
                      @wxcStepperValueIsMinOver="wxcStepperValueIsMinOver"
                      @wxcStepperValueIsMaxOver="wxcStepperValueIsMaxOver"
-                     @wxcStepperValueChanged="wxcStepperValueChanged"></wxc-stepper>
+                     @wxcStepperValueChanged="wxcStepperValueChanged"></mz-stepper>
       </div>
       <div class="demo">
         <text class="text">禁用</text>
-        <wxc-stepper :default-value="4"
+        <mz-stepper :default-value="4"
                      step="2"
                      max="10"
                      min="2"
-                     :disabled="isDisabled"></wxc-stepper>
+                     :disabled="isDisabled"></mz-stepper>
       </div>
 
       <div class="demo">
         <text class="text">input只读:</text>
-        <wxc-stepper :read-only="isOnlyRead"></wxc-stepper>
+        <mz-stepper :read-only="isOnlyRead"></mz-stepper>
       </div>
     </scroller>
   </div>
@@ -56,7 +56,7 @@ under the License.
 
 <style scoped>
 
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;

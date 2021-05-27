@@ -1,16 +1,16 @@
 <template>
-  <div class="wxc-demo">
+  <div class="mz-demo">
     <scroller class="scroller">
-      <title title="wxc-grid-select"></title>
+      <title title="mz-grid-select"></title>
 
       <category title="单选"></category>
 
       <div class="demo">
-        <wxc-grid-select
+        <mz-grid-select
           :list="testData1"
           :single="true"
           @select="params => onSelect('res1', params)">
-        </wxc-grid-select>
+        </mz-grid-select>
 
         <text class="res">{{res1}}</text>
       </div>
@@ -20,12 +20,12 @@
       <category title="多选"></category>
 
       <div class="demo">
-        <wxc-grid-select
+        <mz-grid-select
           :list="testData2"
           :limit="5"
           @overLimit="onOverLimit"
           @select="params => onSelect('res2', params)">
-        </wxc-grid-select>
+        </mz-grid-select>
 
         <text class="res">{{res2}}</text>
       </div>
@@ -33,13 +33,13 @@
       <category title="自定义样式"></category>
 
       <div class="demo">
-        <wxc-grid-select
+        <mz-grid-select
           :single="true"
           :cols="5"
           :customStyles="customStyles"
           :list="testData3"
           @select="params => onSelect('res3', params)">
-        </wxc-grid-select>
+        </mz-grid-select>
 
         <text class="res">{{res3}}</text>
       </div>
@@ -48,7 +48,7 @@
 </template>
 
 <style scoped>
-  .wxc-demo {
+  .mz-demo {
     position: absolute;
     top: 0;
     bottom: 0;
