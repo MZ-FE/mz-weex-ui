@@ -123,6 +123,10 @@ const dom = weex.requireModule('dom')
 import { THEME_COLOR_SET } from '../../theme/config'
 
 export default {
+  model: {
+    prop: 'tabCheckedIndex',
+    event: 'change'
+  },
   props: {
     type: {
       type: String,
@@ -151,7 +155,8 @@ export default {
     hasMargin: {
       type: Boolean,
       default: false
-    }
+    },
+    beforeLeave: Function
   },
   data: () => ({
     currentPage: 0,
@@ -173,8 +178,8 @@ export default {
   }),
 
   computed: {
-    mergeStyleOption() {
-      let { type, theme, tabStyles, defaultStyleOption } = this
+    mergeStyleOption () {
+      const { type, theme, tabStyles, defaultStyleOption } = this
       if (type === 'third') {
         if (theme === 'default') {
           return {
@@ -199,7 +204,7 @@ export default {
             }
           }
         } else {
-          return { ...defaultStyleOption, ...tabStyles, ...{ boxBgColor: THEME_BOX_BGCOLOR_SET[theme] } }
+          return { ...defaultStyleOption, ...tabStyles, ...{ boxBgColor: THEME_BOX_BGCOLOR_SET[theme] }}
         }
       } else if (type === 'third-group') {
         return { bgColor: THEME_COLOR_SET[theme] }
@@ -222,7 +227,7 @@ export default {
     },
 
     // 新增三类固定标签
-    wrapStyle() {
+    wrapStyle () {
       const { theme } = this
       if (theme == 'default') {
         return {
@@ -239,7 +244,7 @@ export default {
       }
     },
 
-    textStyle() {
+    textStyle () {
       const { theme } = this
       if (theme == 'default') {
         return {
@@ -251,7 +256,7 @@ export default {
         }
       }
     },
-    verticalLineStyle() {
+    verticalLineStyle () {
       const { theme } = this
       if (theme == 'default') {
         return {
@@ -267,10 +272,10 @@ export default {
         }
       }
     },
-    textBtnStyle() {
+    textBtnStyle () {
       const { theme } = this
-      let hackH = weex.config.env.platform == 'iOS' ? -1 : 2
-      return function(i) {
+      const hackH = weex.config.env.platform == 'iOS' ? -1 : 2
+      return function (i) {
         if (theme == 'default') {
           return {
             color: '#000000',
@@ -288,22 +293,57 @@ export default {
     }
   },
   methods: {
-    onClicked(index, len) {
+    onClicked (index, len) {
+      const item = this.tabTitles[index];
+
+      if (this.beforeLeave) {
+        const before = this.beforeLeave({
+          ...item,
+          index: index
+        });
+
+        console.log('before');
+        console.log(JSON.stringify(before));
+        if (before && before.then) {
+          before
+            .then(() => {
+              console.log('beforeLeave-then');
+              this.changeTab(index, len);
+            }, () => {
+              // https://github.com/ElemeFE/element/pull/14816
+              // ignore promise rejection in `before-leave` hook
+            });
+        } else if (before !== false) {
+          this.changeTab(index, len);
+        }
+      } else {
+        this.changeTab(index, len);
+      }
+    },
+    /**
+     * 改变选择的tab
+     */
+    changeTab (index, len) {
+      const item = this.tabTitles[index];
       this.currentPage = index
-      this.$emit('dofTabSelected', { index: index })
+      this.$emit('change', index)
+      this.$emit('tabSelected', {
+        ...item,
+        index: index
+      })
       len > 4 && this._scrollToCurrentTab(index)
     },
-    _scrollToCurrentTab(index) {
+    _scrollToCurrentTab (index) {
       const currentTabEl = this.$refs[`dof-tab-title-${index}`][0]
       const firstTabEl = this.$refs['dof-tab-title-0'][0]
       const SAFE_DISTANCE = 16.3
 
       dom.getComponentRect(currentTabEl, res => {
-        let {
+        const {
           size: { height, width = 110, left }
         } = res
         const appearNum = Math.floor(750 / (width + SAFE_DISTANCE))
-        let offset = (-(750 - width) / 2) | 0
+        const offset = (-(750 - width) / 2) | 0
 
         if (index + 1 < appearNum) {
           dom.scrollToElement(firstTabEl, {
@@ -318,16 +358,16 @@ export default {
       })
     },
     // 三类固定
-    onTextClicked(index) {
+    onTextClicked (index) {
       // weex下不能完成事件委托
       this.tabCheckedIndex = index
-      this.$emit('dofTabSelected', { index: index })
+      this.$emit('tabSelected', { index: index })
     }
   },
   watch: {
     tabCheckedIndex: {
-      handler(n, o) {
-        let len = this.tabTitles.length - 1
+      handler (n, o) {
+        const len = this.tabTitles.length - 1
         len >= +n ? (this.currentPage = +n) : (this.currentPage = len)
         if (len > 4) {
           this.$nextTick(() => {

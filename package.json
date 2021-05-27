@@ -47,6 +47,7 @@
     "copy-webpack-plugin": "~4.0.1",
     "css-loader": "~0.28.7",
     "docsify-cli": "^4.4.3",
+    "dolphin-weex-ui": "^0.2.1",
     "eslint": "^3.19.0",
     "eslint-config-vue": "^2.0.2",
     "eslint-plugin-vue": "^2.1.0",
