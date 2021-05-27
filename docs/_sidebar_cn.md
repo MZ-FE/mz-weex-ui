@@ -10,10 +10,6 @@
 
 - 数据展示
 
-- 反馈
-
-- 游戏
-
 - 服务
    - [utils 功能函数](cn/packages/utils/)
 
