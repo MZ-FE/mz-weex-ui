@@ -1,4 +1,4 @@
-- [**搭配 weex-toolkit 使用 Weex Ui**](cn/with-weex-toolkit)
+- [安装](cn/install)
 - 布局
     - [mz-cell 单元格](cn/packages/mz-cell/)
 

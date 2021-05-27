@@ -1,4 +1,4 @@
-## How to contribute to Weex Ui
+## How to contribute to MZ Weex Ui
 
 **Welcome to create [pull requests](https://github.com/apache/incubator-weex-ui/compare/) for bugfix, new component, doc, example, suggestion and anything.**
 

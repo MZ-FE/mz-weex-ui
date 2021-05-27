@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import { WxcRadio } from 'weex-ui'
+  import { WxcRadio } from 'mz-weex-ui'
   export default {
     components: { WxcRadio },
     data: () => ({

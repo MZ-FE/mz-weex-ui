@@ -1,6 +1,6 @@
 # Utils
 
-> Weex Ui 中的公共函数服务
+> MZ Weex Ui 中的公共函数服务
 
 !> 在 `weex-ui` V0.6.0 版本以上，为了减少打包体积，Binding 相关判断由 `Utils.env ` 转移到 `BindEnv`
 

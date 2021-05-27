@@ -1,47 +1,10 @@
-## 搭配 weex-toolkit 使用 Weex Ui
+### 在项目中使用 MZ Weex Ui
 
-### 安装前
+安装 mz-weex-ui
 
-安装前建议你的node版本是 >= 8.0, 推荐使用 [n](https://github.com/tj/n) 来进行版本管理，同时建议 npm 版本 >= 5
+>npm i mz-weex-ui@latest -S
 
-```
-node -v
-v8.2.1
-npm --version
-5.3.0
-```
-### 确保 [weex-toolkit](https://github.com/weexteam/weex-toolkit) 为新版本
-
-> npm install -g weex-toolkit@latest
-
-目前最新版本为：
-
-> weex -v
-
-```
-   v1.1.0-beta.7
- - weexpack : v0.4.7-beta.26
- - weex-builder : v0.2.13-beta.4
- - weex-devtool : v0.3.2-beta.11
- - weex-previewer : v1.3.13-beta.13
- - toolkit-repair : v0.0.5
-```
-
-### 使用 weex-toolkit 创建一个项目
-
-> weex create your_project
-
-同时安装相关依赖
-
-> npm i 
-
-### 在项目中使用 Weex Ui
-
-安装 weex-ui
-
->npm i weex-ui@latest -S
-
-安装babel-preset-stage-0 和 babel-plugin-component 插件，前者用于babel编译，后者用于优化   weex-ui 包的组件引用
+安装babel-preset-stage-0 和 babel-plugin-component 插件，前者用于babel编译，后者用于优化   mz-weex-ui 包的组件引用
 
 > npm i babel-plugin-component babel-preset-stage-0  -D
 
@@ -54,7 +17,7 @@ npm --version
     [
       "component",
       {
-        "libraryName": "weex-ui",
+        "libraryName": "mz-weex-ui",
         "libDir": "packages",
         "style": false
       }
@@ -63,7 +26,7 @@ npm --version
 }
 ```
 
-### 玩一玩 Weex Ui
+### 玩一玩 MZ Weex Ui
 修改 `src/index.vue` 进行测试
 
 ```vue
@@ -81,7 +44,7 @@ npm --version
 </template>
 
 <script>
-  import { WxcButton, WxcPopup } from 'weex-ui';
+  import { WxcButton, WxcPopup } from 'mz-weex-ui';
   module.exports = {
     components: { WxcButton, WxcPopup },
     data: () => ({
@@ -134,4 +97,4 @@ npm --version
 
 
 ### 更多
-- [weex-ui-demo](https://github.com/tw93/weex-ui-demo)
+- [mz-weex-ui-demo](https://github.com/tw93/weex-ui-demo)

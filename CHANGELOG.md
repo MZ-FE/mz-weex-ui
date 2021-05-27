@@ -61,7 +61,7 @@
 
 ## 0.6.9
 - [!] Fixed the bug about [mz-loading](https://apache.github.io/incubator-weex-ui/#/packages/mz-loading/) When `need-mask` is false.
-- [-] Remove the special treatment for weex-toolkit in [with-weex-toolkit](https://apache.github.io/incubator-weex-ui/#/docs/with-weex-toolkit).
+- [-] Remove the special treatment for weex-toolkit in [install](https://apache.github.io/incubator-weex-ui/#/docs/install).
 
 ## 0.6.8
 - [+] [mz-tab-page](https://apache.github.io/incubator-weex-ui/#/packages/mz-tab-page/) supports more settings about tab-item, More can see [here]((https://apache.github.io/incubator-weex-ui/#/packages/mz-tab-page/))

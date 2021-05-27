@@ -63,7 +63,7 @@
 ## 0.6.9
 
 - [!] 修复 [mz-loading](https://apache.github.io/incubator-weex-ui/#/cn/packages/mz-loading/) 组件的 Bug，当 need-mask 为 false 时候
-- [-] 移除文档 [with-weex-toolkit](https://apache.github.io/incubator-weex-ui/#/cn/with-weex-toolkit) 中对最新版本的 weex-toolkit 特殊的处理
+- [-] 移除文档 [install](https://apache.github.io/incubator-weex-ui/#/cn/install) 中对最新版本的 weex-toolkit 特殊的处理
 
 ## 0.6.8
 
@@ -258,7 +258,7 @@
 - [+] 组件展示适配 IPhoneX
 - [!] 代码格式遵循 ESlint
 - [+] 更强大的 [mz-page-calendar](https://github.com/apache/incubator-weex-ui/blob/master/packages/mz-page-calendar/README.md) 组件
-- [+] 正式发布 Weex Ui 官网 🎉🎉
+- [+] 正式发布 MZ Weex Ui 官网 🎉🎉
 
 ## 0.2.8
 

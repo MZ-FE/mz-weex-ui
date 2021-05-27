@@ -1,4 +1,3 @@
-- [En](/)
 - [中文](/cn/)
 - <a href="//apache.github.io/incubator-weex-ui/docs/demo.html" target="_self">Demo</a>
 - <a id="J_show_community" class="show_community" onclick="document.getElementById('J_community_image').classList.toggle('active');this.classList.toggle('active');">Community</a>
