@@ -138,6 +138,19 @@ const getBaseConfig = () => ({
       {
         test: /\.css$/,
         use: 'happypack/loader?id=css'
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name][hash].[ext]',
+              outputPath: 'assets',
+              publicPath: './assets'
+            }
+          }
+        ]
       }
     ]
   },

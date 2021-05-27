@@ -120,7 +120,7 @@
 
 <script>
 const dom = weex.requireModule('dom')
-import { THEME_COLOR_SET } from '../../theme/config'
+import { THEME_COLOR_SET, THEME_BOX_BGCOLOR_SET } from '../../theme/config'
 
 export default {
   model: {
@@ -302,12 +302,9 @@ export default {
           index: index
         });
 
-        console.log('before');
-        console.log(JSON.stringify(before));
         if (before && before.then) {
           before
             .then(() => {
-              console.log('beforeLeave-then');
               this.changeTab(index, len);
             }, () => {
               // https://github.com/ElemeFE/element/pull/14816
@@ -340,7 +337,7 @@ export default {
 
       dom.getComponentRect(currentTabEl, res => {
         const {
-          size: { height, width = 110, left }
+          size: { width = 110 }
         } = res
         const appearNum = Math.floor(750 / (width + SAFE_DISTANCE))
         const offset = (-(750 - width) / 2) | 0
@@ -360,13 +357,13 @@ export default {
     // 三类固定
     onTextClicked (index) {
       // weex下不能完成事件委托
-      this.tabCheckedIndex = index
+      this.$emit('change', index)
       this.$emit('tabSelected', { index: index })
     }
   },
   watch: {
     tabCheckedIndex: {
-      handler (n, o) {
+      handler (n) {
         const len = this.tabTitles.length - 1
         len >= +n ? (this.currentPage = +n) : (this.currentPage = len)
         if (len > 4) {

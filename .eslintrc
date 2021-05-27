@@ -1,4 +1,6 @@
 {
+  "extends": ["plugin:vue/essential", "eslint:recommended"],
+  "plugins": ["vue"],
   "env": {
     "es6": true,
     "node": true,
@@ -16,6 +18,5 @@
     "no-control-regex": "off",
     "vue/html-self-closing": "off",
     "space-before-function-paren": 2
-  },
-  "extends": "vue"
+  }
 }
