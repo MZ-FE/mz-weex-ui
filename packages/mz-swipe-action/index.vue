@@ -6,6 +6,7 @@
         class="itemWrap"
         ref="menuItem"
         :style="{
+          ...cellStyle,
           width:
             parseInt(width) +
             116 * (item.rightItem && item.rightItem.length) +
@@ -50,6 +51,7 @@
         :key="'skid-' + index"
         class="dof-skid"
         :style="{
+          ...cellStyle,
           width:
             parseInt(width) +
             116 * (item.rightItem && item.rightItem.length) +
@@ -102,17 +104,14 @@
   overflow: hidden;
 }
 .dof-skid {
-  margin-bottom: 16px;
   flex-direction: row;
   align-items: stretch;
   overflow: hidden;
-  border-radius: 16px;
 }
 
 /* android */
 
 .itemWrap {
-  margin-bottom: 16px;
   flex-direction: row;
   justify-content: flex-start;
   align-items: stretch;
@@ -155,7 +154,6 @@ import Binding from 'weex-bindingx/lib/index.weex.js';
 import Utils from '../utils';
 
 const animation = weex.requireModule('animation');
-const dom = weex.requireModule('dom');
 
 export default {
   props: {
@@ -167,10 +165,14 @@ export default {
       type: Array,
       default: () => [],
     },
+    itemStyle: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   components: {
   },
-  data() {
+  data () {
     return {
       mobileX: 0,
       webStarX: 0,
@@ -183,14 +185,20 @@ export default {
     };
   },
 
-  mounted() {
+  mounted () {
   },
-  created() {},
+  created () {},
 
-  computed: {},
+  computed: {
+    cellStyle () {
+      return Object.assign({}, this.itemStyle, {
+        marginBottom: '0'
+      })
+    }
+  },
 
   methods: {
-    dofCellClicked(index) {
+    dofCellClicked (index) {
       //点击触发滑动恢复初始化
       if (this.isAndroid) {
         this.rightSlide(); // 列表初始化
@@ -206,7 +214,7 @@ export default {
       }
     },
 
-    special(dom, styles) {
+    special (dom, styles) {
       animation.transition(dom, {
         styles,
         duration: 150, // ms
@@ -214,7 +222,7 @@ export default {
         delay: 0, // ms
       });
     },
-    onRightNode(index, i, text) {
+    onRightNode (index, i, text) {
       if (this.isAndroid) {
         this.rightSlide();
         this.$emit('dofRightClicked', { index, i, text });
@@ -226,7 +234,7 @@ export default {
       }
     },
 
-    onPanEnd(e, node, i) {
+    onPanEnd (e, node, i) {
       if (Utils.env.isWeb()) {
         const webEndX = e.changedTouches[0].pageX;
         this.movingDistance(webEndX - this.webStarX, node, this.$refs.skid[i]);
@@ -246,10 +254,10 @@ export default {
       !Utils.env.isWeb() ? this.mobile(e, node, i, len) : this.web(e, node, i);
       e.stopPropagation();
     },
-    web(e, node, i) {
+    web (e) {
       this.webStarX = e.changedTouches[0].pageX;
     },
-    mobile(e, node, i, len) {
+    mobile (e, node, i, len) {
       let el = this.$refs['skid'][i];
       Binding.bind(
         {
@@ -274,7 +282,7 @@ export default {
         }
       );
     },
-    movingDistance(scope, node, el) {
+    movingDistance (scope, node, el) {
       const len = node.rightItem ? node.rightItem.length : 0;
       const distance = len * -116;
       // if (scope < -80*len) {
@@ -306,13 +314,13 @@ export default {
     // 适配Android
     // 经n次尝试和测试后，发现weex的click事件和touchend事件冲突, 防止滑动后触发click事件
     // 这里异步处理，touchend事件结束后才激活向上传递的click事件
-    touchend() {
+    touchend () {
       setTimeout(() => {
         this.cellCanClick = true;
       }, 100);
     },
 
-    slideMenu(e, index, length) {
+    slideMenu (e, index, length) {
       this.cellCanClick = false;
       let ele = this.$refs.menuItem[index];
       let direction = e.direction;
@@ -325,7 +333,7 @@ export default {
     },
 
     // @params ele 要执行动画的元素
-    leftSlide(e, ele, length) {
+    leftSlide (e, ele, length) {
       this.rightSlide();
       animation.transition(ele, {
         styles: {
@@ -339,7 +347,7 @@ export default {
       e.stopPropagation();
     },
 
-    rightSlide() {
+    rightSlide () {
       let listItems = this.$refs.menuItem;
       for (let i = 0; i < listItems.length; i++) {
         animation.transition(
