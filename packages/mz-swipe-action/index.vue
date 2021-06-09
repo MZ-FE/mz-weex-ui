@@ -191,9 +191,9 @@ export default {
 
   computed: {
     cellStyle () {
-      return Object.assign({}, this.itemStyle, {
+      return Object.assign({
         marginBottom: '0'
-      })
+      }, this.itemStyle)
     }
   },
 
