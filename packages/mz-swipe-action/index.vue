@@ -116,7 +116,6 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: stretch;
-  border-radius: 16px;
 }
 
 .swipe-action-right {
