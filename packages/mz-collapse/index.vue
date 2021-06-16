@@ -1,9 +1,14 @@
 <template>
   <div class="mz-collapse">
     <div class="mz-collapse-header" @click="toggleExpand">
-      <slot></slot>
+      <slot>
+        <div>
+          <text class="mz-collapse-header-title">{{ title }}</text>
+        </div>
+      </slot>
 
-      <div class="arrow-wrapper" v-if="!disabled">
+      <div class="right-cell">
+        <text class="right-text" v-if="rightText">{{ rightText }}</text>
         <image
           class="icon-arrow"
           :class="[isExpand ? 'icon-arrow-expand' : '']"
@@ -24,6 +29,14 @@
   export default {
     name: 'mz-collapse',
     props: {
+      title: {
+        type: String,
+        default: ''
+      },
+      rightText: {
+        type: String,
+        default: ''
+      },
       /**
        * 是否禁用，禁用后不可下拉
        */
@@ -64,18 +77,31 @@
 
 <style scoped>
   .mz-collapse {
+    padding: 0 32px;
     background-color: #fff;
   }
   .mz-collapse-header {
+    padding: 32px 0;
+    border-bottom: 1px  solid #f2f2f2;
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
   }
 
-  .arrow-wrapper {
-    padding-right: 32px;
+  .mz-collapse-header-title {
+    color: #000;
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .right-cell {
     flex-direction: row;
     align-items: center;
+  }
+  .right-text {
+    padding-right: 20px;
+    color: #666;
+    font-size: 28px;
   }
   .icon-arrow {
     width: 22px;
