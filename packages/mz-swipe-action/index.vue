@@ -1,6 +1,6 @@
 <template>
-  <div ref="wrapper">
-    <div v-if="isAndroid" class="container">
+  <div class="wrapper" ref="wrapper">
+    <div v-if="isAndroid" class="container" :style="{ width }">
       <div
         @click="dofCellClicked(index)"
         class="itemWrap"
@@ -17,7 +17,7 @@
         @swipe="slideMenu($event, index, item.rightItem.length)"
         @touchend="touchend"
       >
-        <div>
+        <div :style="{ width }">
           <slot name="swipeItem" v-bind:data="item" v-bind:index="index"></slot>
         </div>
         <div
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="container">
+    <div v-else class="container" :style="{ width }">
       <div
         @click="dofCellClicked(index)"
         ref="skid"
@@ -69,7 +69,7 @@
         "
         @panend="(e) => onPanEnd(e, item, index)"
       >
-        <div ref="swipeItem">
+        <div ref="swipeItem" :style="{ width }">
           <slot name="swipeItem" v-bind:data="item" v-bind:index="index"></slot>
         </div>
 
@@ -98,56 +98,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-.container {
-  overflow: hidden;
-}
-.dof-skid {
-  flex-direction: row;
-  align-items: stretch;
-  overflow: hidden;
-}
-
-/* android */
-
-.itemWrap {
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: stretch;
-}
-
-.swipe-action-right {
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: stretch;
-  overflow: hidden;
-}
-.swipeItem {
-  width: 116px;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-
-.minswipeItem {
-  width: 116px;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-
-.swipeText {
-  font-size: 32px;
-  color: #ffffff;
-  text-align: center;
-  align-items: center;
-  lines: 2;
-  line-height: 48px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-</style>
 
 <script>
 import Binding from 'weex-bindingx/lib/index.weex.js';
@@ -192,7 +142,8 @@ export default {
   computed: {
     cellStyle () {
       return Object.assign({
-        marginBottom: '0'
+        marginBottom: '0',
+        backgroundColor: '#fff'
       }, this.itemStyle)
     }
   },
@@ -369,3 +320,57 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .wrapper {
+    align-items: center;
+    justify-content: center;
+  }
+  .container {
+    overflow: hidden;
+  }
+  .dof-skid {
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  /* android */
+
+  .itemWrap {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .swipe-action-right {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+  }
+  .swipeItem {
+    width: 116px;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+
+  .minswipeItem {
+    width: 116px;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+
+  .swipeText {
+    font-size: 32px;
+    color: #ffffff;
+    text-align: center;
+    align-items: center;
+    lines: 2;
+    line-height: 48px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+</style>

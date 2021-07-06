@@ -9,7 +9,7 @@
     
 
 - 数据展示
-
+    - [mz-swipe-action 侧滑列表](cn/packages/mz-swipe-action/)
 - 服务
    - [utils 功能函数](cn/packages/utils/)
 
