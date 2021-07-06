@@ -3,7 +3,7 @@
 > Weex Tab 标签栏
 
 
-<img src="../../example/tab-page/demo.gif" width="240"/>
+<img src="../../example/mz-tab-page/demo.gif" width="240"/>
 
 
 ## 使用方法
