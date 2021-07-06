@@ -3,9 +3,7 @@
 > Weex Tab 标签栏
 
 
-## [Demo](https://h5.m.taobao.com/trip/mz-radio/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fwxc-radio%2Fdemo%2Findex.native-min.js)
-
-<img src="https://gw.alipayobjects.com/zos/rmsportal/AQMauSgRgIvdoSfxQVmN.gif" width="240"/>&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.alicdn.com/tfs/TB1ORR4SpXXXXX8aXXXXXXXXXXX-200-200.png" width="160"/>
+<img src="../../example/tab-page/demo.gif" width="240"/>
 
 
 ## 使用方法
@@ -13,87 +11,66 @@
 ```vue
 <template>
   <div class="mz-demo">
-    <scroller class="scroller">
-      <mz-radio :list="list" @wxcRadioListChecked="wxcRadioListChecked"></mz-radio>
-      <text class="radio-text">checkedItem: {{checkedInfo}}</text>
-      <category title="Radio不可选"></category>
-      <mz-radio :list="list2"></mz-radio>
-    </scroller>
+    <MzTabPage
+          type="primary"
+          slot="middle"
+          :is-slot="true"
+          v-model="tabCheckedIndex"
+          :tab-titles="tabTitles"
+          :beforeLeave="beforeLeave"
+          @tabSelected="tabChangeHandler"
+        ></MzTabPage>
   </div>
 </template>
 
 <script>
-  import { WxcRadio } from 'mz-weex-ui'
+  import { MzTabPage } from 'mz-weex-ui'
   export default {
-    components: { WxcRadio },
+    components: { MzTabPage },
     data: () => ({
-      list: [
-        { title: '选项1', value: 1 },
-        { title: '选项2', value: 2, checked: true },
-        { title: '选项3', value: 3 },
-        { title: '选项4', value: 4 },
-      ],
-      list2: [
-        { title: '未选不可修改', value: 5, disabled: true },
-        { title: '已选不可修改', value: 6, disabled: true, checked: true },
-      ],
-      checkedInfo: { title: '选项2', value: 2 }
+      tabCheckedIndex: 0,
+      tabTitles: [
+        {
+          title: '设备'
+        },
+        {
+          title: '推荐'
+        },
+        {
+          title: 'test'
+        }
+      ]
     }),
     methods: {
-      wxcRadioListChecked (e) {
-        this.checkedInfo = e;
+      beforeLeave (e) {
+        if (e.index === 1) {
+          return false;
+        } else {
+          return true;
+        }
+      },
+      tabChangeHandler (e) {
+        console.log('tabChangeHandler');
       }
     }
   }
 </script>
 ```
 
-更详细代码可以参考 [demo](https://github.com/apache/incubator-weex-ui/blob/master/example/radio/index.vue)
+### Props
 
-### 可配置参数
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | :----------:|:----:|:-------:|
+| v-model (value) | 绑定当前选中标签的标识符 | `Number` | `-` |
+| tabTitles |标签栏数据| `Array` | `[]` |
+| beforeLeave | 切换标签前的回调函数，返回 false 可阻止切换，支持返回 Promise | `(name) => boolean或者Promise` | -
 
-| Prop | Type | Required | Default | Description |
-| ---- |:----:|:---:|:-------:| :----------:|
-| list | `Array` | `Y` | `[]` | Radio 列表配置(注1) |
-| config | `Object` | `N` | `{}` |覆盖颜色和 icon(注2)|
+#### tabTitles数据结构详细说明
+| Prop | Description | Type | Required | Default |
+| ---- | :----------:|:----:|:---:|:-------:|
+| title | 标题 | `String` | `Y` | `-` |
 
-#### 子item详细说明
-| Prop | Type | Required | Default | Description |
-| ---- |:----:|:---:|:-------:| :----------:|
-| title | `String` | `Y` | `-` | Radio 显示 label |
-| Value | `[String、Number、Object]` | `Y` | `-` | Radio 的 value |
-| checked | `Boolean` | `N` | `false` | Radio 是否选中 |
-| disabled | `Boolean` | `N` | `false` | Radio 是否不可选 |
-| config | `Object` | `N` | `{}` |覆盖颜色和 icon|
-
-注1: `list`
-```
-const list=[
-        { title: '选项1', value: 1 },
-        { title: '选项2', value: 2, checked: true },
-        { title: '未选不可修改', value: 5, disabled: true },
-        { title: '选项3', value: 3 },
-        { title: '选项4', value: 4 }
-      ];
-```
-
-注2: `config`
-```
-
-// 你可以这样来覆盖原有的样式和icon设置
-<mz-radio :list="list" :config="config"></mz-radio>
-
-const config={
-    checkedIcon:'https://gw.alicdn.com/tfs/TB1Y9vlpwMPMeJjy1XcXXXpppXa-72-72.png',
-    disabledIcon:'https://gw.alicdn.com/tfs/TB1PtN3pwMPMeJjy1XdXXasrXXa-72-72.png',
-    checkedColor: '#000000'
-}
-
-```
-
-### 事件回调
-
-```
-//点击事件回调 `@wxcRadioListChecked="wxcRadioListChecked"`
-将会返回 e.value、e.title、e.oldIndex、e.index
-```
+### Events
+| 事件名 | 说明 | 回调参数
+| ---- |:----:|:---:|
+| tabSelected | 点击标签时触发 | { index: 选择标签的下标, ...选择的tab数据项 } |

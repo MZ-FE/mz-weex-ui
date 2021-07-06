@@ -3,6 +3,7 @@
     <dof-minibar
       backgroundColor="transparent"
       textColor="#000000"
+      title="Tab 标签栏"
     >
     </dof-minibar>
 
