@@ -13,56 +13,11 @@
 ## 文档
 
 * **[主页](https://apache.github.io/incubator-weex-ui/#/cn/)**
-* [搭配 weex-toolkit 使用 MZ Weex Ui](https://apache.github.io/incubator-weex-ui/#/cn/install)
-
-## 预览
-
-<img src="https://img.alicdn.com/tfs/TB1O2ulhgoQMeJjy0FoXXcShVXa-1282-986.jpg" width=540/>
-
-你可以通过飞猪、淘宝、天猫、Weex Playground 或者浏览器扫码[体验](https://h5.m.taobao.com/trip/weex-ui/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fweex-ui%2Fdemo%2Findex.native-min.js)
 
 ## 安装
 
 ```shell
-npm i weex-ui -S
-```
-
-## 使用
-
-```html
-<template>
-  <div>
-    <mz-button text="Open Popup"
-                @wxcButtonClicked="buttonClicked">
-    </mz-button>
-    <mz-popup width="500"
-               pos="left"
-               :show="isShow"
-               @wxcPopupOverlayClicked="overlayClicked">
-    </mz-popup>
-  </div>
-</template>
-
-<script>
-  import { WxcButton, WxcPopup } from 'weex-ui';
-  // 或者分开引用（不是很推荐）
-  // import WxcButton from 'weex-ui/packages/mz-button';
-  // import WxcPopup from 'weex-ui/packages/mz-popup';
-  module.exports = {
-    components: { WxcButton, WxcPopup },
-    data: () => ({
-      isShow: false
-    }),
-    methods: {
-      buttonClicked () {
-        this.isShow = true;
-      },
-      overlayClicked () {
-        this.isShow = false;
-      }
-    }
-  };
-</script>
+npm i mz-weex-ui -S
 ```
 
 ### 使用前
@@ -80,7 +35,7 @@ npm i babel-preset-stage-0 babel-plugin-component  -D
         [
             "component",
             {
-                "libraryName": "weex-ui",
+                "libraryName": "mz-weex-ui",
                 "libDir": "packages",
                 "style": false
             }
@@ -88,14 +43,6 @@ npm i babel-preset-stage-0 babel-plugin-component  -D
     ]
 }
 ```
-
-### 更多
-
-* 如果 `webpack.config.js`中 babel-loader 有对 node_modules 进行 exclude 处理，请修改成这样 `exclude: /node_modules(?!(\/|\\).*(weex).*)/`
-* 更多使用可见：[在 weex-toolkit 创建的项目中使用 MZ Weex Ui](/docs/install_cn.md) 和 [weex-ui-demo](https://github.com/tw93/weex-ui-demo)
-* 为了获取最新特性, 请常查看 [升级日志](https://github.com/apache/incubator-weex-ui/releases) 并更新组件到最新版本
-* 很多常见问题可以从 [faq](https://apache.github.io/incubator-weex-ui/#/cn/faq) 和 [issue 列表](https://github.com/apache/incubator-weex-ui/issues?utf8=%E2%9C%93&q=) 获得答案，假如发现了新 Bug，可以给我们提一个[issue](https://github.com/apache/incubator-weex-ui/issues/new)
-* 更多的 Weex 建设经验可以从 [Weex + Ui - Weex Conf 2018](https://apache.github.io/incubator-weex-ui/#/docs/weex-ui-weex-conf-2018) 这篇文章了解，欢迎翻译~
 
 ## 调试
 

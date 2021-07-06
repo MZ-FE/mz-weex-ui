@@ -17,57 +17,11 @@
 ## 文档
 
 * **[主页](https://apache.github.io/incubator-weex-ui/#/cn/)**
-* [English](https://apache.github.io/incubator-weex-ui/#/)
-* [搭配 weex-toolkit 使用 MZ Weex Ui](https://apache.github.io/incubator-weex-ui/#/cn/install)
-
-## 预览
-
-<img src="https://img.alicdn.com/tfs/TB1O2ulhgoQMeJjy0FoXXcShVXa-1282-986.jpg" width=540/>
-
-你可以通过飞猪、淘宝、天猫、Weex Playground 或者浏览器扫码[体验](https://h5.m.taobao.com/trip/weex-ui/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fweex-ui%2Fdemo%2Findex.native-min.js)
 
 ## 安装
 
 ```shell
 npm i mz-weex-ui -S
-```
-
-## 使用
-
-```html
-<template>
-  <div>
-    <mz-button text="Open Popup"
-                @wxcButtonClicked="buttonClicked">
-    </mz-button>
-    <mz-popup width="500"
-               pos="left"
-               :show="isShow"
-               @wxcPopupOverlayClicked="overlayClicked">
-    </mz-popup>
-  </div>
-</template>
-
-<script>
-  import { WxcButton, WxcPopup } from 'mz-weex-ui';
-  // 或者分开引用（不是很推荐）
-  // import WxcButton from 'mz-weex-ui/packages/mz-button';
-  // import WxcPopup from 'mz-weex-ui/packages/mz-popup';
-  module.exports = {
-    components: { WxcButton, WxcPopup },
-    data: () => ({
-      isShow: false
-    }),
-    methods: {
-      buttonClicked () {
-        this.isShow = true;
-      },
-      overlayClicked () {
-        this.isShow = false;
-      }
-    }
-  };
-</script>
 ```
 
 ### 使用前
@@ -94,14 +48,6 @@ npm i babel-preset-stage-0 babel-plugin-component  -D
 }
 ```
 
-### 更多
-
-* 如果 `webpack.config.js`中 babel-loader 有对 node_modules 进行 exclude 处理，请修改成这样 `exclude: /node_modules(?!(\/|\\).*(weex).*)/`
-* 更多使用可见：[在 weex-toolkit 创建的项目中使用 MZ Weex Ui](/docs/install_cn.md) 和 [mz-weex-ui-demo](https://github.com/tw93/mz-weex-ui-demo)
-* 为了获取最新特性, 请常查看 [升级日志](https://github.com/apache/incubator-weex-ui/releases) 并更新组件到最新版本
-* 很多常见问题可以从 [faq](https://apache.github.io/incubator-weex-ui/#/cn/faq) 和 [issue 列表](https://github.com/apache/incubator-weex-ui/issues?utf8=%E2%9C%93&q=) 获得答案，假如发现了新 Bug，可以给我们提一个[issue](https://github.com/apache/incubator-weex-ui/issues/new)
-* 更多的 Weex 建设经验可以从 [Weex + Ui - Weex Conf 2018](https://apache.github.io/incubator-weex-ui/#/docs/weex-ui-weex-conf-2018) 这篇文章了解，欢迎翻译~
-
 ## 调试
 
 ```shell
@@ -111,22 +57,6 @@ npm run start
 
 一旦它编译完成后，将会自动打开一个浏览器，你可以将浏览器切换到开发者模式，这时候在 console 中你可以看到一个预览二维码，直接使用你的 Weex App 扫码就可以看到 Demo 效果。
 
-
-## 支持
-
-* 在你的公司或个人项目中使用 MZ Weex Ui
-* 如果你觉得 MZ Weex Ui 还不错，可以通过 Star 来表示你的喜欢
-* 加入钉钉聊天群帮忙解答 Weex 技术问题
-
- <table><tr><td><img src="https://img.alicdn.com/tfs/TB1AEsZf7T2gK0jSZPcXXcKkpXa-750-990.jpg" width="190"></td><td><img  src="https://img.alicdn.com/tfs/TB1tpS2LxnaK1RjSZFtXXbC2VXa-606-799.png" width="190"></td><td><img src="https://img.alicdn.com/tfs/TB1lf1CLCzqK1RjSZFpXXakSXXa-1125-1485.png" width="190"></td></tr></table>
-
-## 贡献
-
-想解 Bug，贡献代码或者提高文档可读性？有这个想法非常好，在提交 pull request 前记得阅读一下 [Contributing Guide](https://github.com/apache/incubator-weex-ui/blob/master/CONTRIBUTING.md)。
-
-感谢给 MZ Weex Ui 贡献代码的你们！
-
-<a href="https://github.com/apache/incubator-weex-ui/graphs/contributors"><img src="https://opencollective.com/weex-ui/contributors.svg?width=890&button=false"/></a>
 
 ## 协议
 

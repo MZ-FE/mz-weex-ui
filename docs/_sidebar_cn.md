@@ -1,4 +1,5 @@
 - [安装](cn/install)
+- [开发指引](cn/developGuide)
 - 布局
     - [mz-cell 单元格](cn/packages/mz-cell/)
 
