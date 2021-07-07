@@ -1,7 +1,6 @@
 - [安装](cn/install)
 - [开发指引](cn/developGuide)
 - 布局
-    - [mz-cell 单元格](cn/packages/mz-cell/)
 
 - 导航
     - [mz-tab-page 标签页](cn/packages/mz-tab-page/)
