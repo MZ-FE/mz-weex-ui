@@ -1,2 +1,2 @@
 - [中文](/cn/)
-- <a href="//apache.github.io/incubator-weex-ui/docs/demo.html" target="_self">Demo</a>
+- <a href="//apache.github.io/mz-weex-ui/docs/demo.html" target="_self">Demo</a>
