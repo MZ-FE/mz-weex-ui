@@ -18,7 +18,7 @@
     "build:entry": "node bin/build-entry.js",
     "watch": "webpack --progress --watch",
     "serve": "anywhere -d build/example/ -p 8888",
-    "start": "npm run serve > serve.log 2>&1 & npm run watch > watch.log 2>&1 & ",
+    "start": "npm run serve > &1 & npm run watch > &1 & ",
     "doc": "docsify serve"
   },
   "keywords": [

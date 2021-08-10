@@ -17,8 +17,16 @@
 export { default } from './index.vue';
 ```
 
+执行命令`npm run build:entry`，重新生成组件包入口文件，暴露接口。
+
 #### 编写组件示例
 创建`example/mz-swipe-action`文件夹，编写示例代码
+
+### 调试预览
+
+执行`npm run serve` 和 `npm run watch`,
+可在`http://localhost:8888`浏览器预览
+> 打开控制台，用weex应用对`console`面板出现的二维码进行扫码预览
 
 
 ### 发布版本

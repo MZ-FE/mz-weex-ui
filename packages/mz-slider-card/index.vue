@@ -74,16 +74,6 @@ export default {
       type: String,
       default: ''
     },
-    startValidColor: {
-      // 滑条滑到的区域显示的颜色 (渐变色开始)
-      type: String,
-      default: ''
-    },
-    endValidColor: {
-      // 滑条滑到的区域显示的颜色 (渐变色结束)
-      type: String,
-      default: ''
-    },
     min: {
       type: Number,
       default: 0
