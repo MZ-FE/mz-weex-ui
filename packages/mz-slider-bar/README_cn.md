@@ -1,8 +1,6 @@
-# wxc-slider-bar 
+# mz-slider-bar 
 
-!> 这个富交互体验组件依赖于 Weex [BindingX](https://alibaba.github.io/bindingx/) 特性，使用前请确定你的App [是否安装](https://github.com/alibaba/bindingx#installation)
-
-> Weex 滑动选择组件
+> 滑动选择组件（文档待完善）
 
 ### 规则
 - 用于选择线性取值范围中某个具体的值（整数），或者选取一个取值范围
@@ -16,12 +14,12 @@
 
 ```vue
 <template>
-  <wxc-slider-bar v-bind="sliderBarCfg"></wxc-slider-bar>
+  <mz-slider-bar v-bind="sliderBarCfg"></mz-slider-bar>
 </template>
 <script>
-  import { WxcSliderBar } from 'weex-ui';
+  import { MzSliderBar } from 'mz-weex-ui';
   export default {
-  	components: { WxcSliderBar },
+  	components: { MzSliderBar },
   	data: () => ({
       sliderBarCfg: {
         length: 400,
