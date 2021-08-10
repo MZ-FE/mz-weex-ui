@@ -62,7 +62,6 @@ under the License.
 import Utils from '../utils';
 import BindEnv from '../utils/bind-env';
 import Binding from 'weex-bindingx/lib/index.weex.js';
-import debugUtil from '@/common/util/debugUtil';
 
 const animation = weex.requireModule('animation');
 const dom = weex.requireModule('dom');
@@ -163,8 +162,7 @@ export default {
     }
   },
   watch: {
-    value(newVal) {
-      debugUtil.log('value', newVal);
+    value (newVal) {
       if (!this.range) {
         this.diffX1 = this._getDiffX(newVal || this.defaultValue);
       } else {
@@ -174,7 +172,7 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     if (Utils.env.isWeb()) {
       this.env = 'web';
       this.DPR = window.devicePixelRatio ? window.devicePixelRatio : 1;
@@ -182,7 +180,7 @@ export default {
       this.DPR = weex.config.env.scale;
     }
   },
-  mounted() {
+  mounted () {
     this.block1 = this.$refs['slide-block-1']; // 左侧滑块
     this.block2 = this.$refs['slide-block-2']; // 右侧滑块
     this.valueBar = this.$refs['value-bar']; // 黄色值条
@@ -231,13 +229,13 @@ export default {
   },
 
   computed: {
-    containerStyle() {
+    containerStyle () {
       return {
         width: `${this.length + this.pointHeight}px`,
         height: `${this.pointHeight}px`
       };
     },
-    rangeBarStyle() {
+    rangeBarStyle () {
       return {
         width: `${this.length}px`,
         height: `${this.height}px`,
@@ -245,7 +243,7 @@ export default {
         backgroundColor: this.invalidColor
       };
     },
-    valueBarStyle() {
+    valueBarStyle () {
       let left = 0;
       let width = 0;
 
@@ -271,7 +269,7 @@ export default {
 
       return style;
     },
-    blockStyle1() {
+    blockStyle1 () {
       let left = this.diffX1,
         style = {
           width: `${this.pointHeight}px`,
@@ -282,7 +280,7 @@ export default {
 
       return style;
     },
-    blockStyle2() {
+    blockStyle2 () {
       return {
         width: `${this.pointHeight}px`,
         height: `${this.pointHeight}px`,
@@ -292,7 +290,7 @@ export default {
     }
   },
   methods: {
-    getBlock1Value(callback) {
+    getBlock1Value (callback) {
       dom.getComponentRect(this.block1, option => {
         const { left } = option.size;
         const value = this._getValue(left - this.leftDiffX);
@@ -305,7 +303,7 @@ export default {
         }
       });
     },
-    getBlock2Value(callback) {
+    getBlock2Value (callback) {
       dom.getComponentRect(this.block2, option => {
         const { left } = option.size;
         // eslint-disable-next-line vue/no-mutating-props
@@ -314,7 +312,7 @@ export default {
       });
     },
     // 更新单选值或最小值
-    weexHandler1(e) {
+    weexHandler1 (e) {
       if (this.disabled) {
         return;
       }
@@ -338,7 +336,7 @@ export default {
     },
 
     // 更新最大值
-    weexHandler2(e) {
+    weexHandler2 (e) {
       const self = this;
 
       switch (e.state) {
@@ -358,7 +356,7 @@ export default {
       }
     },
 
-    weexStartHandler1() {
+    weexStartHandler1 () {
       // 由于android端不支持 horizontalpan 的move事件，使用setInterval hack方案
       if (!this.isAndroid) {
         return;
@@ -368,7 +366,7 @@ export default {
       }, this.timeout);
     },
 
-    weexStartHandler2() {
+    weexStartHandler2 () {
       if (!this.isAndroid) {
         return;
       }
@@ -379,7 +377,7 @@ export default {
     },
 
     // 清除定时器
-    weexEndHandler() {
+    weexEndHandler () {
       if (!this.isAndroid) {
         return;
       }
@@ -393,7 +391,7 @@ export default {
       }
     },
 
-    webStartHandler(e) {
+    webStartHandler (e) {
       if (this.env === 'weex') {
         return;
       }
@@ -402,7 +400,7 @@ export default {
       this.startDiffX2 = this.diffX2;
     },
 
-    webMoveHandler1(e) {
+    webMoveHandler1 (e) {
       if (this.env === 'weex' || this.disabled) {
         return;
       }
@@ -436,7 +434,7 @@ export default {
       }
     },
 
-    webEndHandler(e) {
+    webEndHandler (e) {
       if (this.env === 'weex' || this.disabled) {
         return;
       }
@@ -448,7 +446,7 @@ export default {
         this.$emit('wxcSliderBarTouchEnd', this.selectRange);
       }
     },
-    webMoveHandler2(e) {
+    webMoveHandler2 (e) {
       if (this.env === 'weex' || this.disabled) {
         return;
       }
@@ -478,7 +476,7 @@ export default {
         }
       }
     },
-    bindBlock1() {
+    bindBlock1 () {
       const self = this;
 
       // 如果禁用，不行进行表达式绑定
@@ -589,7 +587,7 @@ export default {
       }
     },
 
-    bindBlock2() {
+    bindBlock2 () {
       const self = this;
 
       // 如果禁用，不行进行表达式绑定
@@ -652,7 +650,7 @@ export default {
     },
 
     // 获取diffx1 diffx2 取值范围
-    getRange() {
+    getRange () {
       if (!this.range) {
         return {
           rangeX1: [0, this.length]
@@ -666,7 +664,7 @@ export default {
     },
 
     // 限制取值范围
-    _restrictValue(range, value) {
+    _restrictValue (range, value) {
       if (range && range.length && range.length === 2) {
         if (value < range[0]) {
           return range[0];
@@ -679,14 +677,14 @@ export default {
     },
 
     // 根据x方向偏移量计算value
-    _getValue(diffX) {
+    _getValue (diffX) {
       return Math.round(
         (diffX / this.length) * (this.max - this.min) + this.min
       );
     },
 
     // 根据value和length计算x方向偏移值
-    _getDiffX(value) {
+    _getDiffX (value) {
       return ((value - this.min) / (this.max - this.min)) * this.length;
     }
   }

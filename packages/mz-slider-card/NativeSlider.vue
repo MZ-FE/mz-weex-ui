@@ -120,7 +120,7 @@ export default {
     }
   },
   computed: {
-    sliderStyle() {
+    sliderStyle () {
       return {
         flex: 1,
         height: this.height
@@ -128,10 +128,10 @@ export default {
     }
   },
   methods: {
-    slideEnd(event) {
+    slideEnd (event) {
       this.$emit('slideEnd', event.value)
     },
-    slideChange(event) {
+    slideChange (event) {
       this.$emit('slideChange', event.value)
     }
   }
