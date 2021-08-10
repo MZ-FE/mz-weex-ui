@@ -1,6 +1,6 @@
 <template>
-  <div class="card-pane" :style="{ width: width }">
-    <div class="card">
+  <div class="card-pane">
+    <div class="card" :style="{ width: width }">
       <div :class="[disabled ? 'opacity30' : 'opacity100']">
         <div class="header">
           <div class="flex-row center">
@@ -9,7 +9,7 @@
             </div>
             <text class="text-32 mr-16" :style="{ color: '#000000' }">{{ title }}</text>
             <div v-if="isShowValue" class="badge center">
-              <text class="text-28" :style="{ color: '#979797' }">{{ slideValue }}{{ unit }}</text>
+              <text class="text-28" :style="{ color: '#979797' }">{{ showValue }}</text>
             </div>
           </div>
 
@@ -90,10 +90,6 @@ export default {
       type: Number,
       default: 50
     },
-    unit: {
-      type: String,
-      default: ''
-    },
     axisData: {
       type: Array,
       default: () => {
@@ -115,29 +111,34 @@ export default {
     }
   },
   computed: {
-    showPointColor() {
+    showPointColor () {
       let pointColor = this.pointColor || this.themeColor
 
       return this.disabled ? '#C7C7CC' : pointColor
     },
-    color() {
+    color () {
       return this.disabled ? '#C7C7CC' : this.themeColor
+    },
+    showValue () {
+      let selectItem = this.axisData.find(item => item.value === this.slideValue) || {}
+
+      return selectItem.label || this.slideValue
     }
   },
   watch: {
-    value(newVal) {
+    value (newVal) {
       this.slideValue = newVal
     }
   },
-  created() {
+  created () {
     this.slideValue = this.value
   },
   methods: {
-    onSlideChange(value) {
+    onSlideChange (value) {
       this.slideValue = value
       this.$emit('slideChange', value)
     },
-    onSlideEnd(value) {
+    onSlideEnd (value) {
       this.$emit('slideEnd', value)
     }
   }

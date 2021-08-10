@@ -32,19 +32,23 @@
       MzSliderCard
     },
     data: () => ({
-      value: 0,
+      value: 1,
       axisData: [
         {
-          label: '静音'
+          label: '静音',
+          value: 1
         },
         {
-          label: '低'
+          label: '低',
+          value: 2
         },
         {
-          label: '中'
+          label: '中',
+          value: 3
         },
         {
-          label: '高'
+          label: '高',
+          value: 4
         }
       ]
     }),

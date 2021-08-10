@@ -65,7 +65,6 @@
 | min |滑动条下限| `Number` | `0` |
 | max |滑动条上限| `Number` | `100` |
 | isShowValue |是否显示滑动值| `Boolean` | `true` |
-| unit |数值单位| `String` | `` |
 | axisData |横坐标标签| `Array` | `[]` |
 | step |步进长度| `Number` | `1` |
 | disabled |是否禁用| `Boolean` | `false` |
@@ -73,7 +72,8 @@
 #### axisData数据结构详细说明
 | Prop | Description | Type | Required | Default |
 | ---- | :----------:|:----:|:---:|:-------:|
-| label | 坐标名称 | `String` | `Y` | `-` |
+| label | 档位名称 | `String` | `Y` | `-` |
+| value | 档位值 | `Number` | `Y` | `-` |
 
 ### Events
 | 事件名 | 说明 | 回调参数
