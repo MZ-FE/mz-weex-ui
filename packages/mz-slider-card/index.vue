@@ -9,7 +9,7 @@
             </div>
             <text class="text-32 mr-16" :style="{ color: '#000000' }">{{ title }}</text>
             <div v-if="isShowValue" class="badge center">
-              <text class="text-28" :style="{ color: '#979797' }">{{ showValue }}</text>
+              <text class="text-28" :style="{ color: themeColor }">{{ showValue }}</text>
             </div>
           </div>
 
