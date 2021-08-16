@@ -4,5 +4,5 @@
 
 > <span style="line-height:1.8rem;font-weight:400;font-size:1.3rem">美智光电，weex定制UI库<span>
 
-[Star Me](http://git.midea.com/MideaIntelligentLighting/FrontEnd/common/mz-weex-ui.git)
-[Get Started](cn/)
+[Git Lab](http://git.midea.com/MideaIntelligentLighting/FrontEnd/common/mz-weex-ui.git)
+[起步](cn/)

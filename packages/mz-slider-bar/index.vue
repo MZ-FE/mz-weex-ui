@@ -78,7 +78,9 @@ export default {
     blockRadius: 28,
     DPR: 1,
     timeout: 100,
-    isAndroid: Utils.env.isAndroid()
+    isAndroid: Utils.env.isAndroid(),
+    startValidColor: '', // 滑动条滑动部分（渐变开始颜色）
+    endValidColor: '' // 滑动条滑动部分（渐变结束颜色）
   }),
   props: {
     selectRange: {
@@ -135,18 +137,8 @@ export default {
       default: '#F2F2F2'
     },
     validColor: {
-      type: String,
+      type: [String, Array],
       default: '#EE9900'
-    },
-    // 滑动条滑动部分（渐变开始颜色）
-    startValidColor: {
-      type: String,
-      default: ''
-    },
-    // 滑动条滑动部分（渐变结束颜色）
-    endValidColor: {
-      type: String,
-      default: ''
     },
     disabledColor: {
       type: String,
@@ -170,6 +162,15 @@ export default {
         this.diffX2 = this._getDiffX(newVal[1] || this.defaultValue[1]);
         this.barWidth = this.diffX2 - this.diffX1;
       }
+    },
+    validColor (newVal) {
+      console.log('222')
+      console.log(JSON.stringify(newVal))
+
+      if (newVal instanceof Array && newVal.length >= 2) {
+        this.startValidColor = newVal[0];
+        this.endValidColor = newVal[1];
+      }
     }
   },
   created () {
@@ -179,6 +180,14 @@ export default {
     } else {
       this.DPR = weex.config.env.scale;
     }
+
+    if (Array.isArray(this.validColor) && this.validColor.length >= 2) {
+      this.startValidColor = this.validColor[0];
+      this.endValidColor = this.validColor[1];
+    }
+
+    console.log(this.startValidColor)
+    console.log(this.endValidColor)
   },
   mounted () {
     this.block1 = this.$refs['slide-block-1']; // 左侧滑块
@@ -258,15 +267,15 @@ export default {
       let style = {
         width: width + 'px',
         height: this.height + 'px',
-        transform: `translateX(${left}px)`,
-        backgroundColor: this.validColor
+        transform: `translateX(${left}px)`
       };
 
       // 禁用状态下置灰，若需要渐变效果则设置backgroundImage，一旦设置backgroundImage会覆盖backgroundColor的效果
       if (this.startValidColor && this.endValidColor) {
         style.backgroundImage = `linear-gradient(to right, ${this.startValidColor}, ${this.endValidColor})`;
+      } else {
+        style.backgroundColor = this.validColor
       }
-
       return style;
     },
     blockStyle1 () {

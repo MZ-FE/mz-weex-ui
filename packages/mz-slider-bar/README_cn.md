@@ -6,10 +6,8 @@
 - 用于选择线性取值范围中某个具体的值（整数），或者选取一个取值范围
 
 
-## [Demo](https://h5.m.taobao.com/trip/wx-detection-demo/slider-bar/index.html?_wx_tpl=https%3A%2F%2Fh5.m.taobao.com%2Ftrip%2Fwx-detection-demo%2Fslider-bar%2Findex.weex.js)
-<img src="https://gw.alipayobjects.com/zos/rmsportal/KAGxLOahnabmMTggilTC.gif" width="240px"/>&nbsp;&nbsp;&nbsp;&nbsp;
-<img src="https://img.alicdn.com/tfs/TB1kauscAyWBuNjy0FpXXassXXa-200-200.png" width="160px"/>
-
+## Demo
+<img src="../../example/mz-slider-bar/demo.gif" width="240px"/>
 ## 使用方法
 
 ```vue
@@ -34,7 +32,7 @@
   }
 </script>
 ```
-更多 Demo 详细可以查看 [这里](https://github.com/apache/incubator-weex-ui/blob/master/example/slider-bar/index.vue)
+
 
 ### 可配置参数
 
@@ -50,10 +48,11 @@
 | defaultValue | `[Number, Array]` |`N`| `0` | 设置初始取值|
 | disabled     | `Boolean` |`N`| `false`  | 是否禁用 |
 | invalidColor | `String` |`N`| `#E0E0E0`| 无效颜色 |
-| validColor   | `String` |`N`| `#EE9900`| 有效颜色 |
+| validColor   | `[Number, Array]` |`N`| `#EE9900`| 有效颜色，若为数组时，滑动条颜色则为渐变色（仅支持2个颜色的渐变） |
 | disabledColor| `String` |`N`| `#AAA`   | 禁用颜色 |
 | selectRange  | `Array` |`N`| `[0, 0]`   | 回传值 |
 | blockColor  | `String` |`N`| `#FFFFFF`   |滑块颜色|
+| pointHeight  | `Number` |`N`| `40`   |滑块高度|
 
 ### 事件
 
