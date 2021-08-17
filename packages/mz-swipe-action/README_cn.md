@@ -11,22 +11,28 @@
 ```vue
 <template>
   <div class="mz-demo">
-    <MzTabPage
-          type="primary"
-          slot="middle"
-          :is-slot="true"
-          v-model="tabCheckedIndex"
-          :tab-titles="tabTitles"
-          :beforeLeave="beforeLeave"
-          @tabSelected="tabChangeHandler"
-        ></MzTabPage>
+    <mz-swipe-action
+          ref="scenePaneSwipe"
+          @dofRightClicked="cellMenuClick"
+          width="686px"
+          :itemStyle="{ marginBottom: '24px', borderRadius: '16px' }"
+          :list-data="list"
+        >
+          <template slot="swipeItem" slot-scope="scope">
+            <div class="list-item">
+              <div class="item-left">
+                <text class="item-name">{{scope.data.deviceName}}</text>
+              </div>
+            </div>
+          </template>
+        </mz-swipe-action>
   </div>
 </template>
 
 <script>
-  import { MzTabPage } from 'mz-weex-ui'
+  import { MzSwipeAction } from 'mz-weex-ui'
   export default {
-    components: { MzTabPage },
+    components: { MzSwipeAction },
     data: () => ({
       list: [
               {

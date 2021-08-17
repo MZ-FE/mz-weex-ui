@@ -4,9 +4,13 @@
 在`packages`目录下创建组件文件夹，例如`packages/mz-swipe-action`，存放组件代码
 
 #### 组件文档定义
+> 使用docsify生成组件文档
+
 创建组件文档`packages/mz-swipe-action/README_cn.md`,描述组件基本功能以及用法等。
 
 在文档导航栏`docs/_sidebar_cn.md`增加对应的组件链接。
+
+执行命令`npm run doc`，`http://localhost:3000`本地预览文档。
 
 #### 组件功能实现
 创建组件代码文件`packages/mz-swipe-action/index.vue`，实现组件功能
