@@ -32,6 +32,8 @@ export { default } from './index.vue';
 可在`http://localhost:8888`浏览器预览
 > 打开控制台，用weex应用对`console`面板出现的二维码进行扫码预览
 
+### 组件库打包
+`npm run build`
 
 ### 发布版本
  
