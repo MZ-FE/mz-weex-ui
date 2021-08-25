@@ -8,8 +8,8 @@
               <image class="icon-img" :src="iconSrc"></image>
             </div>
             <text class="text-32 mr-16" :style="{ color: '#000000' }">{{ title }}</text>
-            <div v-if="isShowValue" class="badge center">
-              <text class="text-28" :style="{ color: themeColor }">{{ showValue }}</text>
+            <div v-if="isShowValue" class="badge center" :style="{ borderColor: color }">
+              <text class="text-28" :style="{ color: color }">{{ showValue }}</text>
             </div>
           </div>
 
@@ -201,7 +201,6 @@ export default {
   min-width: 110px;
   height: 40px;
   border-width: 2px;
-  border-color: #979797;
   border-radius: 20px;
   opacity: 0.5;
 }
