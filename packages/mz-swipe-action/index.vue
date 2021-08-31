@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper" ref="wrapper">
-    <div v-if="isAndroid" class="container" :style="{ width }">
+  <div ref="wrapper">
+    <div v-if="isAndroid" class="container">
       <div
         @click="dofCellClicked(index)"
         class="itemWrap"
@@ -17,25 +17,27 @@
         @swipe="slideMenu($event, index, item.rightItem.length)"
         @touchend="touchend"
       >
-        <div :style="{ width }">
+        <div>
           <slot name="swipeItem" v-bind:data="item" v-bind:index="index"></slot>
         </div>
+
         <div
           class="swipe-action-right"
           v-if="item.rightItem && item.rightItem.length > 0"
           :style="{ width: 116 * item.rightItem.length + 'px' }">
           <div
-            class="'swipeItem"
+            class="swipeItem"
             v-for="(rightCon, i) in item.rightItem"
             :key="i"
             :style="{ backgroundColor: rightCon.bgColor }"
-            @click="onRightNode(index, i, rightCon.text)">
+            @click="onRightNode(index, i, rightCon.text)"
+          >
             <text class="swipeText">{{ rightCon.text }}</text>
           </div>
         </div>
       </div>
     </div>
-    <div v-else class="container" :style="{ width }">
+    <div v-else class="container">
       <div
         @click="dofCellClicked(index)"
         ref="skid"
@@ -61,20 +63,22 @@
         "
         @panend="(e) => onPanEnd(e, item, index)"
       >
-        <div ref="swipeItem" :style="{ width }">
+        <div ref="swipeItem">
           <slot name="swipeItem" v-bind:data="item" v-bind:index="index"></slot>
         </div>
 
         <div
           class="swipe-action-right"
           v-if="item.rightItem && item.rightItem.length > 0"
-          :style="{ width: 116 * item.rightItem.length + 'px' }">
+          :style="{ width: 116 * item.rightItem.length + 'px' }"
+        >
           <div
             class="swipeItem"
             v-for="(rightCon, i) in item.rightItem"
             :key="i"
             :style="{ backgroundColor: rightCon.bgColor }"
-            @click="onRightNode(index, i, rightCon.text)">
+            @click="onRightNode(index, i, rightCon.text)"
+          >
             <text class="swipeText">{{ rightCon.text }}</text>
           </div>
         </div>
@@ -82,6 +86,49 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+  .container {
+    overflow: hidden;
+  }
+  .dof-skid {
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  /* android */
+
+  .itemWrap {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .swipe-action-right {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+  }
+  .swipeItem {
+    width: 116px;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+
+  .swipeText {
+    font-size: 32px;
+    color: #ffffff;
+    text-align: center;
+    align-items: center;
+    lines: 2;
+    line-height: 48px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+</style>
 
 <script>
   import Binding from 'weex-bindingx/lib/index.weex.js';
@@ -113,7 +160,6 @@
         saveIdx: null,
         isAndroid: Utils.env.isAndroid(),
         isIOS: Utils.env.isIOS(),
-
         cellCanClick: true, //android
         isHighlight: false,
       };
@@ -126,8 +172,7 @@
     computed: {
       cellStyle () {
         return Object.assign({
-          marginBottom: '0',
-          backgroundColor: '#fff'
+          marginBottom: '0'
         }, this.itemStyle)
       }
     },
@@ -304,49 +349,3 @@
     },
   };
 </script>
-
-<style scoped>
-  .wrapper {
-    align-items: center;
-    justify-content: center;
-  }
-  .container {
-    overflow: hidden;
-  }
-  .dof-skid {
-    flex-direction: row;
-    align-items: stretch;
-    overflow: hidden;
-  }
-
-  /* android */
-
-  .itemWrap {
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
-  }
-
-  .swipe-action-right {
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
-    overflow: hidden;
-  }
-  .swipeItem {
-    width: 116px;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-  }
-
-  .swipeText {
-    font-size: 32px;
-    color: #ffffff;
-    text-align: center;
-    align-items: center;
-    line-height: 48px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-</style>
