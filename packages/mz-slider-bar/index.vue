@@ -67,7 +67,6 @@ under the License.
   import Utils from '../utils';
   import BindEnv from '../utils/bind-env';
   import Binding from 'weex-bindingx/lib/index.weex.js';
-  import debugUtil from '@/common/util/debugUtil';
 
   const animation = weex.requireModule('animation');
   const dom = weex.requireModule('dom');
@@ -290,8 +289,6 @@ under the License.
             backgroundColor: this.disabled ? this.disabledColor : this.blockColor
           };
 
-        debugUtil.log('blockStyle1', left);
-
         return style;
       },
       blockStyle2 () {
@@ -312,8 +309,6 @@ under the License.
         let pageX = e.changedTouches[0].pageX;
 
         let value = this._getValue(pageX);
-
-        debugUtil.log('weexEndBar', pageX, value);
 
         this.$emit('wxcSliderBarTouchEnd', value);
       },
@@ -354,7 +349,6 @@ under the License.
             break;
           case 'end':
             this.getBlock1Value(value => {
-              debugUtil.log('weexHandler1', value);
               this.$emit('wxcSliderBarTouchEnd', value);
             });
             break;
@@ -385,7 +379,6 @@ under the License.
       },
 
       weexStartHandler1 () {
-        debugUtil.log('weexStartHandler1');
         // 由于android端不支持 horizontalpan 的move事件，使用setInterval hack方案
         if (!this.isAndroid) {
           return;
@@ -407,7 +400,6 @@ under the License.
 
       // 清除定时器
       weexEndHandler () {
-        debugUtil.log('weexEndHandler');
         if (!this.isAndroid) {
           return;
         }
