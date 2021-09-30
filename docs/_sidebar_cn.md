@@ -8,6 +8,7 @@
 - 数据输入
     - [mz-slider-bar 滑动条](cn/packages/mz-slider-bar/)
     - [mz-slider-card 滑动条卡片](cn/packages/mz-slider-card/)
+    - [mz-illumination-bar 明暗选择](cn/packages/mz-illumination-bar/)
 
 - 数据展示
     - [mz-swipe-action 侧滑列表](cn/packages/mz-swipe-action/)
