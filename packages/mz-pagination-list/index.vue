@@ -1,14 +1,14 @@
 <template>
   <list :style="listStyle">
-    <refresh class="loading-view" @refresh="onrefresh" :display="!isRefreshing ? 'hide' : 'show'">
+    <refresh class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
       <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
     </refresh>
 
-    <cell v-if="total > 0">
+    <cell>
       <slot></slot>
     </cell>
 
-    <cell v-if="!isLoading && total === 0">
+    <cell v-if="!isLoading && !hasMore && total === 0">
       <slot name="noData">
         <div class="no-data-box" :style="{ height: `${height}px` }">
           <text class="no-data-text">{{ noDataText }}</text>
@@ -16,7 +16,7 @@
       </slot>
     </cell>
 
-    <loading @loading="loadmore" class="loading-view" v-if="hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
+    <loading @loading="loadMore" class="loading-view" v-if="hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
       <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
     </loading>
   </list>
@@ -90,7 +90,7 @@ export default {
     /**
      * 刷新，重置页面数据
      */
-    async onrefresh () {
+    async onRefresh () {
       this.isRefreshing = true
       await this.refreshData()
 
@@ -99,7 +99,7 @@ export default {
     /**
      * 分页加载
      */
-    async loadmore () {
+    async loadMore () {
       this.isLoadingMore = true
       await this.getData()
 
@@ -107,7 +107,9 @@ export default {
     }
   },
 
-  created () {},
+  created () {
+    this.loadMore()
+  },
 
   mounted () {},
 
