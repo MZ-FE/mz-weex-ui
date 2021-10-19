@@ -107,9 +107,7 @@ export default {
     }
   },
 
-  created () {
-    this.loadMore()
-  },
+  created () {},
 
   mounted () {},
 
