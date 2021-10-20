@@ -38,3 +38,9 @@
 | title | 标题栏的标题 | `String` | `''` |
 | rightText | 标题栏的右侧文本文案 | `String` | `''` |
 | disabled | 是否禁用 | `Boolean` | `false` |
+
+### Slots
+| 名称 | 说明 |
+| ---- | :----------:|
+| default |标题栏左侧内容|
+| content |折叠内容|

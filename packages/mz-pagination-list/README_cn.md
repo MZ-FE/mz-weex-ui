@@ -48,8 +48,13 @@
 | height | 列表容器高度 | `String` | `''` |
 | pageSize | 列表分页大小 | `Number` | `20` |
 | pageNo | 当前分页页码 | `Number` | `1` |
-| noDataText | 无数据展示文案 | `String` | `暂无数据` |
 | total |列表数据总数| `Number` | `0` |
 | getData |上拉加载更多回调| `Function` | `-` |
 | refreshData |下拉刷新回调| `Function` | `-` |
 | indicatorColor |lading图标的颜色| `String` | `#999` |
+
+
+### Slots
+| 名称 | 说明 |
+| ---- | :----------:|
+| default |列表内容|
