@@ -49,7 +49,7 @@
 | pageSize | 列表分页大小 | `Number` | `20` |
 | pageNo | 当前分页页码 | `Number` | `1` |
 | total |列表数据总数| `Number` | `0` |
-| getData |上拉加载更多回调| `Function` | `-` |
+| getData |上拉加载更多回调，仅当`pageNo * pageSize < total`可以触发| `Function` | `-` |
 | refreshData |下拉刷新回调| `Function` | `-` |
 | indicatorColor |lading图标的颜色| `String` | `#999` |
 
