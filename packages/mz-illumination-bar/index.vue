@@ -1,796 +1,267 @@
 <template>
-  <div class="container-block" :style="{ height: barHeight + 82 + 'px' }">
+  <div class="wrapper">
     <div
-      class="step-index"
-      v-for="(index, item) in indexArr"
-      :key="index"
-      :style="{ bottom: item * 72 + 40 + 'px', width: item === 0 || item === 5 || item === 10 ? 32 + 'px' : 16 + 'px' }"
+      class="index-line"
+      v-for="i in 11"
+      :key="i"
+      :style="{ left: i * 67 - 28 + 'px', height: i == 1 || i == 6 || i == 11 ? '30px' : '15px' }"
     ></div>
-    <div class="index-block" :style="{ bottom: (9 - index) * 72 + 42 + 'px' }">
-      <text class="index-text">当前亮度</text>
-      <div class="index-line"></div>
+    <text class="index-num" :style="{ left: '60px' }" v-if="envIndex != 1">1</text>
+    <text class="index-num" :style="{ left: '124px' }" v-if="envIndex == 1">2</text>
+    <text class="index-num" :style="{ left: '324px' }" v-if="envIndex != 5">5</text>
+    <text class="index-num" :style="{ left: '394px' }" v-if="envIndex != 6">6</text>
+    <text class="index-num" :style="{ left: '596px' }" v-if="envIndex == 10">9</text>
+    <text class="index-num" :style="{ left: '666px' }" v-if="envIndex != 10">10</text>
+    <text class="index-des" :style="{ left: envIndex * 67 - 50 + 'px' }">当前亮度</text>
+    <div class="index-icon-block center" :style="{ left: envIndex * 67 - 8 + 'px' }">
+      <image class="index-img" :src="iconIndex"></image>
     </div>
-    <text class="index-num" :style="{ bottom: 9 * 72 + 42 + 'px' }" v-if="index !== 0">1</text>
-    <text class="index-num" :style="{ bottom: 5 * 72 + 42 + 'px' }" v-if="index !== 5">5</text>
-    <text class="index-num" :style="{ bottom: 4 * 72 + 42 + 'px' }" v-if="index !== 4">6</text>
-    <text class="index-num" :style="{ bottom: 42 + 'px' }" v-if="index !== 9">10</text>
 
-    <text class="tip-text" :style="tip1Style">{{ tipArr[0] }}</text>
-    <text class="tip-text" :style="tip2Style">{{ tipArr[1] }}</text>
-    <text class="tip-text" :style="tip3Style">{{ tipArr[2] }}</text>
-    <text class="tip-text" :style="tip4Style">{{ tipArr[3] }}</text>
+    <text class="env-des" :style="{ left: envDes1Left + 'px' }">较暗</text>
+    <text class="env-des" :style="{ right: envDes2Right + 'px' }">较亮</text>
 
-    <div ref="bar-container" class="bar-block" :style="{ height: barHeight + 80 + 'px' }">
-      <div class="value-block-bg" :style="{ 'background-color': barColor[3] }"></div>
-      <div ref="value-block3" class="value-block" :style="valueBlock3Style" v-if="tabShow[0]"></div>
-      <div ref="value-block2" class="value-block" :style="valueBlock2Style" v-if="tabShow[1]"></div>
-      <div ref="value-block1" class="value-block" :style="valueBlock1Style" v-if="tabShow[2]"></div>
-      <div class="mask"></div>
-
-      <div
-        class="tab-block"
-        ref="tab-block-1"
-        @touchstart="weexStartHandler1"
-        @touchend="weexEndHandler"
-        @verticalpan="weexHandler1"
-        :prevent-move-event="preventMoveEvent"
-        :style="tabBlockStyle1"
-        v-if="tabShow[2]"
-      >
-        <div class="tab">
-          <image class="image-tab" :src="tabIcon"></image>
-        </div>
+    <div class="bar-bg">
+      <div class="bg-block"></div>
+      <div class="value-block" :style="{ width: valueBlockWidth + 'px' }"></div>
+      <div class="tap-icon center" :style="{ left: tabIconLeft + 'px' }">
+        <image class="tab-img" :src="iconTab"></image>
       </div>
 
-      <div
-        class="tab-block"
-        ref="tab-block-2"
-        @touchstart="weexStartHandler2"
-        @touchend="weexEndHandler"
-        @verticalpan="weexHandler2"
-        :prevent-move-event="preventMoveEvent"
-        :style="tabBlockStyle2"
-        v-if="tabShow[1]"
+      <midea-seek-bar
+        class="seekbar"
+        :style="{ top: '0px', opacity: isAndroid ? 0 : 1 }"
+        :max="seekbarConfig.max"
+        :min="seekbarConfig.min"
+        :value="seekbarConfig.value"
+        :unit="seekbarConfig.unit"
+        :showTip="seekbarConfig.showTip"
+        :step="seekbarConfig.step"
+        :axisH="seekbarConfig.axisH"
+        :pointH="seekbarConfig.pointH"
+        :pointColor="seekbarConfig.pointColor"
+        :axisColor="seekbarConfig.axisColor"
+        :axisBgColor="seekbarConfig.axisBgColor"
+        :disable="seekbarConfig.disable"
+        @slideChange="slideChange"
+        @slideEnd="slideEnd"
       >
-        <div class="tab">
-          <image class="image-tab" :src="tabIcon"></image>
-        </div>
-      </div>
+      </midea-seek-bar>
 
-      <div
-        class="tab-block"
-        ref="tab-block-3"
-        @touchstart="weexStartHandler3"
-        @touchend="weexEndHandler"
-        @verticalpan="weexHandler3"
-        :prevent-move-event="preventMoveEvent"
-        :style="tabBlockStyle3"
-        v-if="tabShow[0]"
+      <midea-seek-bar
+        class="seekbar"
+        :style="{ top: '84px', opacity: isAndroid ? 0 : 1 }"
+        :max="seekbarConfig.max"
+        :min="seekbarConfig.min"
+        :value="seekbarConfig.value"
+        :unit="seekbarConfig.unit"
+        :showTip="seekbarConfig.showTip"
+        :step="seekbarConfig.step"
+        :axisH="seekbarConfig.axisH"
+        :pointH="seekbarConfig.pointH"
+        :pointColor="seekbarConfig.pointColor"
+        :axisColor="seekbarConfig.axisColor"
+        :axisBgColor="seekbarConfig.axisBgColor"
+        :disable="seekbarConfig.disable"
+        @slideChange="slideChange"
+        @slideEnd="slideEnd"
       >
-        <div class="tab">
-          <image class="image-tab" :src="tabIcon"></image>
-        </div>
-      </div>
+      </midea-seek-bar>
+
+      <midea-seek-bar
+        class="seekbar"
+        :style="{ top: '168px', opacity: isAndroid ? 0 : 1 }"
+        :max="seekbarConfig.max"
+        :min="seekbarConfig.min"
+        :value="seekbarConfig.value"
+        :unit="seekbarConfig.unit"
+        :showTip="seekbarConfig.showTip"
+        :step="seekbarConfig.step"
+        :axisH="seekbarConfig.axisH"
+        :pointH="seekbarConfig.pointH"
+        :pointColor="seekbarConfig.pointColor"
+        :axisColor="seekbarConfig.axisColor"
+        :axisBgColor="seekbarConfig.axisBgColor"
+        :disable="seekbarConfig.disable"
+        @slideChange="slideChange"
+        @slideEnd="slideEnd"
+      >
+      </midea-seek-bar>
     </div>
   </div>
 </template>
 
 <script>
-import Binding from 'weex-bindingx'
-
-const dom = weex.requireModule('dom')
-
-import { illuminationBarTab } from "../setting/icon.base64";
-
 export default {
   name: 'illuminationBar',
-  data: () => ({
-    preventMoveEvent: true,
-    minDist: 1,
-    timeout: 100,
-    isAndroid: false,
-    barHeight: 720,
-    diffY1: 0,
-    diffY2: 0,
-    diffY3: 0,
-    tabIcon: illuminationBarTab,
-    stepHeight: 40,
-    indexArr: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    valueResult: [0, 0, 0],
-    min: 0,
-    max: 10,
-    disabled: false,
-    stepMode: true
-  }),
   props: {
-    value: {
-      type: Array,
-      // eslint-disable-next-line vue/require-valid-default-prop
-      default: [0, 0, 5]
-    },
     index: {
       type: Number,
+      default: 4
+    },
+    envIndex: {
+      type: Number,
       default: 1
-    },
-    tipArr: {
-      type: Array,
-      // eslint-disable-next-line vue/require-valid-default-prop
-      default: ['', '', '较暗', '较亮']
-    },
-    tabShow: {
-      type: Array,
-      // eslint-disable-next-line vue/require-valid-default-prop
-      default: [false, false, true]
-    },
-    barColor: {
-      type: Array,
-      // eslint-disable-next-line vue/require-valid-default-prop
-      default: ['#d8e9ff', '#a3d3ff', '#69b8ff', '#549eff']
+    }
+  },
+  data () {
+    return {
+      iconIndex:
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAAE6DSy/AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAHgAAAACyl2QUAAADOklEQVRIDb1XO28TQRC+vTuDLEAilJQRCkJUyOdIKClAyk+AkpJHTcFLpDob4xSpSUro4CekIBKWkHBoEEgBISQKKAEpSgL27g0zC3Pe29t1/ECcZM/ONzPfzu7Ojn1B4Hv6aQ3IJuiLlUCIrZCA/AFI8nFhQCH9RtImcBACcIsAkROSIsQ+gYXHdCCDToM9TGNl+bW26S9YPV+Vu709dmRJTsWFsGViSTmoNLluEgzW+RfNAnjkdDBXINPkGTtpBgAoLBcCuFRwkI0kY4ClTGtfaBxCe+Ekg6bE09R4Ye9NBz0WYrWEmQC06rOY8BMTs8eF5E2jatTuZBC0GOOzY52lk0A2ausAwVV2YukiKRHgjm3gti5xkC1tkgIBlvH7AGDODrL1ePFYRVzclITnBJj2N0x7xnb26XFcPSHudr5rAtzpPp5+7HP24XEUnfbZ/g2OG/rYV2k8Q+k6sIHuDZ7GFdn7qWuWcVt6Ccx7RUVlB7LuJOCuxE5mRTLG0kmAtaC7GDuRpOo0dR6XCMzbzk4kXaVNeInA7AbkYD5U5qZO4wIBrr1rO5g63RG7/eQE8PxCjHl6Gv6ARjbr2wPNyEB1dj6bBu8YLxu1crbrDKC1OMM9jA3DpNrr5cWlCZQaXm02Gd1aLvEQHszP4cbkKdnOPl31fuklh1JlN3xOw/BJrv8wvolteUcbh4FKRnZ23mDMGR0nxNt44eg5bpPjcI2dAJWQ2u19tKsGib5GRw6dEjdflv94DMlorASoXJXc/4STH3dxItmPKK7OUq932V1YfhNdRhOjsqVy901OvmTTPp7/CyYfj0faAboqSmXvRq1cEQgZReFZce/VB57IJw/cAWjMJypT26NOThORr47BWN/EjA9NoJ/WlySoLnaOkXaKSUlSDMUSh4nbY28C+At0OQiyUv+3CQ7Ws40/XG5PZwKqWb+GK3jqDhkfJS7idEWWElDN2u0sy9ZcztNgxEncNkfhbPG8HuK2l5zsoOn0sF1Z7uZ/c/IE8Pd+DX+VnNs03YTlaHxNW4/vb+kXHn0E/TRZ+V+TUzo0F86p3090AvFh/bLyArej9DpUzn86BFev8LOJc64Q029rWVNM9cuDvQAAAABJRU5ErkJggg==',
+      iconTab:
+        'data:image/png;base64,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',
+      seekbarConfig: {
+        max: 9,
+        min: 1,
+        value: 4,
+        unit: '',
+        showTip: false,
+        step: 1,
+        axisH: 4,
+        pointH: 44,
+        axisColor: '#ffffff00',
+        pointColor: '#ffffff00',
+        axisBgColor: '#ffffff00',
+        disable: false
+      }
     }
   },
   watch: {
-    value (e) {
-      this.diffY1 = this._getDiffX(e[2])
-      this.diffY2 = this._getDiffX(e[1])
-      this.diffY3 = this._getDiffX(e[0])
-
-      this.valueResult = e
+    index () {
+      this.seekbarConfig.value = this.index
     }
   },
-  created () {
-    this.isAndroid = this.isAndroidPlatform()
-  },
-  mounted () {
-    this.barContainer = this.$refs['bar-container']
-
-    //--------------------
-    this.tabBlock1 = this.$refs['tab-block-1']
-    this.tabBlock2 = this.$refs['tab-block-2']
-    this.tabBlock3 = this.$refs['tab-block-3']
-
-    this.valueBlock1 = this.$refs['value-block1']
-    this.valueBlock2 = this.$refs['value-block2']
-    this.valueBlock3 = this.$refs['value-block3']
-
-    this.diffY1 = this._getDiffX(this.value[2])
-    this.diffY2 = this._getDiffX(this.value[1])
-    this.diffY3 = this._getDiffX(this.value[0])
-
-    this.valueResult = this.value
-
-    // 是否支持expresstionBinding
-    if (Binding.isSupportBinding && Binding.prepare) {
-      this.tabBlock1 &&
-      Binding.prepare({
-        anchor: this.tabBlock1.ref,
-        eventType: 'pan'
-      })
-      this.valueBlock1 &&
-      Binding.prepare({
-        anchor: this.valueBlock1.ref,
-        eventType: 'pan'
-      })
-      this.tabBlock2 &&
-      Binding.prepare({
-        anchor: this.tabBlock2.ref,
-        eventType: 'pan'
-      })
-      this.valueBlock2 &&
-      Binding.prepare({
-        anchor: this.valueBlock2.ref,
-        eventType: 'pan'
-      })
-      this.tabBlock3 &&
-      Binding.prepare({
-        anchor: this.tabBlock3.ref,
-        eventType: 'pan'
-      })
-      this.valueBlock3 &&
-      Binding.prepare({
-        anchor: this.valueBlock3.ref,
-        eventType: 'pan'
-      })
-    }
-
-    // 由于weex在mounted后渲染是异步的不能确保元素渲染完成，需要异步执行
-    setTimeout(() => {
-      dom.getComponentRect(this.barContainer, option => {
-        const { bottom } = option.size
-        this.bottomDiffY = bottom
-      })
-    }, 100)
-  },
-
   computed: {
-    valueBlock1Style () {
-      let bottom = 0
-      let height = 0
-
-      bottom = this.barHeight - this.diffY1 + this.stepHeight
-      height = this.barHeight + this.stepHeight
-
-      return {
-        height: height + 'px',
-        transform: `translateY(${bottom}px)`,
-        backgroundColor: this.barColor[0]
-      }
+    valueBlockWidth () {
+      return this.seekbarConfig.value * 67
     },
-    valueBlock2Style () {
-      let bottom = 0
-      let height = 0
-
-      bottom = this.barHeight - this.diffY2 + this.stepHeight
-      height = this.barHeight + this.stepHeight
-
-      return {
-        height: height + 'px',
-        transform: `translateY(${bottom}px)`,
-        backgroundColor: this.barColor[1]
-      }
-    },
-    valueBlock3Style () {
-      let bottom = 0
-      let height = 0
-
-      bottom = this.barHeight - this.diffY3 + this.stepHeight
-      height = this.barHeight + this.stepHeight
-
-      return {
-        height: height + 'px',
-        transform: `translateY(${bottom}px)`,
-        backgroundColor: this.barColor[2]
-      }
-    },
-    tabBlockStyle1 () {
-      let bottom = this.diffY1 * -1
-      return {
-        transform: `translateY(${bottom}px)`
-      }
-    },
-    tabBlockStyle2 () {
-      let bottom = this.diffY2 * -1
-      return {
-        transform: `translateY(${bottom}px)`
-      }
-    },
-    tabBlockStyle3 () {
-      let bottom = this.diffY3 * -1
-      return {
-        transform: `translateY(${bottom}px)`
-      }
-    },
-    tip1Style () {
-      let bottom = (this.diffY3 * -1 - 762) / 2
-      return {
-        transform: `translateY(${bottom}px)`
-      }
-    },
-    tip2Style () {
-      let bottom = (this.diffY2 * -1 - this.diffY3 - 32) / 2
-      return {
-        transform: `translateY(${bottom}px)`
-      }
-    },
-    tip3Style () {
-      let bottom = (this.diffY1 * -1 - this.diffY2 - 46) / 2
-      return {
-        transform: `translateY(${bottom}px)`
-      }
-    },
-    tip4Style () {
-      let bottom = (-40 - this.diffY1 - 10) / 2
-      return {
-        transform: `translateY(${bottom}px)`
-      }
-    }
-  },
-  methods: {
-    isAndroidPlatform () {
+    isAndroid () {
       const { platform } = weex.config.env
       return platform.toLowerCase() === 'android'
     },
-    // 更新单选值或最小值
-    weexHandler1 (e) {
-      const self = this
-      switch (e.state) {
-        case 'start':
-          self.bindBlock1()
-          break
-        case 'move':
-          dom.getComponentRect(this.tabBlock1, option => {
-            const { bottom } = option.size
-            const value = this._getValue(bottom - this.bottomDiffY)
-            this.valueResult[2] = value
-            this.$emit('updateValue', this.valueResult)
-          })
-          break
-        case 'end':
-          if (!this.disabled) {
-            if (this.isAndroid) {
-              setTimeout(function () {
-                self.$emit('slideEnd')
-              }, 150)
-            } else {
-              this.$emit('slideEnd')
-            }
-          }
-          break
-        default:
-          break
-      }
+    envDes1Left () {
+      return (this.seekbarConfig.value * 67) / 2 - 10
     },
-    weexHandler2 (e) {
-      const self = this
-      switch (e.state) {
-        case 'start':
-          self.bindBlock2()
-          break
-        case 'move':
-          dom.getComponentRect(this.tabBlock2, option => {
-            const { bottom } = option.size
-            const value = this._getValue(bottom - this.bottomDiffY)
-            this.valueResult[1] = value
-            this.$emit('updateValue', this.valueResult)
-          })
-          break
-        case 'end':
-          if (!this.disabled) {
-            if (this.isAndroid) {
-              setTimeout(function () {
-                self.$emit('slideEnd')
-              }, 150)
-            } else {
-              this.$emit('slideEnd')
-            }
-          }
-          break
-        default:
-          break
-      }
+    envDes2Right () {
+      return ((10 - this.seekbarConfig.value) * 67) / 2 - 10
     },
-    weexHandler3 (e) {
-      const self = this
-      switch (e.state) {
-        case 'start':
-          self.bindBlock3()
-          break
-        case 'move':
-          dom.getComponentRect(this.tabBlock3, option => {
-            const { bottom } = option.size
-            const value = this._getValue(bottom - this.bottomDiffY)
-            this.valueResult[0] = value
-            this.$emit('updateValue', this.valueResult)
-          })
-          break
-        case 'end':
-          if (!this.disabled) {
-            if (this.isAndroid) {
-              setTimeout(function () {
-                self.$emit('slideEnd')
-              }, 150)
-            } else {
-              this.$emit('slideEnd')
-            }
-          }
-          break
-        default:
-          break
-      }
-    },
-
-    weexStartHandler1 () {
-      // 由于android端不支持 horizontalpan 的move事件，使用setInterval hack方案
-      if (!this.isAndroid) {
-        return
-      }
-
-      this.firstInterval1 = setInterval(() => {
-        dom.getComponentRect(this.tabBlock1, option => {
-          const { bottom } = option.size
-          const value = this._getValue(bottom - this.bottomDiffY)
-          this.valueResult[2] = value
-          this.$emit('updateValue', this.valueResult)
-        })
-      }, this.timeout)
-    },
-
-    weexStartHandler2 () {
-      if (!this.isAndroid) {
-        return
-      }
-
-      this.firstInterval2 = setInterval(() => {
-        dom.getComponentRect(this.tabBlock2, option => {
-          const { bottom } = option.size
-          const value = this._getValue(bottom - this.bottomDiffY)
-          this.valueResult[1] = value
-          this.$emit('updateValue', this.valueResult)
-        })
-      }, this.timeout)
-    },
-
-    weexStartHandler3 () {
-      if (!this.isAndroid) {
-        return
-      }
-
-      this.firstInterval3 = setInterval(() => {
-        dom.getComponentRect(this.tabBlock3, option => {
-          const { bottom } = option.size
-          const value = this._getValue(bottom - this.bottomDiffY)
-          this.valueResult[0] = value
-          this.$emit('updateValue', this.valueResult)
-        })
-      }, this.timeout)
-    },
-
-    // 清除定时器
-    weexEndHandler () {
-      if (!this.isAndroid) {
-        return
-      }
-      this.firstInterval1 && clearInterval(this.firstInterval1)
-      this.firstInterval2 && clearInterval(this.firstInterval2)
-      this.firstInterval3 && clearInterval(this.firstInterval3)
-    },
-
-    bindBlock1 () {
-      const self = this
-
-      // 如果禁用，不行进行表达式绑定
-      if (self.disabled) {
-        Binding.unbind({
-          token: this.gesToken1,
-          eventType: 'pan'
-        })
-        this.gesToken1 = 0
-        return
-      }
-
-      // 初始化按钮&条的大小范围
-      let blockMax = self.barHeight
-
-      let step = self.barHeight / (self.max - self.min)
-      let stepHalf = step / 2
-
-      const startBottom = self.diffY1 - blockMax - self.minDist
-
-      const props = [
-        {
-          element: self.tabBlock1.ref,
-          property: 'transform.translateY',
-          expression: self.stepMode
-            ? `min(${self.diffY2 - step}, max( floor((${self.diffY1}-y)/${stepHalf})%2 == 0 ?
-            (floor((${self.diffY1}-y)/${step})*${step})
-            : (ceil((${self.diffY1}-y)/${step})*${step}) , 0))*-1`
-            : `min(${self.diffY2}, max(${self.diffY1} - y, 0))*-1`
-        },
-        {
-          element: self.valueBlock1.ref,
-          property: 'transform.translateY',
-          expression: self.stepMode
-            ? `(min(-${self.barHeight - self.diffY2 + step}, max( floor((${startBottom}-y)/${stepHalf})%2 == 0 ?
-            (floor((${startBottom}-y)/${step})*${step})
-            : (ceil((${startBottom}-y)/${step})*${step}) , -${blockMax}))-${self.stepHeight})*-1`
-            : `(min(${self.diffY2 - self.barHeight}, max(${startBottom}-y, -${blockMax}))-${self.stepHeight})*-1`
-        }
-      ]
-
-      const gesTokenObj = Binding.bind(
-        {
-          anchor: self.tabBlock1.ref,
-          eventType: 'pan',
-          props
-        },
-        e => {
-          if (e.state === 'end' || e.state === 'cancel' || e.state === 'exit') {
-            const range = self.getRange1()
-            if (self.stepMode) {
-              self.diffY1 = self._restrictValue(
-                range.rangeX1,
-                Math.floor((self.diffY1 - e.deltaY) / stepHalf) % 2 === 0
-                  ? Math.floor((self.diffY1 - e.deltaY) / step) * step
-                  : Math.ceil((self.diffY1 - e.deltaY) / step) * step
-              )
-            } else {
-              // 限制diffX1范围
-              self.diffY1 = self._restrictValue(range.rangeX1, self.diffY1 - e.deltaY)
-            }
-            self.bindBlock1()
-          }
-        }
-      )
-      this.gesToken1 = gesTokenObj.token
-    },
-
-    bindBlock2 () {
-      const self = this
-
-      // 如果禁用，不行进行表达式绑定
-      if (self.disabled) {
-        Binding.unbind({
-          token: this.gesToken2,
-          eventType: 'pan'
-        })
-        this.gesToken2 = 0
-        return
-      }
-
-      // 初始化按钮&条的大小范围
-      let blockMax = self.barHeight
-
-      let step = self.barHeight / (self.max - self.min)
-      let stepHalf = step / 2
-
-      const startBottom = self.diffY2 - blockMax - self.minDist
-
-      const props = [
-        {
-          element: self.tabBlock2.ref,
-          property: 'transform.translateY',
-          expression: self.stepMode
-            ? `min(${self.diffY3 - step}, max( floor((${self.diffY2}-y)/${stepHalf})%2 == 0 ?
-            (floor((${self.diffY2}-y)/${step})*${step})
-            : (ceil((${self.diffY2}-y)/${step})*${step}), ${self.diffY1 + step}))*-1`
-            : `min(${self.diffY3}, max(${self.diffY2} - y, ${self.diffY1}))*-1`
-        },
-        {
-          element: self.valueBlock2.ref,
-          property: 'transform.translateY',
-          expression: self.stepMode
-            ? `(min(-${self.barHeight - self.diffY3 + step}, max( floor((${startBottom}-y)/${stepHalf})%2 == 0 ?
-            (floor((${startBottom}-y)/${step})*${step})
-            : (ceil((${startBottom}-y)/${step})*${step}), -${blockMax - self.diffY1 - step}))-${self.stepHeight})*-1`
-            : `(min(${self.diffY3 - self.barHeight}, max(${startBottom}-y, -${blockMax}))-${self.stepHeight})*-1`
-        }
-      ]
-
-      const gesTokenObj = Binding.bind(
-        {
-          anchor: self.tabBlock2.ref,
-          eventType: 'pan',
-          props
-        },
-        e => {
-          if (e.state === 'end' || e.state === 'cancel' || e.state === 'exit') {
-            const range = self.getRange2()
-            if (self.stepMode) {
-              self.diffY2 = self._restrictValue(
-                range.rangeX1,
-                Math.floor((self.diffY2 - e.deltaY) / stepHalf) % 2 === 0
-                  ? Math.floor((self.diffY2 - e.deltaY) / step) * step
-                  : Math.ceil((self.diffY2 - e.deltaY) / step) * step
-              )
-            } else {
-              // 限制diffX1范围
-              self.diffY2 = self._restrictValue(range.rangeX1, self.diffY2 - e.deltaY)
-            }
-            self.bindBlock2()
-          }
-        }
-      )
-      this.gesToken2 = gesTokenObj.token
-    },
-
-    bindBlock3 () {
-      const self = this
-
-      // 如果禁用，不行进行表达式绑定
-      if (self.disabled) {
-        Binding.unbind({
-          token: this.gesToken3,
-          eventType: 'pan'
-        })
-        this.gesToken3 = 0
-        return
-      }
-
-      // 初始化按钮&条的大小范围
-      let blockMax = self.barHeight
-
-      let step = self.barHeight / (self.max - self.min)
-      let stepHalf = step / 2
-
-      const startBottom = self.diffY3 - blockMax - self.minDist
-
-      const props = [
-        {
-          element: self.tabBlock3.ref,
-          property: 'transform.translateY',
-          expression: self.stepMode
-            ? `min(${blockMax}, max( floor((${self.diffY3}-y)/${stepHalf})%2 == 0 ?
-            (floor((${self.diffY3}-y)/${step})*${step})
-            : (ceil((${self.diffY3}-y)/${step})*${step}), ${self.diffY2 + step}))*-1`
-            : `min(${blockMax}, max(${self.diffY3} - y, ${self.diffY2}))*-1`
-        },
-        {
-          element: self.valueBlock3.ref,
-          property: 'transform.translateY',
-          expression: self.stepMode
-            ? `(min(0, max( floor((${startBottom}-y)/${stepHalf})%2 == 0 ?
-            (floor((${startBottom}-y)/${step})*${step})
-            : (ceil((${startBottom}-y)/${step})*${step}), -${blockMax - self.diffY2 - step}))-${self.stepHeight})*-1`
-            : `(min(0, max(${startBottom}-y, -${blockMax}))-${self.stepHeight})*-1`
-        }
-      ]
-
-      const gesTokenObj = Binding.bind(
-        {
-          anchor: self.tabBlock3.ref,
-          eventType: 'pan',
-          props
-        },
-        e => {
-          if (e.state === 'end' || e.state === 'cancel' || e.state === 'exit') {
-            const range = self.getRange3()
-            if (self.stepMode) {
-              self.diffY3 = self._restrictValue(
-                range.rangeX1,
-                Math.floor((self.diffY3 - e.deltaY) / stepHalf) % 2 === 0
-                  ? Math.floor((self.diffY3 - e.deltaY) / step) * step
-                  : Math.ceil((self.diffY3 - e.deltaY) / step) * step
-              )
-            } else {
-              // 限制diffX1范围
-              self.diffY3 = self._restrictValue(range.rangeX1, self.diffY3 - e.deltaY)
-            }
-            self.bindBlock3()
-          }
-        }
-      )
-      this.gesToken3 = gesTokenObj.token
-    },
-
-    // 获取diffY1
-    getRange1 () {
-      let step = this.barHeight / (this.max - this.min)
-      return {
-        rangeX1: [0, this.diffY2 - step]
-      }
-    },
-    getRange2 () {
-      let step = this.barHeight / (this.max - this.min)
-      return {
-        rangeX1: [this.diffY1 + step, this.diffY3 - step]
-      }
-    },
-    getRange3 () {
-      let step = this.barHeight / (this.max - this.min)
-      return {
-        rangeX1: [this.diffY2 + step, this.barHeight]
-      }
-    },
-
-    // 限制取值范围
-    _restrictValue (range, value) {
-      if (range && range.length && range.length === 2) {
-        if (value < range[0]) {
-          return range[0]
-        } else if (value > range[1]) {
-          return range[1]
-        } else {
-          return value
-        }
-      }
-    },
-
-    _getValue (diffX) {
-      return Math.round((diffX / this.barHeight) * (this.max - this.min) + this.min) + 10
-    },
-    _getDiffX (value) {
-      let transValue = (value - 10) * -1
-      return ((transValue - this.min) / (this.max - this.min)) * this.barHeight
-    },
-    goTo (e) {
-      this.diffY1 = this._getDiffX(e[2])
-      this.diffY2 = this._getDiffX(e[1])
-      this.diffY3 = this._getDiffX(e[0])
-
-      this.valueResult = this.value
+    tabIconLeft () {
+      return this.seekbarConfig.value * 67 - 8
     }
+  },
+  methods: {
+    slideChange (e) {
+      this.seekbarConfig.value = e.value
+      this.$emit('updateValue', e.value)
+    },
+    slideEnd (e) {
+      this.seekbarConfig.value = e.value
+      this.$emit('slideEnd', e.value)
+    }
+  },
+  created () {
+    this.seekbarConfig.value = this.index
   }
 }
 </script>
 
 <style scoped>
-.container-block {
+.wrapper {
   width: 750px;
+  height: 422px;
 }
-.bar-block {
-  width: 336px;
+.seekbar {
+  width: 620px;
+  height: 90px;
   position: absolute;
-  left: 196px;
-  bottom: 1px;
-  overflow: hidden;
+  left: 64px;
 }
-.tab-block {
-  width: 336px;
-  height: 80px;
+.bar-bg {
+  width: 750px;
+  height: 270px;
   position: absolute;
   left: 0;
-  bottom: 0;
+  top: 60px;
 }
-.tab {
-  width: 36px;
-  height: 40px;
+.bg-block {
+  width: 670px;
+  height: 270px;
   position: absolute;
-  left: 150px;
-  top: 20px;
-}
-.image-tab {
-  width: 36px;
-  height: 40px;
+  left: 40px;
+  top: 0;
+  background-color: #d5e8ff;
 }
 .value-block {
-  width: 336px;
-  height: 0;
+  height: 270px;
   position: absolute;
-  left: 0;
-  border-top-width: 3px;
-  border-top-color: #ffffff;
-  border-top: dashed;
-}
-.mask {
-  width: 336px;
-  height: 40px;
-  background-color: #ffffff;
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-}
-.step-index {
-  height: 2px;
-  background-color: #979797;
-  position: absolute;
-  right: 570px;
-}
-.index-block {
-  height: 70px;
-  width: 196px;
-  position: absolute;
-  left: 0;
-}
-.index-text {
-  font-family: PingFangSC-Regular;
-  font-size: 24px;
-  line-height: 70;
-  color: rgba(250, 100, 0, 0.8);
-  font-weight: 400;
-  margin-left: 60px;
+  left: 40px;
+  top: 0;
+  background-color: #59a5ff;
+  border-right-width: 3px;
+  border-right-color: #ffffff;
+  border-right: dashed;
 }
 .index-line {
-  width: 12px;
-  height: 66px;
-  border-radius: 6px;
-  background-color: rgba(250, 100, 0, 0.8);
+  width: 4px;
+  background-color: #c9c9c9;
+  border-radius: 2px;
   position: absolute;
-  top: 2px;
-  right: 16px;
+  top: 338px;
 }
 .index-num {
+  width: 30px;
   font-family: PingFangSC-Regular;
   font-size: 24px;
-  line-height: 70px;
-  color: rgba(250, 100, 0, 0.8);
+  line-height: 30px;
+  color: #fb8333;
+  text-align: center;
   font-weight: 400;
   position: absolute;
-  right: 570px;
+  top: 334px;
 }
-.value-block-bg {
-  width: 336px;
-  height: 760px;
+.index-des {
+  width: 120px;
+  font-family: PingFangSC-Regular;
+  font-size: 24px;
+  line-height: 30px;
+  color: #fb8333;
+  text-align: center;
+  font-weight: 400;
   position: absolute;
-  left: 0;
-  bottom: 0;
+  top: 376px;
 }
-.tip-text {
+.env-des {
+  width: 100px;
   font-family: PingFangSC-Regular;
   font-size: 32px;
+  line-height: 34px;
   color: #666666;
-  line-height: 32px;
+  text-align: center;
   font-weight: 400;
   position: absolute;
-  left: 548px;
-  bottom: 0;
+  top: 10px;
+}
+.index-icon-block {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 340px;
+}
+.tap-icon {
+  width: 96px;
+  height: 96px;
+  position: absolute;
+  top: 84px;
+}
+.center {
+  justify-content: center;
+  align-items: center;
+}
+.index-img {
+  width: 32px;
+  height: 32px;
+}
+.tab-img {
+  width: 88px;
+  height: 58px;
 }
 </style>

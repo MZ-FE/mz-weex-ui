@@ -3,18 +3,18 @@
 > 明暗亮度档位选择组件
 
 ### 规则
-- 用于选择明暗亮度档位，默认单个拖动栏，最多可配置3个拖动栏
+- 用于选择明暗亮度档位
 
 
 ## Demo
-<img src="../../example/mz-illumination-bar/demo.jpg" width="240px"/>
+<img src="../../example/mz-illumination-bar/demo.png" width="240px"/>
 ## 使用方法
 
 ```vue
 <template>
     <mz-illumination-bar
-        :value="curValueArr"
-        :index="curEnvIndex"
+        :index="curIndex"
+        :envIndex="curEnvIndex"
         @updateValue="onUpdateValue"
         @slideEnd="onSlideEnd"
     ></mz-illumination-bar>
@@ -24,12 +24,12 @@
   export default {
   	components: { MzIlluminationBar },
   	data: () => ({
-            curValueArr: [0, 0, 1],
+            curIndex: 4,
             curEnvIndex: 0,
   	}),
         methods: {
             onUpdateValue(e) {},
-            onSlideEnd() {}
+            onSlideEnd(e) {}
         }
   }
 </script>
@@ -40,11 +40,8 @@
 
 | Prop | Type | Required | Default | Description |
 |-------------|------------|--------|-----|-----|
-| value       | `Array` |`N`| `[0, 0, 5]`    | 拖动栏当前值 |
-| index       | `Number` |`N`| `1`      | “当前亮度”指示器当前值 |
-| tipArr      | `Array` |`N`| `['', '', '较暗', '较亮']`  | 右侧提示文案 |
-| tabShow     | `Array` |`N`| `[false, false, true]`    | 滑动栏是否显示 |
-| barColor    | `Array` |`N`| `['#d8e9ff', '#a3d3ff', '#69b8ff', '#549eff']`  | 值块的背景颜色 |
+| index       | `Number` |`N`| `4`    | 拖动栏当前值 |
+| index       | `Number` |`N`| `1`      | “当前亮度”指示器当前值(取值从1~10) |
 
 ### 事件
 
