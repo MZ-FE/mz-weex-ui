@@ -47,6 +47,7 @@ export { default } from './index.vue';
 修订号(patch)，当你做了向下兼容的问题修正：`npm version patch`
 
 #### 发布
+> 注意必须发布前保证当前镜像地址为npm的官方地址
 `npm publish`
 
 
