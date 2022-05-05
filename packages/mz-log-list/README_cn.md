@@ -30,7 +30,8 @@
 | list |列表数据| `Array` | `[]` |
 
 #### list数据结构
-| Prop | Description | Type | Default |
-| ---- | :----------:|:----:|:-------:|
-| label | 日志左侧文案 | `String` | `` |
-| content | 日志右侧文案 | `String` | `` |
+| Prop | Description |   Type    | Default |
+| ---- |:-----------:|:---------:|:-------:|
+| label |   日志左侧文案    | `String`  |   ``    |
+| isWarn |  文案是否高亮显示   | `Boolean` | `false` |
+| content |   日志右侧文案    | `String`  |   ``    |

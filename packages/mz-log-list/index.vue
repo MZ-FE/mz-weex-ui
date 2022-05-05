@@ -2,10 +2,10 @@
   <div class="log-list">
     <div class="line" v-if="list.length > 0"></div>
     <div class="log-item" v-for="(logItem, logIndex) in list" :key="logIndex">
-      <text class="time-text">{{ logItem.label }}</text>
-      <div class="dot"></div>
+      <text class="time-text" :class="[logItem.isWarn || 'text-warn']">{{ logItem.label }}</text>
+      <div class="dot" :class="[logItem.isWarn || 'bg-warn']"></div>
 
-      <text class="content-text">{{ logItem.content }}</text>
+      <text class="content-text" :class="[logItem.isWarn || 'text-warn']">{{ logItem.content }}</text>
     </div>
   </div>
 </template>
@@ -51,11 +51,19 @@ export default {
   line-height: 24px;
 }
 
+.text-warn {
+  color: #FF3B30;
+}
+
 .dot {
   width: 12px;
   height: 12px;
   background-color: #c7c7cc;
   border-radius: 50%;
+}
+
+.bg-warn {
+  background-color: #FF3B30;
 }
 
 .log-list {
