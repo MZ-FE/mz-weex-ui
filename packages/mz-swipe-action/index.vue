@@ -5,13 +5,7 @@
         @click="dofCellClicked(index)"
         class="itemWrap"
         ref="menuItem"
-        :style="{
-          ...cellStyle,
-          width:
-            parseInt(width) +
-            116 * (item.rightItem && item.rightItem.length) +
-            'px',
-        }"
+        :style="getCellStyle(item)"
         v-for="(item, index) in listData"
         :key="index"
         @swipe="slideMenu($event, index, item.rightItem.length)"
@@ -44,13 +38,7 @@
         v-for="(item, index) of listData"
         :key="'skid-' + index"
         class="dof-skid"
-        :style="{
-          ...cellStyle,
-          width:
-            parseInt(width) +
-            116 * (item.rightItem && item.rightItem.length) +
-            'px',
-        }"
+        :style="getCellStyle(item)"
         @panstart="
           (e) =>
             !isAndroid &&
@@ -169,15 +157,20 @@
     },
     created () {},
 
-    computed: {
-      cellStyle () {
-        return Object.assign({
-          marginBottom: '0'
-        }, this.itemStyle)
-      }
-    },
+    computed: {},
 
     methods: {
+      getCellStyle (item) {
+        return Object.assign({
+          marginBottom: '0'
+        }, {
+          ...this.itemStyle,
+          width:
+            parseInt(this.width) +
+            116 * (item.rightItem && item.rightItem.length) +
+            'px',
+        })
+      },
       dofCellClicked (index) {
         //点击触发滑动恢复初始化
         if (this.isAndroid) {
