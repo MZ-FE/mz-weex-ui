@@ -17,7 +17,7 @@
 ## 安装
 
 ```shell
-npm i mz-weex-ui -S
+npm i mz-weex-ui@latest -S
 ```
 
 ### 使用前
