@@ -36,7 +36,7 @@ export default {
 
 <style scoped>
 .log-item {
-  padding-top: 36px;
+  padding-top: 64px;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -73,7 +73,7 @@ export default {
   position: absolute;
   width: 2px;
   left: 131px;
-  top: 40px;
+  top: 68px;
   bottom: 12px;
   background-color: #e5e5e8;
 }
