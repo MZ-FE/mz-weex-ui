@@ -38,10 +38,10 @@
 
 ### 可配置参数
 
-| Prop | Type | Required | Default | Description |
-|-------------|------------|--------|-----|-----|
-| index       | `Number` |`N`| `4`    | 拖动栏当前值 |
-| envIndex       | `Number` |`N`| `1`      | “当前亮度”指示器当前值(取值从1~10) |
+| Prop | Type | Required | Default | Description           |
+|-------------|------------|--------|-----|-----------------------|
+| index       | `Number` |`N`| `4`    | 拖动栏当前值（取值范围1~9）       |
+| envIndex       | `Number` |`N`| `1`      | “当前亮度”指示器当前值(取值1范围1~10) |
 
 ### 事件
 
