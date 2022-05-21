@@ -60,10 +60,7 @@ export default {
   },
   computed: {
     listStyle () {
-      let style = {
-        alignItems: 'center',
-        justifyContent: 'center'
-      }
+      let style = {}
 
       if (this.height > 0) {
         style.height = `${this.height}px`
