@@ -18,7 +18,7 @@
       :key="i"
       :style="{ transform: 'rotate(' + (i - 1) * 18 + 'deg)', opacity: i > tabCircleIndex ? 1 : 0 }"
     ></image>
-    <image class="needle" :src="needleImg" :style="{ transform: 'rotate(' + (envIndex * 18.4 - 100) + 'deg)' }"></image>
+    <image class="needle" :src="needleImg" :style="{ transform: 'rotate(' + ((11 - envIndex) * 18.4 - 100) + 'deg)' }"></image>
     <image
       class="tab-circle"
       :src="tabCircleImg"
@@ -45,7 +45,7 @@ export default {
     index: {
       // 1 ~ 9
       type: Number,
-      default: 5
+      default: 3
     },
     envIndex: {
       // 1 ~ 10
@@ -83,7 +83,8 @@ export default {
   },
   watch: {
     index () {
-      this.tabCircleIndex = this.index
+      let temp = this.index < 1 ? 1 : this.index > 9 ? 9 : this.index
+      this.tabCircleIndex = 10 - temp
     }
   },
   computed: {
@@ -115,7 +116,8 @@ export default {
     }
   },
   created () {
-    this.tabCircleIndex = this.index
+    let temp = this.index < 1 ? 1 : this.index > 9 ? 9 : this.index
+    this.tabCircleIndex = 10 - temp
   }
 }
 </script>
