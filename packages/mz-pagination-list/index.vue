@@ -1,7 +1,7 @@
 <template>
   <div :style="listStyle">
-    <list>
-      <refresh class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
+    <list ref="list" class="scroller">
+      <refresh :style="loadingViewStyle" class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
         <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
       </refresh>
 
@@ -9,7 +9,7 @@
         <slot></slot>
       </cell>
 
-      <loading @loading="loadMore" class="loading-view" v-if="hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
+      <loading :style="loadingViewStyle" @loading="loadMore" class="loading-view" v-if="hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
         <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
       </loading>
     </list>
@@ -17,6 +17,10 @@
 </template>
 
 <script>
+import debugUtil from "@/util/debugUtil";
+
+const dom = weex.requireModule('dom')
+
 export default {
   props: {
     height: {
@@ -37,12 +41,14 @@ export default {
     // 请求数据的回调
     getData: {
       type: Function,
-      default: async () => {}
+      default: async () => {
+      }
     },
     // 请求数据的回调
     refreshData: {
       type: Function,
-      default: async () => {}
+      default: async () => {
+      }
     },
     indicatorColor: {
       type: String,
@@ -55,7 +61,8 @@ export default {
     return {
       isRefreshing: false,
       isLoadingMore: false,
-      isIos: weex.config.env.platform === 'iOS'
+      isIos: weex.config.env.platform === 'iOS',
+      listWidth: 750
     }
   },
   computed: {
@@ -67,6 +74,9 @@ export default {
       }
 
       return style
+    },
+    loadingViewStyle () {
+      return { width: `${this.listWidth}px`}
     },
     hasMore () {
       return this.pageNo * this.pageSize < this.total
@@ -94,17 +104,33 @@ export default {
     }
   },
 
-  created () {},
+  created () {
+  },
 
-  mounted () {},
+  mounted () {
+    setTimeout(() => {
+      dom.getComponentRect(this.$refs['list'], option => {
+        debugUtil.log('getComponentRect-list', option)
+        // 查询失败时result为false
+        if (!option.result) {
+          return
+        }
+        this.listWidth = option.size.width
+      })
+    }, 300)
+  },
 
-  destroyed () {}
+  destroyed () {
+  }
 }
 </script>
 
 <style scoped>
+.scroller {
+  align-items: stretch;
+}
 .loading-view {
-  width: 750px;
+  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
