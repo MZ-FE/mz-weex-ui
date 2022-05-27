@@ -108,10 +108,10 @@ export default {
       }
       this.isTouching = true
       this.tabCircleIndex = this.progress2Index(progress)
-      this.$emit('updateValue', this.tabCircleIndex)
+      this.$emit('updateValue', 10 - this.tabCircleIndex)
     },
     endProgress () {
-      if (this.isTouching) this.$emit('slideEnd', this.tabCircleIndex)
+      if (this.isTouching) this.$emit('slideEnd', 10 - this.tabCircleIndex)
       this.isTouching = false
     }
   },
