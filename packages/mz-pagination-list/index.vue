@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import debugUtil from "@/util/debugUtil";
-
 const dom = weex.requireModule('dom')
 
 export default {
@@ -110,7 +108,6 @@ export default {
   mounted () {
     setTimeout(() => {
       dom.getComponentRect(this.$refs['list'], option => {
-        debugUtil.log('getComponentRect-list', option)
         // 查询失败时result为false
         if (!option.result) {
           return
