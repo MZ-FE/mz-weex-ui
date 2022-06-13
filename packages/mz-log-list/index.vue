@@ -1,11 +1,16 @@
 <template>
-  <div class="log-list">
-    <div class="line" v-if="list.length > 0"></div>
-    <div class="log-item" v-for="(logItem, logIndex) in list" :key="logIndex">
-      <text class="time-text" :class="[logItem.isWarn || 'text-warn']">{{ logItem.label }}</text>
-      <div class="dot" :class="[logItem.isWarn || 'bg-warn']"></div>
+  <div class="card" :style="{ height: cardHeight + 'px' }">
+    <div class="date-block">
+      <text class="date-text">{{ title }}</text>
+    </div>
 
-      <text class="content-text" :class="[logItem.isWarn || 'text-warn']">{{ logItem.content }}</text>
+    <div class="item-block" v-for="(item, index) in list" :key="index">
+      <text class="item-time">{{ item.label }}</text>
+      <text class="item-content">{{ item.content }}</text>
+
+      <div class="line-top" v-if="index != 0"></div>
+      <div class="line-bottom" v-if="index != list.length - 1"></div>
+      <div class="circle"></div>
     </div>
   </div>
 </template>
@@ -13,74 +18,91 @@
 <script>
 export default {
   props: {
+    title: {
+      type: String,
+      default: ''
+    },
     list: {
       type: Array,
       default: () => []
     }
   },
-  components: {},
-  data () {
-    return {}
-  },
-  computed: {},
-  watch: {},
-  methods: {},
-
-  created () {},
-
-  mounted () {},
-
-  destroyed () {}
+  computed: {
+    cardHeight () {
+      return this.list.length * 88 + 112
+    }
+  }
 }
 </script>
 
 <style scoped>
-.log-item {
-  padding-top: 64px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+.card {
+  width: 750px;
+  margin-top: 16px;
+  background-color: #ffffff;
 }
-
-.time-text {
-  width: 126px;
-  padding-right: 20px;
+.date-block {
+  width: 686px;
+  height: 96px;
+}
+.date-text {
+  font-family: PingFangSC-Medium;
+  font-size: 28px;
+  color: #666666;
+  line-height: 28px;
+  font-weight: 500;
+  position: absolute;
+  top: 36px;
+  left: 33px;
+}
+.item-block {
+  width: 686px;
+  height: 88px;
+}
+.item-time {
+  font-family: PingFangSC-Regular;
   font-size: 24px;
   color: #8a8a8f;
-  text-align: left;
+  text-align: right;
   line-height: 24px;
-}
-
-.text-warn {
-  color: #FF3B30;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  background-color: #c7c7cc;
-  border-radius: 50%;
-}
-
-.bg-warn {
-  background-color: #FF3B30;
-}
-
-.log-list {
-  position: relative;
-}
-.line {
+  font-weight: 400;
   position: absolute;
-  width: 2px;
-  left: 131px;
-  top: 68px;
-  bottom: 12px;
-  background-color: #e5e5e8;
+  left: 32px;
+  top: 32px;
 }
-.content-text {
-  padding-left: 48px;
+.item-content {
+  font-family: PingFangSC-Regular;
   font-size: 24px;
   color: #000000;
   line-height: 24px;
+  font-weight: 400;
+  position: absolute;
+  left: 208px;
+  top: 32px;
+}
+.circle {
+  width: 12px;
+  height: 12px;
+  background: #c7c7cc;
+  border-radius: 6px;
+  position: absolute;
+  left: 148px;
+  top: 38px;
+}
+.line-top {
+  width: 2px;
+  height: 49px;
+  background-color: #e5e5e8;
+  position: absolute;
+  left: 153px;
+  top: 0;
+}
+.line-bottom {
+  width: 2px;
+  height: 49px;
+  background-color: #e5e5e8;
+  position: absolute;
+  left: 153px;
+  bottom: 0;
 }
 </style>

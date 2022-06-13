@@ -8,7 +8,7 @@
 ```vue
 <template>
   <div class="mz-demo">
-    <mzLogList :list="list"></mzLogList>
+    <mzLogList :title="title" :list="list"></mzLogList>
   </div>
 </template>
 
@@ -17,7 +17,8 @@
   export default {
     components: { mzLogList },
     data: () => ({
-      list: [{ label: '12:00', content: '11111'}, { label: '13:00', content: '2222'}],
+      title: '3月7日 周五',
+      list: [{ label: '10:21:25', content: '管理员密码 开锁成功'}, { label: '16:16:06', content: '管理员密码 开锁成功'}],
     }),
   }
 </script>
@@ -25,13 +26,13 @@
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| ---- | :----------:|:----:|:-------:|
-| list |列表数据| `Array` | `[]` |
+| 参数 |  说明  |    类型    | 默认值  |
+| ---- |:----:|:--------:|:----:|
+| title |  标题  | `String` |  `''`  |
+| list | 列表数据 | `Array`  | `[]` |
 
 #### list数据结构
 | Prop | Description |   Type    | Default |
 | ---- |:-----------:|:---------:|:-------:|
 | label |   日志左侧文案    | `String`  |   ``    |
-| isWarn |  文案是否高亮显示   | `Boolean` | `false` |
 | content |   日志右侧文案    | `String`  |   ``    |
