@@ -8,6 +8,7 @@ import MzIlluminationBar from './packages/mz-illumination-bar';
 import MzLinkList from './packages/mz-link-list';
 import MzLogList from './packages/mz-log-list';
 import MzPaginationList from './packages/mz-pagination-list';
+import MzPopup from './packages/mz-popup';
 import MzSliderBar from './packages/mz-slider-bar';
 import MzSliderCard from './packages/mz-slider-card';
 import MzSwipeAction from './packages/mz-swipe-action';
@@ -21,6 +22,7 @@ export {
   MzLinkList,
   MzLogList,
   MzPaginationList,
+  MzPopup,
   MzSliderBar,
   MzSliderCard,
   MzSwipeAction,
