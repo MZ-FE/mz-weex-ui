@@ -3,6 +3,7 @@
  */
 
 import BindEnv from './packages/bind-env';
+import MzCalendar from './packages/mz-calendar';
 import MzCollapse from './packages/mz-collapse';
 import MzIlluminationBar from './packages/mz-illumination-bar';
 import MzLinkList from './packages/mz-link-list';
@@ -17,6 +18,7 @@ import Utils from './packages/utils';
 
 export {
   BindEnv,
+  MzCalendar,
   MzCollapse,
   MzIlluminationBar,
   MzLinkList,
