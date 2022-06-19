@@ -71,7 +71,7 @@
 <slot></slot>
 ```
 
-- 触发按钮插槽，能暴露的参数有限，需要定义的东西多就直接换一个吧，详见 example
+- 触发按钮插槽。trigger 默认是 `dof-button`，能暴露的参数有限，需要定义的东西多的话，就直接通过插槽实现吧，详见 example
 ```vue
 <slot name="trigger"></slot>
 ```
