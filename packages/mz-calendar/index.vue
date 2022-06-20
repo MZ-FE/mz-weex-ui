@@ -4,8 +4,8 @@
       :show="showCalendar"
       :popupStyle="popupStyle"
       :btnText="btnText"
-      @buttonClicked="popupTrigger"
-      @overlayClicked="showCalendar = false"
+      @buttonClicked="$emit('buttonClicked')"
+      @overlayClicked="$emit('overlayClicked')"
     >
       <div class="calendar">
         <div class="week-title">
@@ -19,6 +19,7 @@
               class="day-item"
               v-for="(day, c) in week"
               :key="c"
+              :ref="`day-${day.format('YYYY-MM-DD')}`"
               @click="checkDay(day)"
             >
               <text :style="dayComposedStyle(day)">{{ day.date() }}</text>
@@ -32,6 +33,7 @@
           </div>
         </scroller>
       </div>
+      <slot slot="trigger"></slot>
     </mz-popup>
   </div>
 </template>
@@ -40,6 +42,7 @@
 import { DofButton } from "dolphin-weex-ui";
 import MzPopup from "../mz-popup";
 import dayjs from "dayjs";
+const domModule = weex.requireModule("dom");
 
 const today = dayjs();
 const yesterday = today.subtract(1, "day");
@@ -71,8 +74,12 @@ export const generateCalendar = (months = 2) => {
 module.exports = {
   components: { DofButton, MzPopup },
   props: {
+    showCalendar: {
+      type: Boolean,
+      default: false,
+    },
     height: {
-      type: [Number, String],
+      type: [Number],
       default: 520,
     },
     monthSpan: {
@@ -118,11 +125,14 @@ module.exports = {
         fontSize: "18px",
       }),
     },
+    disabledList: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
       checkedDate: today,
-      showCalendar: false,
       WEEK_DAYS: ["日", "一", "二", "三", "四", "五", "六"],
     };
   },
@@ -133,21 +143,20 @@ module.exports = {
      * @returns {boolean}
      * ! 今天与选定日期的月份，差值超过 monthSpan - 1
      * ! 选定日期晚于今天
+     * ! 在 disabledList 中
      */
     isDisabled(day) {
-      const { monthSpan } = this;
+      const { monthSpan, disabledList } = this;
       const diff = today.month() - day.month();
       return (
         diff > monthSpan - 1 ||
         (diff < 0 && diff > monthSpan - 13) ||
-        day.isAfter(today)
+        day.isAfter(today) ||
+        disabledList.some((d) => day.isSame(d, "day"))
       );
     },
     isToday(day) {
       return day.isSame(today, "day");
-    },
-    popupTrigger() {
-      this.showCalendar = !this.showCalendar;
     },
     checkDay(day) {
       if (this.isDisabled(day)) {
@@ -171,6 +180,15 @@ module.exports = {
       }
       return style;
     },
+    scrollToToday() {
+      const todayEl = this.$refs[`day-${today.format("YYYY-MM-DD")}`];
+      if (todayEl) {
+        domModule.scrollToElement(todayEl[0], {
+          offset: -this.height / 2,
+          animated: true,
+        });
+      }
+    },
   },
   computed: {
     calendar() {
@@ -183,6 +201,14 @@ module.exports = {
         return "昨天";
       }
       return this.checkedDate.format("YYYY-MM-DD");
+    },
+  },
+  watch: {
+    async showCalendar(val) {
+      if (val) {
+        await this.$nextTick();
+        this.scrollToToday();
+      }
     },
   },
 };
