@@ -88,6 +88,7 @@ module.exports = {
       type: [Number],
       default: 520,
     },
+    // 日期跨度，以月为单位
     monthSpan: {
       type: Number,
       default: 3,
@@ -124,6 +125,13 @@ module.exports = {
         color: "#c7c7c7",
       }),
     },
+    emphasizedStyle: {
+      type: Object,
+      default: () => ({
+        color: "#c00",
+        fontWeight: "bold",
+      }),
+    },
     monthStyle: {
       type: Object,
       default: () => ({
@@ -131,16 +139,26 @@ module.exports = {
         fontSize: "18px",
       }),
     },
+    // 禁用的日期
     disabledList: {
       type: Array,
       default: () => [],
+    },
+    // 突出显示的日期
+    emphasizedList: {
+      type: Array,
+      default: () => [],
+    },
+    // 滚动到指定日期
+    scrollToDay: {
+      type: String,
+      default: today.format("YYYY-MM-DD"),
     },
   },
   data() {
     return {
       checkedDate: today,
       WEEK_DAYS: ["日", "一", "二", "三", "四", "五", "六"],
-      scrolled: false,
     };
   },
   methods: {
@@ -162,6 +180,10 @@ module.exports = {
         disabledList.some((d) => day.isSame(d, "day"))
       );
     },
+    isEmphasized(day) {
+      const { emphasizedList } = this;
+      return emphasizedList.some((d) => day.isSame(d, "day"));
+    },
     isToday(day) {
       return day.isSame(today, "day");
     },
@@ -181,18 +203,20 @@ module.exports = {
       if (day.isSame(this.checkedDate, "day")) {
         Object.assign(style, this.checkedStyle);
       }
-
       if (this.isDisabled(day)) {
         Object.assign(style, this.disabledStyle);
       }
+      if (this.isEmphasized(day)) {
+        Object.assign(style, this.emphasizedStyle);
+      }
       return style;
     },
-    scrollToToday() {
-      const todayEl = this.$refs[`day-${today.format("YYYY-MM-DD")}`];
+    scrollTo() {
+      const todayEl = this.$refs[`day-${this.scrollToDay}`];
       if (todayEl) {
+        const weekTitleHeight = 100;
         domModule.scrollToElement(todayEl[0], {
-          offset: -this.height / 2,
-          animated: true,
+          offset: -this.height / 2 + weekTitleHeight,
         });
       }
     },
@@ -212,9 +236,8 @@ module.exports = {
   },
   watch: {
     showCalendar(val) {
-      if (val && !this.scrolled) {
-        this.scrolled = true;
-        setTimeout(() => this.scrollToToday(), 300);
+      if (val && this.scrollToDay) {
+        setTimeout(() => this.scrollTo(), 500);
       }
     },
   },
