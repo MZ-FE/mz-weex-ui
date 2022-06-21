@@ -31,6 +31,9 @@
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
+| showCalendar | `Boolean` |`Yes`| `false` | 是否显示  |
+| pos | `String` |`No`| `bottom` | 从哪弹出  |
+| height | `Number` |`No`| `520` | 弹层高度  |
 | monthSpan | `Number` |`No`| `3` | 月份跨度  |
 | popupStyle | `Object` |`No`| - | 弹层样式  |
 | normalDayStyle | `Object` |`No`| - | 普通日期样式  |

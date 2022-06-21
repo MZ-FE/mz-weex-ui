@@ -20,7 +20,7 @@
 npm i mz-weex-ui@latest -S
 ```
 
-### 使用前
+## 使用前
 
 为了不打包所有的组件，你需要使用 [`babel-plugin-component`](https://www.npmjs.com/package/babel-plugin-component) 来只引入需要的组件打包，同时如果没有安装 `babel-preset-stage-0`，也需一并安装。
 
@@ -53,6 +53,29 @@ npm run start
 
 一旦它编译完成后，将会自动打开一个浏览器，你可以将浏览器切换到开发者模式，这时候在 console 中你可以看到一个预览二维码，直接使用你的 Weex App 扫码就可以看到 Demo 效果。
 
+### 本地发布并在隔壁项目直接调试
+
+全局安装 [yalc](https://github.com/wclr/yalc)
+```shell
+npm i yalc -g
+```
+
+在 `mz-weex-ui` 项目目录发布
+```shell
+yalc publish 
+```
+
+在要进行调试的项目目录进行链接
+```shell
+yalc link mz-weex-ui
+```
+
+代码修改完成后，无须正式发布+安装，在 `mz-weex-ui` 目录执行
+```shell
+npm run async
+```
+
+> TODO 自动监控修改并发布
 
 ## 协议
 

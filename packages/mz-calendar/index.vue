@@ -2,6 +2,7 @@
   <div>
     <mz-popup
       :show="showCalendar"
+      :pos="pos"
       :popupStyle="popupStyle"
       :btnText="btnText"
       @buttonClicked="$emit('buttonClicked')"
@@ -78,6 +79,11 @@ module.exports = {
       type: Boolean,
       default: false,
     },
+    // 从哪弹出 "free" | "bottom"
+    pos: {
+      type: String,
+      default: "bottom",
+    },
     height: {
       type: [Number],
       default: 520,
@@ -134,6 +140,7 @@ module.exports = {
     return {
       checkedDate: today,
       WEEK_DAYS: ["日", "一", "二", "三", "四", "五", "六"],
+      scrolled: false,
     };
   },
   methods: {
@@ -204,10 +211,10 @@ module.exports = {
     },
   },
   watch: {
-    async showCalendar(val) {
-      if (val) {
-        await this.$nextTick();
-        this.scrollToToday();
+    showCalendar(val) {
+      if (val && !this.scrolled) {
+        this.scrolled = true;
+        setTimeout(() => this.scrollToToday(), 300);
       }
     },
   },

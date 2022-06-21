@@ -36,6 +36,7 @@
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | show | `Boolean` |`Yes`| `false` | 弹层显示状态  |
+| pos | `String` |`No`| `bottom` | 从哪弹出  |
 | btnText | `String` |`No`| `显示弹层` | 触发按钮文字 |
 | haveOverlay | `Boolean` |`No`| `true` | 是否带有遮罩屏蔽 |
 | overlayCfg | `Object` |`No`| - | 遮罩层配置，用于覆盖默认配置 |

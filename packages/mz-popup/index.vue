@@ -47,6 +47,11 @@ module.exports = {
       type: Boolean,
       default: false,
     },
+    // 从哪弹出 "free" | "bottom"
+    pos: {
+      type: String,
+      default: "free",
+    },
     btnText: {
       type: String,
       default: "显示弹层",
@@ -118,8 +123,14 @@ module.exports = {
       return this.show;
     },
     composedStyle() {
-      const { defaultStyle, popupStyle, boxShadow, btnSize, popupHeight } =
-        this;
+      const {
+        defaultStyle,
+        popupStyle,
+        boxShadow,
+        btnSize,
+        popupHeight,
+        screenHeight,
+      } = this;
       const style = {
         height: `${this.popupHeight}px`,
       };
@@ -128,8 +139,14 @@ module.exports = {
         style.boxShadow =
           typeof boxShadow === "string" ? boxShadow : defaultShadow;
       }
-      // 自动判断弹框方向 // HACK 非严格计算
-      if (btnSize.top < 700) {
+
+      if (this.pos === "bottom") {
+        style.top = `${screenHeight}px`;
+        style.borderTopLeftRadius = "0";
+        style.borderTopLeftRadius = "0";
+      }
+      // 其它自动判断弹框方向 // HACK 非严格计算
+      else if (btnSize.top < 700) {
         style.top = `${btnSize.height + btnSize.top}px`;
       } else {
         style.top = `${btnSize.top - popupHeight}px`;
@@ -147,6 +164,10 @@ module.exports = {
       const { btnSize, btnWrapperSize, popupSize: p } = this;
       const b = this.btnSizeGot ? btnSize : btnWrapperSize;
       return b.top < p.top + p.height && p.top < b.top + b.height;
+    },
+    screenHeight() {
+      const { env } = weex.config;
+      return parseInt((env.deviceHeight / env.deviceWidth) * 750);
     },
   },
   mounted() {
@@ -179,10 +200,16 @@ module.exports = {
       if (!popupEl) {
         return;
       }
+      const styles = {};
+      if (this.pos === "bottom") {
+        styles.transform = `translateY(-${isShow ? this.popupHeight : 0}px)`;
+      } else {
+        styles.opacity = isShow ? 1 : 0;
+      }
       animation.transition(
         popupEl,
         {
-          styles: { opacity: isShow ? 1 : 0 },
+          styles,
           duration,
           delay: 0,
           ...this.animation,
