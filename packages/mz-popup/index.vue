@@ -103,10 +103,10 @@ module.exports = {
     defaultStyle: {
       left: "0px",
       width: "750px",
-      borderRadius: "32px", // IoT UI 规范弧度
       transformOrigin: "top center",
       backgroundColor: "#ffffff",
     },
+    screenHeight: 1080,
   }),
   computed: {
     // HACK 弹层动画
@@ -142,14 +142,17 @@ module.exports = {
 
       if (this.pos === "bottom") {
         style.top = `${screenHeight}px`;
-        style.borderTopLeftRadius = "0";
-        style.borderTopLeftRadius = "0";
-      }
-      // 其它自动判断弹框方向 // HACK 非严格计算
-      else if (btnSize.top < 700) {
-        style.top = `${btnSize.height + btnSize.top}px`;
+        style.borderTopLeftRadius = "32px";
+        style.borderTopRightRadius = "32px";
       } else {
-        style.top = `${btnSize.top - popupHeight}px`;
+        style.borderRadius = "32px";
+
+        // 其它自动判断弹框方向 // HACK 非严格计算
+        if (btnSize.top < 700) {
+          style.top = `${btnSize.height + btnSize.top}px`;
+        } else {
+          style.top = `${btnSize.top - popupHeight}px`;
+        }
       }
       return { ...defaultStyle, ...style, ...popupStyle };
     },
@@ -165,13 +168,12 @@ module.exports = {
       const b = this.btnSizeGot ? btnSize : btnWrapperSize;
       return b.top < p.top + p.height && p.top < b.top + b.height;
     },
-    screenHeight() {
-      const { env } = weex.config;
-      return parseInt((env.deviceHeight / env.deviceWidth) * 750);
-    },
   },
   mounted() {
     this.appearPopup(this.show);
+    domModule.getComponentRect("viewport", (data) => {
+      this.screenHeight = data.size.height;
+    });
   },
   methods: {
     handleTouchEnd(e) {

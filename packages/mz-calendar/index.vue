@@ -5,6 +5,8 @@
       :pos="pos"
       :popupStyle="popupStyle"
       :btnText="btnText"
+      :overlayCfg="overlayCfg"
+      :boxShadow="boxShadow"
       @buttonClicked="$emit('buttonClicked')"
       @overlayClicked="$emit('overlayClicked')"
     >
@@ -154,6 +156,16 @@ module.exports = {
       type: String,
       default: today.format("YYYY-MM-DD"),
     },
+    // 遮罩层配置，用于覆盖默认配置
+    overlayCfg: {
+      type: Object,
+      default: () => ({}),
+    },
+    // 弹层下是否显示投影，可转入自定义投影样式
+    boxShadow: {
+      type: Boolean | String,
+      default: true,
+    },
   },
   data() {
     return {
@@ -237,7 +249,7 @@ module.exports = {
   watch: {
     showCalendar(val) {
       if (val && this.scrollToDay) {
-        setTimeout(() => this.scrollTo(), 500);
+        setTimeout(() => this.scrollTo(), 800);
       }
     },
   },

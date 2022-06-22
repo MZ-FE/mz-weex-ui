@@ -10,6 +10,8 @@
       @checked="dayChecked"
       :disabledList="disabledList"
       :emphasizedList="emphasizedList"
+      :overlayCfg="{ opacity: 0 }"
+      boxShadow="0 -8px 16px rgba(0, 0, 0, 0.1)"
     >
       <text name="trigger" class="text-btn" @click="showCalendar = true"
         >showCalendar</text
