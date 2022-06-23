@@ -4,16 +4,18 @@
       :show="showCalendar"
       :pos="pos"
       :popupStyle="popupStyle"
+      :popupHeight="popupHeight"
       :btnText="btnText"
       :overlayCfg="overlayCfg"
       :boxShadow="boxShadow"
       @buttonClicked="$emit('buttonClicked')"
       @overlayClicked="$emit('overlayClicked')"
     >
+      <text :style="titleStyle" v-if="titleText">{{ titleText }}</text>
       <div class="calendar">
         <div class="week-title">
           <div class="week-item" v-for="day in WEEK_DAYS" :key="day">
-            <text class="text-week">{{ day }}</text>
+            <text class="text-week" :style="weekStyle">{{ day }}</text>
           </div>
         </div>
         <scroller class="days-scroller">
@@ -31,6 +33,12 @@
                 class="text-month"
                 v-if="day.date() === 1"
                 >{{ day.month() + 1 }}月</text
+              >
+              <text
+                v-if="showTodayText(day)"
+                :style="todayTextStyle"
+                class="text-today"
+                >今天</text
               >
             </div>
           </div>
@@ -86,9 +94,9 @@ module.exports = {
       type: String,
       default: "bottom",
     },
-    height: {
+    popupHeight: {
       type: [Number],
-      default: 520,
+      default: 600,
     },
     // 日期跨度，以月为单位
     monthSpan: {
@@ -98,20 +106,26 @@ module.exports = {
     normalDayStyle: {
       type: Object,
       default: () => ({
-        width: "42px",
-        height: "42px",
+        width: "46px",
+        height: "46px",
         color: "#267aff",
         fontSize: "30px",
-        lineHeight: "42px",
+        lineHeight: "46px",
         textAlign: "center",
-        borderRadius: "21px",
+        borderRadius: "23px",
       }),
     },
+    // 今天的数字样式
     todayStyle: {
       type: Object,
+      default: () => ({}),
+    },
+    // 今天下标的样式
+    todayTextStyle: {
+      type: Object,
       default: () => ({
-        color: "#267aff",
-        backgroundColor: "#e3ebf9",
+        color: "#29c3ff",
+        fontSize: "16px",
       }),
     },
     checkedStyle: {
@@ -138,8 +152,34 @@ module.exports = {
       type: Object,
       default: () => ({
         color: "#29c3ff",
-        fontSize: "18px",
+        fontSize: "16px",
       }),
+    },
+    weekStyle: {
+      type: Object,
+      default: () => ({
+        color: "#c7c7c7",
+        fontSize: "18px",
+        fontWeight: "bold",
+      }),
+    },
+    titleStyle: {
+      type: Object,
+      default: () => ({
+        color: "#267aff",
+        fontSize: "30px",
+        fontWeight: "bold",
+        height: "80px",
+        lineHeight: "80px",
+        paddingTop: "10px",
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+    titleText: {
+      type: String,
+      default: "日历",
     },
     // 禁用的日期
     disabledList: {
@@ -207,6 +247,10 @@ module.exports = {
       this.checkedDate = day;
       this.$emit("checked", day);
     },
+    showTodayText(day) {
+      return this.isToday(day) && !this.isToday(this.checkedDate);
+    },
+
     dayComposedStyle(day) {
       const style = Object.assign({}, this.normalDayStyle);
       if (this.isToday(day)) {
@@ -228,7 +272,7 @@ module.exports = {
       if (todayEl) {
         const weekTitleHeight = 100;
         domModule.scrollToElement(todayEl[0], {
-          offset: -this.height / 2 + weekTitleHeight,
+          offset: -this.popupHeight / 2 + weekTitleHeight,
         });
       }
     },
@@ -259,8 +303,7 @@ module.exports = {
 <style scoped>
 .calendar {
   position: relative;
-  height: 500px;
-  padding-top: 20px;
+  height: 520px;
 }
 
 .days-scroller {
@@ -284,14 +327,16 @@ module.exports = {
   height: 80px;
 }
 
-.text-week {
-  color: #29c3ff;
-  font-size: 18px;
-}
-
 .text-month {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100px;
+  text-align: center;
+}
+.text-today {
+  position: absolute;
+  bottom: 0;
   left: 0;
   width: 100px;
   text-align: center;

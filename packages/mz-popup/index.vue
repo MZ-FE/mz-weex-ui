@@ -19,6 +19,18 @@
       :style="composedStyle"
     >
       <slot></slot>
+      <div class="bottom-wrapper" :style="bottomStyle">
+        <div v-if="button && button.length > 0" class="actionsheet-bottom">
+          <text
+            v-for="(btn, index) in button"
+            :key="index"
+            :style="{ color: btn.textColor || '#267aff' }"
+            @click="actionsheetBtnClick(index, btn.text || btn)"
+            class="actionsheet-btn"
+            >{{ btn.text || btn }}</text
+          >
+        </div>
+      </div>
     </div>
     <div ref="btnWrapperRef">
       <slot name="trigger">
@@ -87,6 +99,11 @@ module.exports = {
         timingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
       }),
     },
+    // 底部按键
+    button: {
+      type: Array,
+      default: () => [],
+    },
   },
   data: () => ({
     btnSize: {},
@@ -122,6 +139,11 @@ module.exports = {
       }
       return this.show;
     },
+    realPopupHeight() {
+      return this.isIpx && this.pos === "bottom"
+        ? this.popupHeight + 68
+        : this.popupHeight;
+    },
     composedStyle() {
       const {
         defaultStyle,
@@ -129,10 +151,11 @@ module.exports = {
         boxShadow,
         btnSize,
         popupHeight,
+        realPopupHeight,
         screenHeight,
       } = this;
       const style = {
-        height: `${this.popupHeight}px`,
+        height: `${realPopupHeight}px`,
       };
       if (boxShadow) {
         const defaultShadow = "0 8px 8px rgba(0, 0, 0, 0.1)";
@@ -159,6 +182,9 @@ module.exports = {
     composedOverlayCfg() {
       return { ...this.defaultOverlayCfg, ...this.overlayCfg };
     },
+    bottomStyle() {
+      return { paddingBottom: this.isIpx ? "68px" : "0px" };
+    },
     btnSizeGot() {
       return Object.keys(this.btnSize).length > 0;
     },
@@ -167,6 +193,13 @@ module.exports = {
       const { btnSize, btnWrapperSize, popupSize: p } = this;
       const b = this.btnSizeGot ? btnSize : btnWrapperSize;
       return b.top < p.top + p.height && p.top < b.top + b.height;
+    },
+    isIpx() {
+      const { platform, deviceModel } = weex.config.env;
+      return (
+        platform.toLowerCase() === "ios" &&
+        deviceModel.match(/^iPhone(\d*),\d*$/)[1] >= 10
+      );
     },
   },
   mounted() {
@@ -203,8 +236,9 @@ module.exports = {
         return;
       }
       const styles = {};
+      const translateY = isShow ? -this.realPopupHeight : 0;
       if (this.pos === "bottom") {
-        styles.transform = `translateY(-${isShow ? this.popupHeight : 0}px)`;
+        styles.transform = `translateY(${translateY}px)`;
       } else {
         styles.opacity = isShow ? 1 : 0;
       }
@@ -252,6 +286,11 @@ module.exports = {
       }
       this.$emit("popupClicked");
     },
+    actionsheetBtnClick(index, text) {
+      this.appearPopup(false);
+      this.$refs.overlay.appearOverlay(false);
+      this.$emit("popupButtonClicked", { index, text });
+    },
   },
 };
 </script>
@@ -262,5 +301,32 @@ module.exports = {
   right: 0;
   left: 0;
   width: 750px;
+  flex: 1;
+}
+.bottom-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.actionsheet-bottom {
+  flex: 1;
+  height: 120px; /* 包括border-width */
+  flex-direction: row;
+  justify-content: space-between;
+  border-top-width: 20px;
+  border-color: #f3f3f3;
+  border-style: solid;
+}
+.actionsheet-btn {
+  font-size: 32px;
+  background-color: #ffffff;
+  line-height: 100px;
+  text-align: center;
+  flex: 1;
+}
+
+.actionsheet-btn:active {
+  background-color: #f5f5f5;
 }
 </style>

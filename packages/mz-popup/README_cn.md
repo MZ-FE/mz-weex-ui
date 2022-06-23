@@ -41,10 +41,10 @@
 | haveOverlay | `Boolean` |`No`| `true` | 是否带有遮罩屏蔽 |
 | overlayCfg | `Object` |`No`| - | 遮罩层配置，用于覆盖默认配置 |
 | boxShadow | `Boolean \| String` |`No`| `true` | 弹层下是否显示投影，可转入自定义投影样式 |
-| popupHeight | `Number` |`No`| `500` | 弹层高度 |
+| popupHeight | `Number` |`No`| `500` | 弹层高度，ipx下自动增加68px |
 | popupStyle | `Object` |`No`| - | 覆盖弹层样式，包括尺寸、位置、背景 |
 | animation | `Object` |`No`| `timingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1.0)'` | 弹层动画时间函数 |
-
+| button | `Array` |`No`| - | 底部按钮 |
 
 ### 事件
 
@@ -64,6 +64,11 @@
 
 ```
 @popupClicked="popupClicked"
+```
+
+- 底部按钮组被点击时触发；button 数组非空时可用
+```
+popupButtonClicked
 ```
 
 ### Slot

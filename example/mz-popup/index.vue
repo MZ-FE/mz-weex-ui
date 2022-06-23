@@ -5,8 +5,10 @@
     <mz-popup
       :show="popupDataA.show"
       :overlayCfg="{ opacity: 0.2 }"
+      :button="button"
       @overlayClicked="popupDataA.show = false"
       @buttonClicked="popupDataA.show = !popupDataA.show"
+      @popupButtonClicked="popupButtonClicked"
       class="popupA"
     >
       <text class="popup-text">默认 slot 弹层内容</text>
@@ -49,6 +51,13 @@ export default {
         show: false,
         offset: {},
       },
+      button: [
+        {
+          text: "取消",
+          textColor: "#666",
+        },
+        "确定",
+      ],
     };
   },
   components: {
@@ -76,6 +85,9 @@ export default {
     overlayClicked() {
       console.log("overlayClicked");
       this.popupDataB.show = false;
+    },
+    popupButtonClicked(params) {
+      this.$bridge.toast(params);
     },
   },
 
