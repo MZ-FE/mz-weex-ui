@@ -60,3 +60,9 @@
 ```
 @checked="dayChecked"
 ```
+
+- 日历滚动时触发；
+
+```
+@scroll="scroll" // $emit("scroll", "YYYY-MM", e);
+```

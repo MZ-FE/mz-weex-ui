@@ -18,7 +18,7 @@
             <text class="text-week" :style="weekStyle">{{ day }}</text>
           </div>
         </div>
-        <scroller class="days-scroller">
+        <scroller class="days-scroller" @scroll="scrollEvent">
           <div class="row" v-for="(week, r) in calendar" :key="r">
             <div
               class="day-item"
@@ -54,7 +54,6 @@ import { DofButton } from "dolphin-weex-ui";
 import MzPopup from "../mz-popup";
 import dayjs from "dayjs";
 const domModule = weex.requireModule("dom");
-
 const today = dayjs();
 const yesterday = today.subtract(1, "day");
 
@@ -275,6 +274,13 @@ module.exports = {
           offset: -this.popupHeight / 2 + weekTitleHeight,
         });
       }
+    },
+    scrollEvent(e) {
+      const { contentOffset } = e;
+      const rowHeight = 80;
+      const index = Math.floor(-contentOffset.y / rowHeight) + 2; // 向下偏移三周
+      const d = this.calendar[index][6]; // 取当前行/星期的周六
+      this.$emit("scroll", d.format("YYYY-MM"), e);
     },
   },
   computed: {

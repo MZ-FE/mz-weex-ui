@@ -8,6 +8,7 @@
       :monthSpan="4"
       @overlayClicked="showCalendar = false"
       @checked="dayChecked"
+      @scroll="scroll"
       :disabledList="disabledList"
       :emphasizedList="emphasizedList"
       :overlayCfg="{ opacity: 0 }"
@@ -41,6 +42,9 @@ export default {
   methods: {
     dayChecked(day) {
       this.$toast(day.format("MM-DD"));
+    },
+    scroll(month, e) {
+      this.$toast({ month, e });
     },
   },
 
