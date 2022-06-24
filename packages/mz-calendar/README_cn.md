@@ -32,10 +32,9 @@
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | showCalendar | `Boolean` |`Yes`| `false` | 是否显示  |
-| pos | `"bottom|free"` |`No`| `'bottom'` | 从哪弹出  |
-| popupHeight | `Number` |`No`| `520` | 弹层高度，ipx下自动增加68px |
+| pos | `"bottom|free"` |`No`| `'bottom'` | 从哪弹出，默认值不同于`mz-popup`  |
+| popupHeight | `Number` |`No`| `700` | 弹层高度，ipx下自动增加68px，默认值不同于`mz-popup` |
 | monthSpan | `Number` |`No`| `3` | 月份跨度  |
-| popupStyle | `Object` |`No`| - | 弹层样式  |
 | normalDayStyle | `Object` |`No`| - | 普通日期样式  |
 | todayStyle | `Object` |`No`| - | “今天”的日期数字样式  |
 | todayTextStyle | `Object` |`No`| - | “今天”的下标文字样式  |
@@ -49,9 +48,8 @@
 | disabledList | `Array` |`No`| - | 须禁用的日期列表，支持dayjs格式，或可被格式化为日期类型的字符串格式  |
 | emphasizedList | `Array` |`No`| - | 须突出显示的日期列表，支持dayjs格式，或可被格式化为日期类型的字符串格式  |
 | scrollToDay | `String` |`No`| today.format("YYYY-MM-DD") | 打开时自动滚动到的日期 |
-| overlayCfg | `Object` |`No`| - | 遮罩层配置，用于覆盖默认配置 |
-| boxShadow | `Boolean \| String` |`No`| `true` | 弹层下是否显示投影，可转入自定义投影样式 |
 
+> `popupStyle` `overlayCfg` `boxShadow` `button` 等参数同组件 `mz-popup`
 
 ### 事件
 
@@ -59,6 +57,11 @@
 
 ```
 @checked="dayChecked"
+```
+
+- 底部按钮组被点击时触发，同 `mz-popup`
+```
+@popupButtonClicked="popuppopupButtonClickedClicked"
 ```
 
 - 日历滚动时触发；

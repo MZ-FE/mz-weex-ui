@@ -8,8 +8,10 @@
       :btnText="btnText"
       :overlayCfg="overlayCfg"
       :boxShadow="boxShadow"
+      :button="button"
       @buttonClicked="$emit('buttonClicked')"
       @overlayClicked="$emit('overlayClicked')"
+      @popupButtonClicked="popupButtonClicked"
     >
       <text :style="titleStyle" v-if="titleText">{{ titleText }}</text>
       <div class="calendar">
@@ -95,7 +97,7 @@ module.exports = {
     },
     popupHeight: {
       type: [Number],
-      default: 600,
+      default: 700,
     },
     // 日期跨度，以月为单位
     monthSpan: {
@@ -205,6 +207,10 @@ module.exports = {
       type: Boolean | String,
       default: true,
     },
+    button: {
+      type: Array,
+      default: () => ["取消"],
+    },
   },
   data() {
     return {
@@ -281,6 +287,9 @@ module.exports = {
       const index = Math.floor(-contentOffset.y / rowHeight) + 2; // 向下偏移三周
       const d = this.calendar[index][6]; // 取当前行/星期的周六
       this.$emit("scroll", d.format("YYYY-MM"), e);
+    },
+    popupButtonClicked(index, text) {
+      this.$emit("popupButtonClicked", { index, text });
     },
   },
   computed: {

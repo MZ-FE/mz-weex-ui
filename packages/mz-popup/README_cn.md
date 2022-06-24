@@ -68,7 +68,7 @@
 
 - 底部按钮组被点击时触发；button 数组非空时可用
 ```
-popupButtonClicked
+@popupButtonClicked="popuppopupButtonClickedClicked"
 ```
 
 ### Slot

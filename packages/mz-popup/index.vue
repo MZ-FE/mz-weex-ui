@@ -195,11 +195,9 @@ module.exports = {
       return b.top < p.top + p.height && p.top < b.top + b.height;
     },
     isIpx() {
-      const { platform, deviceModel } = weex.config.env;
-      return (
-        platform.toLowerCase() === "ios" &&
-        deviceModel.match(/^iPhone(\d*),\d*$/)[1] >= 10
-      );
+      const { deviceModel } = weex.config.env;
+      const match = deviceModel.match(/^iPhone(\d*),(\d*)$/);
+      return !!match && (match[1] > 10 || (match[1] === 10 && match[2] > 2));
     },
   },
   mounted() {
