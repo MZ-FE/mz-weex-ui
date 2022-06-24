@@ -1,6 +1,6 @@
 {
   "name": "mz-weex-ui",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "A rich interaction, lightweight, high performance UI library based on Weex",
   "main": "index.js",
   "lib": "vue",
