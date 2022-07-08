@@ -8,7 +8,9 @@
 ```vue
 <template>
   <div class="mz-demo">
-    <mzLogList :title="title" :list="list"></mzLogList>
+    <mzLogList :title="title" :list="list">
+      <div slot="rightIcon"></div>
+    </mzLogList>
   </div>
 </template>
 
@@ -36,3 +38,9 @@
 | ---- |:-----------:|:---------:|:-------:|
 | label |   日志左侧文案    | `String`  |   ``    |
 | content |   日志右侧文案    | `String`  |   ``    |
+
+### Slot
+- 具名插槽，可在 `mz-log-list` 标签内使用；
+```vue
+<slot name="rightIcon"></slot>
+```

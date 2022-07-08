@@ -7,6 +7,9 @@
     <div class="item-block" v-for="(item, index) in list" :key="index">
       <text class="item-time">{{ item.label }}</text>
       <text class="item-content">{{ item.content }}</text>
+      <div class="rightIcon">
+        <slot name="rightIcon"></slot>
+      </div>
 
       <div class="line-top" v-if="index != 0"></div>
       <div class="line-bottom" v-if="index != list.length - 1"></div>
@@ -37,12 +40,10 @@ export default {
 
 <style scoped>
 .card {
-  width: 750px;
   margin-top: 16px;
   background-color: #ffffff;
 }
 .date-block {
-  width: 686px;
   height: 96px;
 }
 .date-text {
@@ -56,7 +57,6 @@ export default {
   left: 33px;
 }
 .item-block {
-  width: 686px;
   height: 88px;
 }
 .item-time {
@@ -104,5 +104,10 @@ export default {
   position: absolute;
   left: 153px;
   bottom: 0;
+}
+.rightIcon {
+  position: absolute;
+  right: 32px;
+  top: 24px;
 }
 </style>
