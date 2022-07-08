@@ -21,7 +21,7 @@
 export { default } from './index.vue';
 ```
 
-执行命令`npm run build:entry`，重新生成组件包入口文件，暴露接口。
+新增组件后需要执行命令`npm run build:entry`，重新生成组件包入口文件，暴露接口。
 
 #### 编写组件示例
 创建`example/mz-swipe-action`文件夹，编写示例代码
@@ -47,6 +47,7 @@ export { default } from './index.vue';
 修订号(patch)，当你做了向下兼容的问题修正：`npm version patch`
 
 #### 发布
+> 注意必须发布前保证当前镜像地址为npm的官方地址
 `npm publish`
 
 

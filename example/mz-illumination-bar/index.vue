@@ -10,8 +10,8 @@
       <text class="des-text">{{ desText2 }}</text>
     </div>
     <mz-illumination-bar
-      :value="curValueArr"
-      :index="curEnvIndex"
+      :index="curIndex"
+      :env-index="curEnvIndex"
       @updateValue="onUpdateValue"
       @slideEnd="onSlideEnd"
     ></mz-illumination-bar>
@@ -39,8 +39,8 @@ export default {
     return {
       desText1: '明暗程度分为\n较暗、较亮 两个等级',
       desText2: '拖动按钮可调节\n不同等级之间的判断阀值',
-      curValueArr: [0, 0, 1],
-      curEnvIndex: 0,
+      curIndex: 4,
+      curEnvIndex: 1,
     }
   },
   methods: {
@@ -48,13 +48,13 @@ export default {
       this.$pop()
     },
     onUpdateValue (e) {
-      this.curValueArr = e
+      this.curIndex = e
     },
-    onSlideEnd () {
-      this.$toast(JSON.stringify(this.curValueArr))
+    onSlideEnd (e) {
+      this.curIndex = e
     },
     onSetDefaultClick () {
-      this.curValueArr = [0, 0, 1]
+      this.curIndex = 4
     },
   },
 }
@@ -86,7 +86,7 @@ export default {
 .confirm-btn {
   width: 560px;
   height: 88px;
-  background: #267aff;
+  background-color: #267aff;
   border-radius: 44px;
   position: fixed;
   bottom: 100px;
@@ -101,7 +101,7 @@ export default {
 .default-btn {
   width: 160px;
   height: 64px;
-  background: #f2f2f2;
+  background-color: #f2f2f2;
   border-radius: 32px;
   position: fixed;
   bottom: 246px;

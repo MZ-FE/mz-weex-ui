@@ -1,116 +1,141 @@
 <template>
-  <list :style="listStyle">
-    <refresh class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
-      <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
-    </refresh>
+  <div :style="listStyle">
+    <list ref="list" class="scroller">
+      <refresh :style="loadingViewStyle" class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
+        <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
+      </refresh>
 
-    <cell>
-      <slot></slot>
-    </cell>
+      <cell>
+        <slot></slot>
+      </cell>
 
-    <loading @loading="loadMore" class="loading-view" v-if="hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
-      <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
-    </loading>
-  </list>
+      <loading :style="loadingViewStyle" @loading="loadMore" class="loading-view" v-if="hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
+        <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
+      </loading>
+    </list>
+  </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      height: {
-        type: Number,
-      },
-      pageSize: {
-        type: Number,
-        default: 20
-      },
-      pageNo: {
-        type: Number,
-        default: 1
-      },
-      total: {
-        type: Number,
-        default: 0
-      },
-      // 请求数据的回调
-      getData: {
-        type: Function,
-        default: async () => {}
-      },
-      // 请求数据的回调
-      refreshData: {
-        type: Function,
-        default: async () => {}
-      },
-      indicatorColor: {
-        type: String,
-        default: '#999'
-      }
-    },
-    name: 'index',
-    components: {},
-    data () {
-      return {
-        isRefreshing: false,
-        isLoadingMore: false,
-        isIos: weex.config.env.platform === 'iOS'
-      }
-    },
-    computed: {
-      listStyle () {
-        let style = {}
+const dom = weex.requireModule('dom')
 
-        if (this.height > 0) {
-          style.height = `${this.height}px`
+export default {
+  props: {
+    height: {
+      type: Number,
+    },
+    pageSize: {
+      type: Number,
+      default: 20
+    },
+    pageNo: {
+      type: Number,
+      default: 1
+    },
+    total: {
+      type: Number,
+      default: 0
+    },
+    // 请求数据的回调
+    getData: {
+      type: Function,
+      default: async () => {
+      }
+    },
+    // 请求数据的回调
+    refreshData: {
+      type: Function,
+      default: async () => {
+      }
+    },
+    indicatorColor: {
+      type: String,
+      default: '#999'
+    }
+  },
+  name: 'index',
+  components: {},
+  data () {
+    return {
+      isRefreshing: false,
+      isLoadingMore: false,
+      isIos: weex.config.env.platform === 'iOS',
+      listWidth: 750
+    }
+  },
+  computed: {
+    listStyle () {
+      let style = {}
+
+      if (this.height > 0) {
+        style.height = `${this.height}px`
+      }
+
+      return style
+    },
+    loadingViewStyle () {
+      return { width: `${this.listWidth}px`}
+    },
+    hasMore () {
+      return this.pageNo * this.pageSize < this.total
+    }
+  },
+  watch: {},
+  methods: {
+    /**
+     * 刷新，重置页面数据
+     */
+    async onRefresh () {
+      this.isRefreshing = true
+      await this.refreshData()
+
+      this.isRefreshing = false
+    },
+    /**
+     * 分页加载
+     */
+    async loadMore () {
+      this.isLoadingMore = true
+      await this.getData()
+
+      this.isLoadingMore = false
+    }
+  },
+
+  created () {
+  },
+
+  mounted () {
+    setTimeout(() => {
+      dom.getComponentRect(this.$refs['list'], option => {
+        // 查询失败时result为false
+        if (!option.result) {
+          return
         }
+        this.listWidth = option.size.width
+      })
+    }, 300)
+  },
 
-        return style
-      },
-      hasMore () {
-        return this.pageNo * this.pageSize < this.total
-      }
-    },
-    watch: {},
-    methods: {
-      /**
-       * 刷新，重置页面数据
-       */
-      async onRefresh () {
-        this.isRefreshing = true
-        await this.refreshData()
-
-        this.isRefreshing = false
-      },
-      /**
-       * 分页加载
-       */
-      async loadMore () {
-        this.isLoadingMore = true
-        await this.getData()
-
-        this.isLoadingMore = false
-      }
-    },
-
-    created () {},
-
-    mounted () {},
-
-    destroyed () {}
+  destroyed () {
   }
+}
 </script>
 
 <style scoped>
-  .loading-view {
-    width: 750px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.scroller {
+  align-items: stretch;
+}
+.loading-view {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .indicator {
-    width: 100px;
-    height: 100px;
-    color: #999;
-  }
+.indicator {
+  width: 100px;
+  height: 100px;
+  color: #999;
+}
 </style>
