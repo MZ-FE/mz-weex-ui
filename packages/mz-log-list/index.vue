@@ -8,11 +8,11 @@
       <text class="item-time">{{ item.label }}</text>
       <text class="item-content">{{ item.content }}</text>
       <div class="rightIcon">
-        <slot name="rightIcon"></slot>
+        <slot name="rightIcon" v-bind:listItem="item"></slot>
       </div>
 
-      <div class="line-top" v-if="index != 0"></div>
-      <div class="line-bottom" v-if="index != list.length - 1"></div>
+      <div class="line-top" v-if="index !== 0"></div>
+      <div class="line-bottom" v-if="index !== list.length - 1"></div>
       <div class="circle"></div>
     </div>
   </div>
