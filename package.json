@@ -70,9 +70,9 @@
     "weex-vue-render": "^1.0.36"
   },
   "dependencies": {
+    "dayjs": "^1.8.29",
     "url-loader": "^4.1.1",
     "url-parse": "^1.4.3",
-    "weex-bindingx": "0.0.17",
-    "dayjs": "^1.8.29"
+    "weex-bindingx": "0.0.49"
   }
 }
