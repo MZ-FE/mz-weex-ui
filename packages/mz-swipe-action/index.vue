@@ -281,6 +281,9 @@ export default {
             // this.movingDistance(this.mobileX, node, el);
             this.movingDistance(e.deltaX, node, el); //add by lau
           }
+
+          // 滑动结束
+          this.$emit("swipeEnd", { index: i, deltaX });
         }
       );
     },
