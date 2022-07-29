@@ -67,6 +67,7 @@
 | width | 滑动列表元素宽度 | `String` | `750px` |
 | listData |侧滑列表数据| `Array` | `[]` |
 | itemStyle | 滑动项元素样式配置对象 | `Object` | `{}`
+| disableSwipe | 临时禁用滑动功能 | `Boolean` | `false`
 
 #### listData数据结构
 | Prop | Description | Type | Default |
