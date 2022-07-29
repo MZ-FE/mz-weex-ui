@@ -95,6 +95,11 @@ module.exports = {
       type: String,
       default: "bottom",
     },
+    // 尺寸\位置\背景,均由此参数控制,可覆盖设置
+    popupStyle: {
+      type: Object,
+      default: () => ({}),
+    },
     popupHeight: {
       type: [Number],
       default: 700,
@@ -182,7 +187,12 @@ module.exports = {
       type: String,
       default: "日历",
     },
-    // 禁用的日期
+    // 启用的日期列表，与禁用日期列表互斥存在
+    enabledList: {
+      type: Array,
+      default: () => [],
+    },
+    // 禁用的日期列表
     disabledList: {
       type: Array,
       default: () => [],
@@ -223,17 +233,21 @@ module.exports = {
      * @description 当天是否禁用
      * @param {dayjs} day
      * @returns {boolean}
+     * ! 符合禁用的条件
      * ! 今天与选定日期的月份，差值超过 monthSpan - 1
      * ! 选定日期晚于今天
-     * ! 在 disabledList 中
+     * ! enabledList 非空，且 day 不在 enabledList 中
+     * ! disabledList 非空，且 day 在 disabledList 中
      */
     isDisabled(day) {
-      const { monthSpan, disabledList } = this;
+      const { monthSpan, enabledList, disabledList } = this;
       const diff = today.month() - day.month();
       return (
         diff > monthSpan - 1 ||
         (diff < 0 && diff > monthSpan - 13) ||
         day.isAfter(today) ||
+        (enabledList.length &&
+          enabledList.every((d) => !day.isSame(d, "day"))) ||
         disabledList.some((d) => day.isSame(d, "day"))
       );
     },

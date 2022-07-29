@@ -45,6 +45,7 @@
 | weekStyle | `Object` |`No`| - | 星期文字样式 |
 | titleStyle | `Object` |`No`| - | 标题文字样式，`titleText`非空时可用 |
 | titleText | `String` |`日历`| - | 标题文字内容 |
+| enabledList | `Array` |`No`| - | 启用的日期列表，与禁用日期列表互斥存在，支持dayjs格式，或可被格式化为日期类型的字符串格式  |
 | disabledList | `Array` |`No`| - | 须禁用的日期列表，支持dayjs格式，或可被格式化为日期类型的字符串格式  |
 | emphasizedList | `Array` |`No`| - | 须突出显示的日期列表，支持dayjs格式，或可被格式化为日期类型的字符串格式  |
 | scrollToDay | `String` |`No`| today.format("YYYY-MM-DD") | 打开时自动滚动到的日期 |
