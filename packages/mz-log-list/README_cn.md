@@ -38,6 +38,7 @@
 | ---- |:-----------:|:---------:|:-------:|
 | label |   日志左侧文案    | `String`  |   ``    |
 | content |   日志右侧文案    | `String`  |   ``    |
+| isWarn |  文案是否高亮显示   | `Boolean` | `false` |
 
 ### Slot
 - 具名插槽，可在 `mz-log-list` 标签内使用；
