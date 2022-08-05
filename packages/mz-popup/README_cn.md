@@ -36,6 +36,7 @@
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | show | `Boolean` |`Yes`| `false` | 弹层显示状态  |
+| showButton | `Boolean` |`No`| `false` | 显示默认的按钮或trigger插槽  |
 | pos | `"bottom|free"` |`No`| `free` | 从哪弹出  |
 | btnText | `String` |`No`| `显示弹层` | 触发按钮文字 |
 | haveOverlay | `Boolean` |`No`| `true` | 是否带有遮罩屏蔽 |

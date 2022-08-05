@@ -50,7 +50,7 @@
 | emphasizedList | `Array` |`No`| - | 须突出显示的日期列表，支持dayjs格式，或可被格式化为日期类型的字符串格式  |
 | scrollToDay | `String` |`No`| today.format("YYYY-MM-DD") | 打开时自动滚动到的日期 |
 
-> `popupStyle` `overlayCfg` `boxShadow` `button` 等参数同组件 `mz-popup`
+> `showButton` `popupStyle` `overlayCfg` `boxShadow` `button` 等参数同组件 `mz-popup`
 
 ### 事件
 
@@ -70,3 +70,12 @@
 ```
 @scroll="scroll" // $emit("scroll", "YYYY-MM", e);
 ```
+
+### Slot
+- 触发按钮插槽。trigger 默认是直接引用 `mz-popup`中的 `dof-button`，能暴露的参数有限，需要定义的东西多的话，就直接通过插槽实现吧，详见 example
+
+```vue
+<slot name="trigger"></slot>
+```
+
+> 也可以使用 `:showButton="false"` 隐藏按钮，完全在外部定义触发方式

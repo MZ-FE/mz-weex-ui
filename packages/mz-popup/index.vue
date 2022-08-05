@@ -33,7 +33,7 @@
       </div>
     </div>
     <div ref="btnWrapperRef">
-      <slot name="trigger">
+      <slot name="trigger" v-if="showButton">
         <dof-button
           ref="btnRef"
           type="primary"
@@ -58,6 +58,11 @@ module.exports = {
     show: {
       type: Boolean,
       default: false,
+    },
+    // 显示默认的按钮或trigger插槽
+    showButton: {
+      type: Boolean,
+      default: true,
     },
     // 从哪弹出 "free" | "bottom"
     pos: {
