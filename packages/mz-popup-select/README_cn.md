@@ -48,15 +48,21 @@ export default {
 
 ## 可配置参数
 
-| Prop                 | Type                               | Required | Default                   | Description                |
-| -------------------- | ---------------------------------- | -------- | ------------------------- | -------------------------- |
-| btnActiveBgc         | `String`                           | `false`  | `rgba(38, 122, 255, 0.1)` | 按钮选中时按钮背景色       |
-| btnInactiveBgc       | `String`                           | `false`  | `rgba(0,0,0,0.04)`        | 按钮不被选中时按钮背景色   |
-| btnTextActiveColor   | `String`                           | `false`  | `#267aff`                 | 按钮选中时按钮字体颜色     |
-| btnTextInacticeColor | `String`                           | `false`  | `#000000`                 | 按钮不被选中时按钮字体颜色 |
-| on-update            | `(value: number | string) => void` | `false`  | `undefinded`              | 点击一个选项时的回调函数   |
-| on-overlayClick      | `() => void`                       | `false`  | `undefinded`              | 点击遮罩层时的回调函数     |
-| on-cancel            | `()=> void`                        | `false`  | `undefinded`              | 点击取消时的回调函数       |
+| Prop                 | Type                                        | Required | Default                   | Description                      |
+| -------------------- | ------------------------------------------- | -------- | ------------------------- | -------------------------------- |
+| isShow               | `Boolean`                                   | `false`  | `undefinded`              | 可以通过 isShow 控制是否打开弹窗 |
+| title                | `String`                                    | `false`  | `undefinded`              | 标题                             |
+| value                | `String`                                    | `false`  | `undefinded`              | 选择值                           |
+| list                 | `{value: number | string, label: string}[]` | `false`  | `undefinded`              | 选择列表                         |
+| btnActiveBgc         | `String`                                    | `false`  | `rgba(38, 122, 255, 0.1)` | 按钮选中时按钮背景色             |
+| btnInactiveBgc       | `String`                                    | `false`  | `rgba(0,0,0,0.04)`        | 按钮不被选中时按钮背景色         |
+| btnTextActiveColor   | `String`                                    | `false`  | `#267aff`                 | 按钮选中时按钮字体颜色           |
+| btnTextInacticeColor | `String`                                    | `false`  | `#000000`                 | 按钮不被选中时按钮字体颜色       |
+| on-update            | `(value: number | string) => void`          | `false`  | `undefinded`              | 点击一个选项时的回调函数         |
+| on-overlayClick      | `() => void`                                | `false`  | `undefinded`              | 点击遮罩层时的回调函数           |
+| on-cancel            | `()=> void`                                 | `false`  | `undefinded`              | 点击取消时的回调函数             |
+
+> 注意：如果使用 isShow 控制弹窗时，建议使用 `:isShow.sync="isShow"` 进行双向绑定。value 也可以通过 `:value.sync="value"` 进行双向绑定， 或者通过 update 回调事件获取
 
 ## 可调用方法
 

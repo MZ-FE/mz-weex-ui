@@ -44,6 +44,18 @@ export default {
     DofPopup,
   },
   props: {
+    isShow: {
+      type: Boolean,
+    },
+    list: {
+      type: Array,
+    },
+    value: {
+      type: [Number, String],
+    },
+    title: {
+      type: String,
+    },
     btnActiveBgc: {
       type: String,
       default: 'rgba(38, 122, 255, 0.1)',
@@ -84,23 +96,68 @@ export default {
      * @param {string} value 已选择
      * @param {string} list 标题
      */
-    show({ list = [], value = '', title = '' }) {
-      this.insList = list
-      this.insValue = value
-      this.insTitle = title
+    show({ list, value, title }) {
+      if (list) {
+        this.insList = list
+      }
+      if (value) {
+        this.insValue = value
+      }
+      if (title) {
+        this.insTitle = title
+      }
       this.isShowPopup = true
     },
     handleClick(value) {
       this.$emit('update', value)
+      this.$emit('update:value', value)
+      this.$emit('update:isShow', false)
       this.$refs.popup.hide()
     },
     handleCancel() {
       this.$emit('cancel')
+      this.$emit('update:isShow', false)
       this.$refs.popup.hide()
     },
     handleOverlayClicked() {
       this.$emit('overlayClicked')
+      this.$emit('update:isShow', false)
       this.isShowPopup = false
+    },
+  },
+  watch: {
+    isShow: {
+      handler(val) {
+        if (!val) {
+          return
+        }
+        this.isShowPopup = true
+      },
+      immediate: true,
+    },
+    list: {
+      handler(value) {
+        if (value) {
+          this.insList = value
+        }
+      },
+      immediate: true,
+    },
+    value: {
+      handler(val) {
+        if (val) {
+          this.insValue = val
+        }
+      },
+      immediate: true,
+    },
+    title: {
+      handler(value) {
+        if (value) {
+          this.insTitle = value
+        }
+      },
+      immediate: true,
     },
   },
 }
