@@ -6,28 +6,57 @@
     :height="height"
   >
     <div class="content">
-      <text class="title">{{ insTitle }}</text>
-      <div
-        v-for="item in insList"
-        :key="item.value"
-        class="btn"
-        :style="{
-          backgroundColor:
-            insValue === item.value ? btnActiveBgc : btnInactiveBgc,
-        }"
-        @click="handleClick(item.value)"
-      >
-        <text
-          class="btn-text"
+      <list class="list" v-if="isUseList">
+        <cell>
+          <text class="title" ref="title">{{ insTitle }}</text>
+        </cell>
+        <cell v-for="item in insList" :key="item.value">
+          <div
+            class="btn"
+            :style="{
+              backgroundColor:
+                insValue === item.value ? btnActiveBgc : btnInactiveBgc,
+            }"
+            @click="handleClick(item.value)"
+          >
+            <text
+              class="btn-text"
+              :style="{
+                color:
+                  insValue === item.value
+                    ? btnTextActiveColor
+                    : btnTextInacticeColor,
+                fontWeight: insValue === item.value ? 600 : 400,
+              }"
+              >{{ item.label }}</text
+            >
+          </div>
+        </cell>
+      </list>
+      <div v-else>
+        <text class="title">{{ insTitle }}</text>
+        <div
+          v-for="item in insList"
+          :key="item.value"
+          class="btn"
           :style="{
-            color:
-              insValue === item.value
-                ? btnTextActiveColor
-                : btnTextInacticeColor,
-            fontWeight: insValue === item.value ? 600 : 400,
+            backgroundColor:
+              insValue === item.value ? btnActiveBgc : btnInactiveBgc,
           }"
-          >{{ item.label }}</text
+          @click="handleClick(item.value)"
         >
+          <text
+            class="btn-text"
+            :style="{
+              color:
+                insValue === item.value
+                  ? btnTextActiveColor
+                  : btnTextInacticeColor,
+              fontWeight: insValue === item.value ? 600 : 400,
+            }"
+            >{{ item.label }}</text
+          >
+        </div>
       </div>
       <div class="cancel" @click="handleCancel">
         <text class="cancel-text">取消</text>
@@ -72,6 +101,10 @@ export default {
       type: String,
       default: '#000000',
     },
+    extraTitleLine: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -82,12 +115,27 @@ export default {
     }
   },
   computed: {
+    isUseList() {
+      const halfPageHeight =
+        ((750 / weex.config.env.deviceWidth) * weex.config.env.deviceHeight) / 2
+      const contentHeight =
+        this.insTitle === ''
+          ? 96 + this.insList.length * 96 + 104
+          : 144 + this.insList.length * 96 + 104 + this.extraTitleLine * 48
+      return contentHeight > halfPageHeight
+    },
     height() {
-      // 顶部title144（如果title为空则为96） + 每一个选项96（高度80+底边距16） + 取消按钮104（按钮96+顶边距8）
-      if (this.insTitle === '') {
-        return 96 + this.insList.length * 96 + 104
+      // 顶部title144（如果title为空则为96） + 每一个选项96（高度80+底边距16） + 取消按钮104（按钮96+顶边距8）+ 额外的行高（比如title多行）
+      const halfPageHeight =
+        ((750 / weex.config.env.deviceWidth) * weex.config.env.deviceHeight) / 2
+      const contentHeight =
+        this.insTitle === ''
+          ? 96 + this.insList.length * 96 + 104
+          : 144 + this.insList.length * 96 + 104 + this.extraTitleLine * 48
+      if (contentHeight > halfPageHeight) {
+        return halfPageHeight
       }
-      return 144 + this.insList.length * 96 + 104
+      return contentHeight
     },
   },
   methods: {
@@ -115,25 +163,29 @@ export default {
       this.$refs.popup.hide()
     },
     handleCancel() {
-      this.$emit('cancel')
+      this.$emit('close')
       this.$emit('update:isShow', false)
+      // 使用hide才能展示关闭动画
       this.$refs.popup.hide()
+      // 如果这里再执行this.isShowPopup = false会导致动画失效
+      // 所以不需要this.isShowPopup = false
     },
     handleOverlayClicked() {
-      this.$emit('overlayClicked')
+      this.$emit('close')
       this.$emit('update:isShow', false)
+      // 用户点击遮罩时就dof-popup就已经调用hide，不需要手动调用
+      // 只需要将isShowPopup设置成false
       this.isShowPopup = false
     },
   },
   watch: {
-    isShow: {
-      handler(val) {
-        if (!val) {
-          return
-        }
-        this.isShowPopup = true
-      },
-      immediate: true,
+    // 不能初始化时调用hide，不然会导致无法打开弹窗
+    isShow(val) {
+      if (!val) {
+        this.$refs.popup.hide()
+        return
+      }
+      this.isShowPopup = true
     },
     list: {
       handler(value) {
@@ -167,8 +219,12 @@ export default {
 .content {
   width: 750px;
   align-items: center;
+  flex: 1;
 }
 
+.list {
+  flex: 1;
+}
 .title {
   font-family: PingFangSC-Medium;
   font-size: 34px;
@@ -177,6 +233,7 @@ export default {
   text-align: center;
   font-weight: 600;
   margin: 48px 0;
+  max-width: 686px;
 }
 
 .btn {
