@@ -52,17 +52,16 @@
             116 * (item.rightItem && item.rightItem.length) +
             'px',
         }"
-        @panstart="
+        @touchstart="
           (e) =>
-            !isAndroid &&
-            onPanStart(
+            onTouchStart(
               e,
               item,
               index,
               item.rightItem ? item.rightItem.length : 0
             )
         "
-        @panend="(e) => onPanEnd(e, item, index)"
+        @touchend="(e) => onTouchEnd(e, item, index)"
       >
         <div ref="swipeItem">
           <slot name="swipeItem" v-bind:data="item" v-bind:index="index"></slot>
@@ -230,7 +229,7 @@ export default {
       }
     },
 
-    onPanEnd(e, node, i) {
+    onTouchEnd(e, node, i) {
       if (this.disableSwipe) {
         return;
       }
@@ -241,7 +240,7 @@ export default {
     },
 
     // 使用官方的pan事件解决某些ios设备使用@swipe不能滑动的问题
-    onPanStart: function (e, node, i, len) {
+    onTouchStart: function (e, node, i, len) {
       if (this.disableSwipe) {
         return;
       }
