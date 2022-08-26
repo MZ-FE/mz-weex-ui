@@ -116,6 +116,7 @@ export default {
   },
   computed: {
     isUseList() {
+      // 判断内容的高度是否大于屏幕一半的高度，如果大于，则使用list组件
       const halfPageHeight =
         ((750 / weex.config.env.deviceWidth) * weex.config.env.deviceHeight) / 2
       const contentHeight =
@@ -126,6 +127,7 @@ export default {
     },
     height() {
       // 顶部title144（如果title为空则为96） + 每一个选项96（高度80+底边距16） + 取消按钮104（按钮96+顶边距8）+ 额外的行高（比如title多行）
+      // 如果计算结果大于屏幕一半高度则返回屏幕一半的高度
       const halfPageHeight =
         ((750 / weex.config.env.deviceWidth) * weex.config.env.deviceHeight) / 2
       const contentHeight =
@@ -139,12 +141,14 @@ export default {
     },
   },
   methods: {
-    /**
+    /** 通过ref调用show方法展示弹出框
+     * @param {string} title 标题
+     * @param {string} value 已选择值
      * @param {array} list 选项列表
-     * @param {string} value 已选择
-     * @param {string} list 标题
+     * @param {string} list.label 选项展示的文字
+     * @param {number | string} list.value 选项对应的值
      */
-    show({ list, value, title }) {
+    show({ list, value, title } = {}) {
       if (list) {
         this.insList = list
       }
