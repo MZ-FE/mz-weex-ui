@@ -83,7 +83,7 @@ export default {
 .circle {
   width: 12px;
   height: 12px;
-  background: #c7c7cc;
+  background-color: #c7c7cc;
   border-radius: 6px;
   position: absolute;
   left: 148px;
