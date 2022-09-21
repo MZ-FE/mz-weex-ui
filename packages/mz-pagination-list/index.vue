@@ -2,8 +2,9 @@
   <div :style="listStyle">
     <list ref="list" class="scroller">
       <refresh :style="loadingViewStyle" class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
-        <text v-if="isIos" style="padding: 20px;color: #999;font-size: 24px;">{{ isRefreshing ? '正在刷新' : '下拉刷新' }}</text>
-        <loading-indicator v-else class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
+        <image class="loading-indicator" :src="imgData.loadingGif"></image>
+<!-- IOS端 refresh组件内不显示loading-indicator组件，改用gif图       -->
+        <!--        <loading-indicator v-else class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>-->
       </refresh>
 
       <cell>
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+import { loadingGif } from '../setting/icon.base64'
 const dom = weex.requireModule('dom')
 
 export default {
@@ -58,6 +60,9 @@ export default {
   components: {},
   data () {
     return {
+      imgData: {
+        loadingGif
+      },
       isRefreshing: false,
       isLoadingMore: false,
       isIos: weex.config.env.platform === 'iOS',
@@ -138,5 +143,9 @@ export default {
   width: 100px;
   height: 100px;
   color: #999;
+}
+.loading-indicator {
+  width: 40px;
+  height: 40px;
 }
 </style>
