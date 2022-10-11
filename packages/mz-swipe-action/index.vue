@@ -159,7 +159,7 @@ export default {
     },
   },
   components: {},
-  data() {
+  data () {
     return {
       mobileX: 0,
       webStarX: 0,
@@ -171,11 +171,11 @@ export default {
     };
   },
 
-  mounted() {},
-  created() {},
+  mounted () {},
+  created () {},
 
   computed: {
-    cellStyle() {
+    cellStyle () {
       return Object.assign(
         {
           marginBottom: "0",
@@ -189,7 +189,7 @@ export default {
   },
 
   methods: {
-    dofCellClicked(index) {
+    dofCellClicked (index) {
       //点击触发滑动恢复初始化
       if (this.isAndroid) {
         this.rightSlide(); // 列表初始化
@@ -205,7 +205,7 @@ export default {
       }
     },
 
-    special(dom, styles) {
+    special (dom, styles) {
       animation.transition(dom, {
         styles,
         duration: 150, // ms
@@ -213,7 +213,7 @@ export default {
         delay: 0, // ms
       });
     },
-    onRightNode(index, i, text) {
+    onRightNode (index, i, text) {
       if (this.disableSwipe) {
         return;
       }
@@ -229,7 +229,7 @@ export default {
       }
     },
 
-    onTouchEnd(e, node, i) {
+    onTouchEnd (e, node, i) {
       if (this.disableSwipe) {
         return;
       }
@@ -255,10 +255,10 @@ export default {
       !Utils.env.isWeb() ? this.mobile(e, node, i, len) : this.web(e, node, i);
       e.stopPropagation();
     },
-    web(e) {
+    web (e) {
       this.webStarX = e.changedTouches[0].pageX;
     },
-    mobile(e, node, i, len) {
+    mobile (e, node, i, len) {
       let el = this.$refs["skid"][i];
       Binding.bind(
         {
@@ -274,8 +274,9 @@ export default {
           ],
         },
         (e) => {
-          const { state, deltaX } = e;
-          if (state === "end") {
+          const { state, deltaX, deltaY } = e;
+          // 过滤纵向滑动距离过大，暂定160的（一般为滚动页面操作）
+          if (state === "end" && Math.abs(deltaY) < 160) {
             this.mobileX = deltaX;
             // this.movingDistance(this.mobileX, node, el);
             this.movingDistance(e.deltaX, node, el); //add by lau
@@ -286,23 +287,12 @@ export default {
         }
       );
     },
-    movingDistance(scope, node, el) {
+    movingDistance (scope, node, el) {
       const len = node.rightItem ? node.rightItem.length : 0;
       const distance = len * -116;
-      // if (scope < -80*len) {
-      //   this.special(el, {
-      //     transform: `translate(${distance}px, 0)`
-      //   });
-      //   this.mobileX = distance;
-      // } else {
-      //   this.special(el, {
-      //     transform: 'translate(0, 0)'
-      //   });
-      //   this.mobileX = 0;
-      // }
 
-      //modify by lau
-      if (scope < 0) {
+      // 判断左滑超过80px才触发按钮显示动画
+      if (scope < -80) {
         this.special(el, {
           transform: `translate(${distance}px, 0)`,
         });
@@ -318,13 +308,13 @@ export default {
     // 适配Android
     // 经n次尝试和测试后，发现weex的click事件和touchend事件冲突, 防止滑动后触发click事件
     // 这里异步处理，touchend事件结束后才激活向上传递的click事件
-    touchend() {
+    touchend () {
       setTimeout(() => {
         this.cellCanClick = true;
       }, 100);
     },
 
-    slideMenu(e, index, length) {
+    slideMenu (e, index, length) {
       this.cellCanClick = false;
       let ele = this.$refs.menuItem[index];
       let direction = e.direction;
@@ -337,7 +327,7 @@ export default {
     },
 
     // @params ele 要执行动画的元素
-    leftSlide(e, ele, length) {
+    leftSlide (e, ele, length) {
       this.rightSlide();
       animation.transition(ele, {
         styles: {
@@ -351,7 +341,7 @@ export default {
       e.stopPropagation();
     },
 
-    rightSlide() {
+    rightSlide () {
       let listItems = this.$refs.menuItem;
       for (let i = 0; i < listItems.length; i++) {
         animation.transition(
