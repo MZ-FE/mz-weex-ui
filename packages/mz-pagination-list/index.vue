@@ -1,7 +1,7 @@
 <template>
   <div :style="listStyle">
     <list ref="list" class="scroller">
-      <refresh :style="loadingViewStyle" class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
+      <refresh v-if="refreshData" :style="loadingViewStyle" class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
         <image class="loading-indicator" :src="imgData.loadingGif"></image>
 <!-- IOS端 refresh组件内不显示loading-indicator组件，改用gif图       -->
         <!--        <loading-indicator v-else class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>-->
@@ -11,7 +11,7 @@
         <slot></slot>
       </cell>
 
-      <loading :style="loadingViewStyle" @loading="loadMore" class="loading-view" v-if="hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
+      <loading :style="loadingViewStyle" @loading="loadMore" class="loading-view" v-if="getData && hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
         <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
       </loading>
     </list>
@@ -42,14 +42,12 @@ export default {
     // 请求数据的回调
     getData: {
       type: Function,
-      default: async () => {
-      }
+      default: null
     },
     // 请求数据的回调
     refreshData: {
       type: Function,
-      default: async () => {
-      }
+      default: null
     },
     indicatorColor: {
       type: String,
