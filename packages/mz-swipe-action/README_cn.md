@@ -67,6 +67,7 @@
 | width | 滑动列表元素宽度 | `String` | `750px` |
 | listData |侧滑列表数据| `Array` | `[]` |
 | itemStyle | 滑动项元素样式配置对象 | `Object` | `{}`
+| disableSwipe | 临时禁用滑动功能 | `Boolean` | `false`
 
 #### listData数据结构
 | Prop | Description | Type | Default |
@@ -76,4 +77,6 @@
 ### Events
 | 事件名 | 说明 | 回调参数
 | ---- |:----:|:---:|
-| cellMenuClick | 点击侧滑按钮时触发 | { index: 当前点击的侧滑选项索引, text: 当前点击的侧滑选项文本 } |
+| dofCellClicked | 点击cell触发 | { index: 当前点击的侧滑选项索引 } |
+| dofRightClicked | 点击侧滑按钮时触发 | { index: 当前点击的侧滑选项索引, text: 当前点击的侧滑选项文本 } |
+| swipeEnd | 侧滑动画结束时触发 | { index: 当前点击的侧滑选项索引, deltaX: 拖动松开时移动的距离 } |

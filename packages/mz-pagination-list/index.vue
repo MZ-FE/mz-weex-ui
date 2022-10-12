@@ -1,15 +1,17 @@
 <template>
   <div :style="listStyle">
     <list ref="list" class="scroller">
-      <refresh :style="loadingViewStyle" class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
-        <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
+      <refresh v-if="refreshData" :style="loadingViewStyle" class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
+        <image class="loading-indicator" :src="imgData.loadingGif"></image>
+<!-- IOS端 refresh组件内不显示loading-indicator组件，改用gif图       -->
+        <!--        <loading-indicator v-else class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>-->
       </refresh>
 
       <cell>
         <slot></slot>
       </cell>
 
-      <loading :style="loadingViewStyle" @loading="loadMore" class="loading-view" v-if="hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
+      <loading :style="loadingViewStyle" @loading="loadMore" class="loading-view" v-if="getData && hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
         <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
       </loading>
     </list>
@@ -17,6 +19,7 @@
 </template>
 
 <script>
+import { loadingGif } from '../setting/icon.base64'
 const dom = weex.requireModule('dom')
 
 export default {
@@ -39,14 +42,12 @@ export default {
     // 请求数据的回调
     getData: {
       type: Function,
-      default: async () => {
-      }
+      default: null
     },
     // 请求数据的回调
     refreshData: {
       type: Function,
-      default: async () => {
-      }
+      default: null
     },
     indicatorColor: {
       type: String,
@@ -57,6 +58,9 @@ export default {
   components: {},
   data () {
     return {
+      imgData: {
+        loadingGif
+      },
       isRefreshing: false,
       isLoadingMore: false,
       isIos: weex.config.env.platform === 'iOS',
@@ -137,5 +141,9 @@ export default {
   width: 100px;
   height: 100px;
   color: #999;
+}
+.loading-indicator {
+  width: 40px;
+  height: 40px;
 }
 </style>

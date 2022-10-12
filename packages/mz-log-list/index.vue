@@ -5,15 +5,15 @@
     </div>
 
     <div class="item-block" v-for="(item, index) in list" :key="index">
-      <text class="item-time">{{ item.label }}</text>
-      <text class="item-content">{{ item.content }}</text>
+      <text class="item-time" :class="[item.isWarn && 'text-warn']">{{ item.label }}</text>
+      <text class="item-content" :class="[item.isWarn && 'text-warn']">{{ item.content }}</text>
       <div class="rightIcon">
         <slot name="rightIcon" v-bind:listItem="item"></slot>
       </div>
 
       <div class="line-top" v-if="index !== 0"></div>
       <div class="line-bottom" v-if="index !== list.length - 1"></div>
-      <div class="circle"></div>
+      <div class="circle" :class="[item.isWarn && 'bg-warn']"></div>
     </div>
   </div>
 </template>
@@ -83,7 +83,7 @@ export default {
 .circle {
   width: 12px;
   height: 12px;
-  background: #c7c7cc;
+  background-color: #c7c7cc;
   border-radius: 6px;
   position: absolute;
   left: 148px;
@@ -110,4 +110,11 @@ export default {
   right: 32px;
   top: 24px;
 }
+.text-warn {
+  color: #FF3B30;
+}
+.bg-warn {
+  background-color: #FF3B30;
+}
+
 </style>

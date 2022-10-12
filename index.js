@@ -10,8 +10,10 @@ import MzLinkList from './packages/mz-link-list';
 import MzLogList from './packages/mz-log-list';
 import MzPaginationList from './packages/mz-pagination-list';
 import MzPopup from './packages/mz-popup';
+import MzPopupSelect from './packages/mz-popup-select';
 import MzSliderBar from './packages/mz-slider-bar';
 import MzSliderCard from './packages/mz-slider-card';
+import MzStatusCapsule from './packages/mz-status-capsule';
 import MzSwipeAction from './packages/mz-swipe-action';
 import MzTabPage from './packages/mz-tab-page';
 import Utils from './packages/utils';
@@ -25,8 +27,10 @@ export {
   MzLogList,
   MzPaginationList,
   MzPopup,
+  MzPopupSelect,
   MzSliderBar,
   MzSliderCard,
+  MzStatusCapsule,
   MzSwipeAction,
   MzTabPage,
   Utils
