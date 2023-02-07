@@ -20,11 +20,18 @@
     >
       <slot></slot>
       <div class="bottom-wrapper" :style="bottomStyle">
-        <div v-if="button && button.length > 0" class="actionsheet-bottom">
+        <div
+          v-if="button && button.length > 0"
+          class="actionsheet-bottom"
+          :style="{ borderColor: gapColor }"
+        >
           <text
             v-for="(btn, index) in button"
             :key="index"
-            :style="{ color: btn.textColor || '#267aff' }"
+            :style="{
+              color: btn.textColor || '#267aff',
+              backgroundColor: btnColor,
+            }"
             @click="actionsheetBtnClick(index, btn.text || btn)"
             class="actionsheet-btn"
             >{{ btn.text || btn }}</text
@@ -104,10 +111,20 @@ module.exports = {
         timingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
       }),
     },
-    // 底部按键
+    // 底部按钮
     button: {
       type: Array,
       default: () => [],
+    },
+    // 底部按钮底色
+    btnColor: {
+      type: String,
+      default: "#ffffff",
+    },
+    // 与底部按钮间的分隔条底色
+    gapColor: {
+      type: String,
+      default: "#f5f5f5",
     },
   },
   data: () => ({
@@ -318,12 +335,10 @@ module.exports = {
   flex-direction: row;
   justify-content: space-between;
   border-top-width: 20px;
-  border-color: #f3f3f3;
   border-style: solid;
 }
 .actionsheet-btn {
   font-size: 32px;
-  background-color: #ffffff;
   line-height: 100px;
   text-align: center;
   flex: 1;

@@ -46,6 +46,8 @@
 | popupStyle | `Object` |`No`| - | 覆盖弹层样式，包括尺寸、位置、背景 |
 | animation | `Object` |`No`| `timingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1.0)'` | 弹层动画时间函数 |
 | button | `Array` |`No`| - | 底部按钮 |
+| btnColor | `String` |`No`| `#ffffff` | 底部按钮底色 |
+| gapColor | `String` |`No`| `#f5f5f5` | 与底部按钮间的分隔条底色 |
 
 ### 事件
 
