@@ -1,12 +1,19 @@
 <template>
-  <div class="card" :style="{ height: cardHeight + 'px' }">
+  <div
+    class="card"
+    :style="{ height: cardHeight + 'px', backgroundColor: cardBgColor }"
+  >
     <div class="date-block">
-      <text class="date-text">{{ title }}</text>
+      <text class="date-text" :style="{ color: dateColor }">{{ title }}</text>
     </div>
 
     <div class="item-block" v-for="(item, index) in list" :key="index">
-      <text class="item-time" :class="[item.isWarn && 'text-warn']">{{ item.label }}</text>
-      <text class="item-content" :class="[item.isWarn && 'text-warn']">{{ item.content }}</text>
+      <text class="item-time" :style="composedTimeStyle(item.isWarn)">{{
+        item.label
+      }}</text>
+      <text class="item-content" :style="composedContentStyle(item.isWarn)">{{
+        item.content
+      }}</text>
       <div class="rightIcon">
         <slot name="rightIcon" v-bind:listItem="item"></slot>
       </div>
@@ -23,25 +30,49 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: "",
     },
     list: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
+    // 卡片底色
+    cardBgColor: {
+      type: String,
+      default: "#ffffff",
+    },
+    dateColor: {
+      type: String,
+      default: "#666666",
+    },
+    timeColor: {
+      type: String,
+      default: "#8a8a8f",
+    },
+    contentColor: {
+      type: String,
+      default: "#000000",
+    },
   },
   computed: {
-    cardHeight () {
-      return this.list.length * 88 + 112
-    }
-  }
-}
+    cardHeight() {
+      return this.list.length * 88 + 112;
+    },
+  },
+  methods: {
+    composedTimeStyle(isWarn = false) {
+      return { color: isWarn ? "#ff3b30" : this.timeColor };
+    },
+    composedContentStyle(isWarn = false) {
+      return { color: isWarn ? "#ff3b30" : this.contentColor };
+    },
+  },
+};
 </script>
 
 <style scoped>
 .card {
   margin-top: 16px;
-  background-color: #ffffff;
 }
 .date-block {
   height: 96px;
@@ -49,7 +80,6 @@ export default {
 .date-text {
   font-family: PingFangSC-Medium;
   font-size: 28px;
-  color: #666666;
   line-height: 28px;
   font-weight: 500;
   position: absolute;
@@ -62,7 +92,6 @@ export default {
 .item-time {
   font-family: PingFangSC-Regular;
   font-size: 24px;
-  color: #8a8a8f;
   text-align: right;
   line-height: 24px;
   font-weight: 400;
@@ -73,7 +102,6 @@ export default {
 .item-content {
   font-family: PingFangSC-Regular;
   font-size: 24px;
-  color: #000000;
   line-height: 24px;
   font-weight: 400;
   position: absolute;
@@ -111,10 +139,9 @@ export default {
   top: 24px;
 }
 .text-warn {
-  color: #FF3B30;
+  color: #ff3b30;
 }
 .bg-warn {
-  background-color: #FF3B30;
+  background-color: #ff3b30;
 }
-
 </style>

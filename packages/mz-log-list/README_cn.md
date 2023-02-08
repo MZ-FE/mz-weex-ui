@@ -32,6 +32,10 @@
 | ---- |:----:|:--------:|:----:|
 | title |  标题  | `String` |  `''`  |
 | list | 列表数据 | `Array`  | `[]` |
+| cardBgColor | 卡片底色 | `String`  | `[]` |
+| dateColor | 列表数据 | `String`  | `[]` |
+| timeColor | 列表数据 | `String`  | `[]` |
+| contentColor | 列表数据 | `String`  | `[]` |
 
 #### list数据结构
 | Prop | Description |   Type    | Default |
