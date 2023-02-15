@@ -30,8 +30,11 @@
             :key="index"
             :style="{
               color: btn.textColor || '#267aff',
-              backgroundColor: btnColor,
+              backgroundColor:
+                index === btnActiveIndex ? btnActiveColor : btnColor,
             }"
+            @touchstart="btnActiveIndex = index"
+            @touchend="btnActiveIndex = -1"
             @click="actionsheetBtnClick(index, btn.text || btn)"
             class="actionsheet-btn"
             >{{ btn.text || btn }}</text
@@ -121,6 +124,11 @@ module.exports = {
       type: String,
       default: "#ffffff",
     },
+    // 底部按钮:active底色
+    btnActiveColor: {
+      type: String,
+      default: "#f5f5f5",
+    },
     // 与底部按钮间的分隔条底色
     gapColor: {
       type: String,
@@ -146,6 +154,7 @@ module.exports = {
       backgroundColor: "#ffffff",
     },
     screenHeight: 1080,
+    btnActiveIndex: -1, // 正在被点击的按钮索引，-1表示未点击
   }),
   computed: {
     // HACK 弹层动画
@@ -342,9 +351,5 @@ module.exports = {
   line-height: 100px;
   text-align: center;
   flex: 1;
-}
-
-.actionsheet-btn:active {
-  background-color: #f5f5f5;
 }
 </style>

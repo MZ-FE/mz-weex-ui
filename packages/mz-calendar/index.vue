@@ -11,6 +11,7 @@
       :button="button"
       :showButton="showButton"
       :btnColor="btnColor"
+      :btnActiveColor="btnActiveColor"
       :gapColor="gapColor"
       @buttonClicked="$emit('buttonClicked')"
       @overlayClicked="$emit('overlayClicked')"
@@ -225,6 +226,11 @@ module.exports = {
     btnColor: {
       type: String,
       default: "#ffffff",
+    },
+    // 底部按钮:active底色
+    btnActiveColor: {
+      type: String,
+      default: "#f5f5f5",
     },
     // 与底部按钮间的分隔条底色
     gapColor: {
