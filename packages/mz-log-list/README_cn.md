@@ -32,10 +32,13 @@
 | ---- |:----:|:--------:|:----:|
 | title |  标题  | `String` |  `''`  |
 | list | 列表数据 | `Array`  | `[]` |
-| cardBgColor | 卡片底色 | `String`  | `[]` |
-| dateColor | 列表数据 | `String`  | `[]` |
-| timeColor | 列表数据 | `String`  | `[]` |
-| contentColor | 列表数据 | `String`  | `[]` |
+| cardBgColor | 卡片底色 | `String`  | `#ffffff` |
+| dateColor | 日期颜色 | `String`  | `#666666` |
+| timeColor | 时间颜色 | `String`  | `#8a8a8f` |
+| contentColor | 内容颜色 | `String`  | `"#000000` |
+| lineColor | 线条颜色 | `String`  | `#e5e5e8` |
+| dotColor | 圆点颜色 | `String`  | `#c7c7cc` |
+| warnigColor | 警告颜色，同时作用于圆点、时间、内容 | `String`  | `#ff3b30` |
 
 #### list数据结构
 | Prop | Description |   Type    | Default |

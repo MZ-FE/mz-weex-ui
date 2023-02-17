@@ -18,9 +18,17 @@
         <slot name="rightIcon" v-bind:listItem="item"></slot>
       </div>
 
-      <div class="line-top" v-if="index !== 0"></div>
-      <div class="line-bottom" v-if="index !== list.length - 1"></div>
-      <div class="circle" :class="[item.isWarn && 'bg-warn']"></div>
+      <div
+        class="line-top"
+        :style="{ backgroundColor: lineColor }"
+        v-if="index !== 0"
+      ></div>
+      <div
+        class="line-bottom"
+        :style="{ backgroundColor: lineColor }"
+        v-if="index !== list.length - 1"
+      ></div>
+      <div class="dot" :style="dotStyle(item.isWarn)"></div>
     </div>
   </div>
 </template>
@@ -53,6 +61,18 @@ export default {
       type: String,
       default: "#000000",
     },
+    lineColor: {
+      type: String,
+      default: "#e5e5e8",
+    },
+    dotColor: {
+      type: String,
+      default: "#c7c7cc",
+    },
+    warnigColor: {
+      type: String,
+      default: "#ff3b30",
+    },
   },
   computed: {
     cardHeight() {
@@ -61,10 +81,13 @@ export default {
   },
   methods: {
     composedTimeStyle(isWarn = false) {
-      return { color: isWarn ? "#ff3b30" : this.timeColor };
+      return { color: isWarn ? this.warnigColor : this.timeColor };
     },
     composedContentStyle(isWarn = false) {
-      return { color: isWarn ? "#ff3b30" : this.contentColor };
+      return { color: isWarn ? this.warnigColor : this.contentColor };
+    },
+    dotStyle(isWarn = false) {
+      return { backgroundColor: isWarn ? this.warnigColor : this.dotColor };
     },
   },
 };
@@ -108,10 +131,9 @@ export default {
   left: 208px;
   top: 32px;
 }
-.circle {
+.dot {
   width: 12px;
   height: 12px;
-  background-color: #c7c7cc;
   border-radius: 6px;
   position: absolute;
   left: 148px;
@@ -120,7 +142,6 @@ export default {
 .line-top {
   width: 2px;
   height: 49px;
-  background-color: #e5e5e8;
   position: absolute;
   left: 153px;
   top: 0;
@@ -128,7 +149,6 @@ export default {
 .line-bottom {
   width: 2px;
   height: 49px;
-  background-color: #e5e5e8;
   position: absolute;
   left: 153px;
   bottom: 0;
@@ -140,8 +160,5 @@ export default {
 }
 .text-warn {
   color: #ff3b30;
-}
-.bg-warn {
-  background-color: #ff3b30;
 }
 </style>
