@@ -172,7 +172,7 @@ module.exports = {
     },
     realPopupHeight() {
       return this.isIpx && this.pos === "bottom"
-        ? this.popupHeight + 68
+        ? Number(this.popupHeight) + 68
         : this.popupHeight;
     },
     composedStyle() {

@@ -110,7 +110,7 @@ module.exports = {
       default: () => ({}),
     },
     popupHeight: {
-      type: [Number],
+      type: Number,
       default: 700,
     },
     // 日期跨度，以月为单位
