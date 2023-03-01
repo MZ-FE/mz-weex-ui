@@ -153,7 +153,6 @@ module.exports = {
       transformOrigin: "top center",
       backgroundColor: "#ffffff",
     },
-    screenHeight: 1080,
     btnActiveIndex: -1, // 正在被点击的按钮索引，-1表示未点击
   }),
   computed: {
@@ -183,7 +182,6 @@ module.exports = {
         btnSize,
         popupHeight,
         realPopupHeight,
-        screenHeight,
       } = this;
       const style = {
         height: `${realPopupHeight}px`,
@@ -195,7 +193,7 @@ module.exports = {
       }
 
       if (this.pos === "bottom") {
-        style.top = `${screenHeight}px`;
+        style.bottom = `-${realPopupHeight}px`;
         style.borderTopLeftRadius = "32px";
         style.borderTopRightRadius = "32px";
       } else {
@@ -233,9 +231,6 @@ module.exports = {
   },
   mounted() {
     this.appearPopup(this.show);
-    domModule.getComponentRect("viewport", (data) => {
-      this.screenHeight = data.size.height;
-    });
   },
   methods: {
     handleTouchEnd(e) {
