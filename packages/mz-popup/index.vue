@@ -29,6 +29,7 @@
             v-for="(btn, index) in button"
             :key="index"
             :style="{
+              ...btnStyle(index),
               color: btn.textColor || '#267aff',
               backgroundColor:
                 index === btnActiveIndex ? btnActiveColor : btnColor,
@@ -250,6 +251,17 @@ module.exports = {
         });
       }
     },
+    // 底部按钮样式
+    btnStyle(index) {
+      if (index === 0) {
+        return;
+      }
+      return {
+        borderColor: this.gapColor,
+        borderLeftWidth: "2px",
+        borderStyle: "solid",
+      };
+    },
 
     dofOverlayBodyClicking() {
       this.appearPopup(false);
@@ -312,7 +324,7 @@ module.exports = {
     },
     actionsheetBtnClick(index, text) {
       this.appearPopup(false);
-      this.$refs.overlay.appearOverlay(false);
+      // this.$refs.overlay.appearOverlay(false); // !! IOS 下会影响收起时的动画效果，应该禁用
       this.$emit("popupButtonClicked", { index, text });
     },
   },
