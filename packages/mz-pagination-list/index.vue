@@ -1,26 +1,43 @@
 <template>
   <div :style="listStyle">
     <list ref="list" class="scroller">
-      <refresh v-if="refreshData" :style="loadingViewStyle" class="loading-view" @refresh="onRefresh" :display="!isRefreshing ? 'hide' : 'show'">
-        <image class="loading-indicator" :src="imgData.loadingGif"></image>
-<!-- IOS端 refresh组件内不显示loading-indicator组件，改用gif图       -->
-        <!--        <loading-indicator v-else class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>-->
+      <!-- IOS端 refresh组件内不显示loading-indicator组件，改用gif图       -->
+      <!--        <loading-indicator v-else class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>-->
+      <refresh
+        v-if="refreshData"
+        :style="loadingViewStyle"
+        class="loading-view"
+        @refresh="onRefresh"
+        :display="!isRefreshing ? 'hide' : 'show'"
+      >
+        <slot name="loading">
+          <image class="loading-indicator" :src="imgData.loadingGif"></image>
+        </slot>
       </refresh>
 
       <cell>
         <slot></slot>
       </cell>
 
-      <loading :style="loadingViewStyle" @loading="loadMore" class="loading-view" v-if="getData && hasMore" :display="!isLoadingMore ? 'hide' : 'show'">
-        <loading-indicator class="indicator" :style="{ color: this.indicatorColor }"></loading-indicator>
+      <loading
+        :style="loadingViewStyle"
+        @loading="loadMore"
+        class="loading-view"
+        v-if="getData && hasMore"
+        :display="!isLoadingMore ? 'hide' : 'show'"
+      >
+        <loading-indicator
+          class="indicator"
+          :style="{ color: this.indicatorColor }"
+        ></loading-indicator>
       </loading>
     </list>
   </div>
 </template>
 
 <script>
-import { loadingGif } from '../setting/icon.base64'
-const dom = weex.requireModule('dom')
+import { loadingGif } from "../setting/icon.base64";
+const dom = weex.requireModule("dom");
 
 export default {
   props: {
@@ -29,101 +46,99 @@ export default {
     },
     pageSize: {
       type: Number,
-      default: 20
+      default: 20,
     },
     pageNo: {
       type: Number,
-      default: 1
+      default: 1,
     },
     total: {
       type: Number,
-      default: 0
+      default: 0,
     },
     // 请求数据的回调
     getData: {
       type: Function,
-      default: null
+      default: null,
     },
     // 请求数据的回调
     refreshData: {
       type: Function,
-      default: null
+      default: null,
     },
     indicatorColor: {
       type: String,
-      default: '#999'
-    }
+      default: "#999",
+    },
   },
-  name: 'index',
+  name: "index",
   components: {},
-  data () {
+  data() {
     return {
       imgData: {
-        loadingGif
+        loadingGif,
       },
       isRefreshing: false,
       isLoadingMore: false,
-      isIos: weex.config.env.platform === 'iOS',
-      listWidth: 750
-    }
+      isIos: weex.config.env.platform === "iOS",
+      listWidth: 750,
+    };
   },
   computed: {
-    listStyle () {
-      let style = {}
+    listStyle() {
+      let style = {};
 
       if (this.height > 0) {
-        style.height = `${this.height}px`
+        style.height = `${this.height}px`;
       }
 
-      return style
+      return style;
     },
-    loadingViewStyle () {
-      return { width: `${this.listWidth}px`}
+    loadingViewStyle() {
+      return { width: `${this.listWidth}px` };
     },
-    hasMore () {
-      return this.pageNo * this.pageSize < this.total
-    }
+    hasMore() {
+      return this.pageNo * this.pageSize < this.total;
+    },
   },
   watch: {},
   methods: {
     /**
      * 刷新，重置页面数据
      */
-    async onRefresh () {
-      this.isRefreshing = true
-      await this.refreshData()
+    async onRefresh() {
+      this.isRefreshing = true;
+      await this.refreshData();
 
-      this.isRefreshing = false
+      this.isRefreshing = false;
     },
     /**
      * 分页加载
      */
-    async loadMore () {
-      this.isLoadingMore = true
-      await this.getData()
+    async loadMore() {
+      this.isLoadingMore = true;
+      await this.getData();
 
-      this.isLoadingMore = false
-    }
+      this.isLoadingMore = false;
+    },
   },
 
-  created () {
-  },
+  created() {},
 
-  mounted () {
+  mounted() {
     setTimeout(() => {
-      dom.getComponentRect(this.$refs['list'], option => {
+      dom.getComponentRect(this.$refs["list"], (option) => {
         // 查询失败时result为false
         if (!option.result) {
-          return
+          return;
         }
-        this.listWidth = option.size.width
-      })
-    }, 300)
+        this.listWidth = option.size.width;
+      });
+    }, 300);
   },
 
-  destroyed () {
-  }
-}
+  destroyed() {},
+};
 </script>
 
 <style scoped>
