@@ -10,6 +10,9 @@
       :boxShadow="boxShadow"
       :button="button"
       :showButton="showButton"
+      :btnColor="btnColor"
+      :btnActiveColor="btnActiveColor"
+      :gapColor="gapColor"
       @buttonClicked="$emit('buttonClicked')"
       @overlayClicked="$emit('overlayClicked')"
       @popupButtonClicked="popupButtonClicked"
@@ -107,7 +110,7 @@ module.exports = {
       default: () => ({}),
     },
     popupHeight: {
-      type: [Number],
+      type: Number,
       default: 700,
     },
     // 日期跨度，以月为单位
@@ -117,15 +120,7 @@ module.exports = {
     },
     normalDayStyle: {
       type: Object,
-      default: () => ({
-        width: "46px",
-        height: "46px",
-        color: "#267aff",
-        fontSize: "30px",
-        lineHeight: "46px",
-        textAlign: "center",
-        borderRadius: "23px",
-      }),
+      default: () => ({}),
     },
     // 今天的数字样式
     todayStyle: {
@@ -227,11 +222,35 @@ module.exports = {
       type: Array,
       default: () => ["取消"],
     },
+    // 底部按钮底色
+    btnColor: {
+      type: String,
+      default: "#ffffff",
+    },
+    // 底部按钮:active底色
+    btnActiveColor: {
+      type: String,
+      default: "#f5f5f5",
+    },
+    // 与底部按钮间的分隔条底色
+    gapColor: {
+      type: String,
+      default: "#f5f5f5",
+    },
   },
   data() {
     return {
       checkedDate: today,
       WEEK_DAYS: ["日", "一", "二", "三", "四", "五", "六"],
+      defaultDayStyle: {
+        width: "46px",
+        height: "46px",
+        color: "#267aff",
+        fontSize: "30px",
+        lineHeight: "46px",
+        textAlign: "center",
+        borderRadius: "23px",
+      },
     };
   },
   methods: {
@@ -277,7 +296,11 @@ module.exports = {
     },
 
     dayComposedStyle(day) {
-      const style = Object.assign({}, this.normalDayStyle);
+      const style = Object.assign(
+        {},
+        this.defaultDayStyle,
+        this.normalDayStyle
+      );
       if (this.isToday(day)) {
         Object.assign(style, this.todayStyle);
       }

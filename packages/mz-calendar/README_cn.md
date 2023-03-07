@@ -49,6 +49,9 @@
 | disabledList | `Array` |`No`| - | 须禁用的日期列表，支持dayjs格式，或可被格式化为日期类型的字符串格式  |
 | emphasizedList | `Array` |`No`| - | 须突出显示的日期列表，支持dayjs格式，或可被格式化为日期类型的字符串格式  |
 | scrollToDay | `String` |`No`| today.format("YYYY-MM-DD") | 打开时自动滚动到的日期 |
+| btnColor | `String` |`No`| `#ffffff` | 底部按钮底色 |
+| btnActiveColor | `String` |`No`| `#f5f5f5` | 底部按钮点中时的底色，类似:active |
+| gapColor | `String` |`No`| `#f5f5f5` | 与底部按钮间的分隔条底色 |
 
 > `showButton` `popupStyle` `overlayCfg` `boxShadow` `button` 等参数同组件 `mz-popup`
 

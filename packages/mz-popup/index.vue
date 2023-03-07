@@ -20,11 +20,22 @@
     >
       <slot></slot>
       <div class="bottom-wrapper" :style="bottomStyle">
-        <div v-if="button && button.length > 0" class="actionsheet-bottom">
+        <div
+          v-if="button && button.length > 0"
+          class="actionsheet-bottom"
+          :style="{ borderColor: gapColor }"
+        >
           <text
             v-for="(btn, index) in button"
             :key="index"
-            :style="{ color: btn.textColor || '#267aff' }"
+            :style="{
+              ...btnStyle(index),
+              color: btn.textColor || '#267aff',
+              backgroundColor:
+                index === btnActiveIndex ? btnActiveColor : btnColor,
+            }"
+            @touchstart="btnActiveIndex = index"
+            @touchend="btnActiveIndex = -1"
             @click="actionsheetBtnClick(index, btn.text || btn)"
             class="actionsheet-btn"
             >{{ btn.text || btn }}</text
@@ -104,10 +115,25 @@ module.exports = {
         timingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
       }),
     },
-    // 底部按键
+    // 底部按钮
     button: {
       type: Array,
       default: () => [],
+    },
+    // 底部按钮底色
+    btnColor: {
+      type: String,
+      default: "#ffffff",
+    },
+    // 底部按钮:active底色
+    btnActiveColor: {
+      type: String,
+      default: "#f5f5f5",
+    },
+    // 与底部按钮间的分隔条底色
+    gapColor: {
+      type: String,
+      default: "#f5f5f5",
     },
   },
   data: () => ({
@@ -128,7 +154,7 @@ module.exports = {
       transformOrigin: "top center",
       backgroundColor: "#ffffff",
     },
-    screenHeight: 1080,
+    btnActiveIndex: -1, // 正在被点击的按钮索引，-1表示未点击
   }),
   computed: {
     // HACK 弹层动画
@@ -146,7 +172,7 @@ module.exports = {
     },
     realPopupHeight() {
       return this.isIpx && this.pos === "bottom"
-        ? this.popupHeight + 68
+        ? Number(this.popupHeight) + 68
         : this.popupHeight;
     },
     composedStyle() {
@@ -157,7 +183,6 @@ module.exports = {
         btnSize,
         popupHeight,
         realPopupHeight,
-        screenHeight,
       } = this;
       const style = {
         height: `${realPopupHeight}px`,
@@ -169,7 +194,7 @@ module.exports = {
       }
 
       if (this.pos === "bottom") {
-        style.top = `${screenHeight}px`;
+        style.bottom = `-${realPopupHeight}px`;
         style.borderTopLeftRadius = "32px";
         style.borderTopRightRadius = "32px";
       } else {
@@ -207,9 +232,6 @@ module.exports = {
   },
   mounted() {
     this.appearPopup(this.show);
-    domModule.getComponentRect("viewport", (data) => {
-      this.screenHeight = data.size.height;
-    });
   },
   methods: {
     handleTouchEnd(e) {
@@ -228,6 +250,17 @@ module.exports = {
           this.$emit("buttonClicked");
         });
       }
+    },
+    // 底部按钮样式
+    btnStyle(index) {
+      if (index === 0) {
+        return;
+      }
+      return {
+        borderColor: this.gapColor,
+        borderLeftWidth: "2px",
+        borderStyle: "solid",
+      };
     },
 
     dofOverlayBodyClicking() {
@@ -291,7 +324,7 @@ module.exports = {
     },
     actionsheetBtnClick(index, text) {
       this.appearPopup(false);
-      this.$refs.overlay.appearOverlay(false);
+      // this.$refs.overlay.appearOverlay(false); // !! IOS 下会影响收起时的动画效果，应该禁用
       this.$emit("popupButtonClicked", { index, text });
     },
   },
@@ -318,18 +351,12 @@ module.exports = {
   flex-direction: row;
   justify-content: space-between;
   border-top-width: 20px;
-  border-color: #f3f3f3;
   border-style: solid;
 }
 .actionsheet-btn {
   font-size: 32px;
-  background-color: #ffffff;
   line-height: 100px;
   text-align: center;
   flex: 1;
-}
-
-.actionsheet-btn:active {
-  background-color: #f5f5f5;
 }
 </style>
