@@ -3,13 +3,14 @@
     :class="['cell-row', hasBottomBorder && 'cell-row-hasBottomBorder']"
     :style="{
       ...curCellStyle,
-      backgroundColor: isHighlight && isActive && !disabled ? activeBgColor : cellStyle.backgroundColor,
+      backgroundColor: isHighlight && isActive && !disabled ? activeBgColor : cellStyle.backgroundColor, borderBottomColor
     }"
     @click="onClick"
     @touchstart="isActive = true"
     @touchend="isActive = false"
+    @touchcancel="isActive = false"
   >
-    <div :class="['content', hasSubBottomBorder && 'content-hasSubBottomBorder']" :style="{ height }">
+    <div :class="['content', hasSubBottomBorder && 'content-hasSubBottomBorder']" :style="{ height, borderBottomColor }">
       <div class="flex-row center">
         <div class="function-icon-box" :style="functionIconSize" v-if="icon">
           <image :style="functionIconSize" :src="icon"></image>
@@ -43,7 +44,7 @@ export default {
     },
     iconBgColor: {
       type: String,
-      default: '#ffffff',
+      default: 'transparent',
     },
     title: {
       type: String,
@@ -77,6 +78,10 @@ export default {
     descColor: {
       type: String,
       default: '#8A8A8F',
+    },
+    bottomBorderColor:{
+      type:String,
+      default:'#f2f2f2'
     },
     hasSubBottomBorder: {
       type: Boolean,
@@ -165,6 +170,9 @@ export default {
         return {}
       }
     },
+    borderBottomColor () {
+      return this.bottomBorderColor
+    }
   },
   watch: {},
   methods: {
@@ -208,12 +216,10 @@ export default {
 .content-hasSubBottomBorder {
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-bottom-color: #2b2b2f;
 }
 .cell-row-hasBottomBorder {
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-bottom-color: #2b2b2f;
 }
 
 .left-title {
@@ -231,6 +237,7 @@ export default {
 .right-arrow {
   width: 40px;
   height: 40px;
+  margin-right: -10px;
 }
 .right-text {
   font-family: PingFangSC-Regular;

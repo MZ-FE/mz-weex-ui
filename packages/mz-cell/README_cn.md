@@ -28,7 +28,7 @@
 |------|------|----------|---------|-------------|
 | icon | `String` |`No`| - | 列表图标  |
 | iconSize | `Number` |`No`| `64` | 列表图标尺寸  |
-| iconBgColor | `String` |`No`| `#ffffff` | 列表图标背景颜色 |
+| iconBgColor | `String` |`No`| `transparent` | 列表图标背景颜色 |
 | title | `String` |`No`| - | 列表标题  |
 | titleBoldValue | `Number` |`No`| `400` | 列表标题加粗  |
 | titleColor | `String` |`No`| `#000000` | 列表标题颜色  |
@@ -40,6 +40,7 @@
 | descColor | `String` |`No`| `#8A8A8F` | 展示说明信息的字体颜色 |
 | hasSubBottomBorder | `Boolean` |`No`| `false` | 是否有下内边框 |
 | hasBottomBorder | `Boolean` |`No`| `false` | 是否有下边框 |
+| bottomBorderColor | `String` |`No`| `#f2f2f2` | 下边框颜色 |
 | centerTitle | `Boolean` |`No`| `false` | 标题是否居中（MzCell用作单选列表时可使用）  |
 | disabled | `Boolean` |`No`| `false`| 是否禁用当前cell |
 | disabledColor | `String` |`No`| `'rgba(255, 255, 255, 0.7)'` | 禁用样式背景颜色  |
@@ -62,3 +63,7 @@
 ```vue
 <slot name="right"> </slot>
 ```
+
+## 注意事项
+
+- 使用cellStyle属性时必须写入backgroundColor
