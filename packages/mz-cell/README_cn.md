@@ -64,6 +64,12 @@
 <slot name="right"> </slot>
 ```
 
+- 箭头插槽，可以自定义箭头样式大小及位置
+
+```vue
+<slot name="arrow"> </slot>
+```
+
 ## 注意事项
 
 - 使用cellStyle属性时必须写入backgroundColor

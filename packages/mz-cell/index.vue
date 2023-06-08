@@ -24,7 +24,9 @@
       <div class="flex-row center right-box">
         <slot name="right"> </slot>
         <text class="right-text" :style="rightTextStyle" v-if="rightText">{{ rightText }}</text>
-        <image v-if="hasArrow" class="right-arrow" :src="arrowImg"></image>
+        <slot name="arrow">
+          <image v-if="hasArrow" class="right-arrow" :src="arrowImg"></image>
+        </slot>
       </div>
     </div>
     <div class="shade" :style="disabledCellStyle" v-if="disabled" @click.stop></div>
