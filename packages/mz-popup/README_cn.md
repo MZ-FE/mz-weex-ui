@@ -45,10 +45,18 @@
 | popupHeight | `Number` |`No`| `500` | 弹层高度，ipx下自动增加68px |
 | popupStyle | `Object` |`No`| - | 覆盖弹层样式，包括尺寸、位置、背景 |
 | animation | `Object` |`No`| `timingFunction: 'cubic-bezier(0.25, 0.1, 0.25, 1.0)'` | 弹层动画时间函数 |
-| button | `Array` |`No`| - | 底部按钮 |
+| button | `Array` |`No`| - | 底部按钮（见下面配置项） |
 | btnColor | `String` |`No`| `#ffffff` | 底部按钮底色 |
 | btnActiveColor | `String` |`No`| `#f5f5f5` | 底部按钮点中时的底色，类似:active |
 | gapColor | `String` |`No`| `#f5f5f5` | 与底部按钮间的分隔条底色 |
+
+### button配置项
+| Prop | Type | Description |
+|------|------|-------------|
+| text | `String` | 按钮文字 |
+| textColor | `String` | 按钮文字颜色 |
+| btnColor | `String` | 按钮背景色 |
+| btnActiveColor | `String` | 按钮激活时的背景色 |
 
 ### 事件
 

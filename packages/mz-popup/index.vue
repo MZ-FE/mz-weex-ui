@@ -32,7 +32,7 @@
               ...btnStyle(index),
               color: btn.textColor || '#267aff',
               backgroundColor:
-                index === btnActiveIndex ? btnActiveColor : btnColor,
+                index === btnActiveIndex ? (btn.btnActiveColor ? btn.btnActiveColor : btnActiveColor) : (btn.btnColor ? btn.btnColor : btnColor),
             }"
             @touchstart="btnActiveIndex = index"
             @touchend="btnActiveIndex = -1"
