@@ -3,15 +3,17 @@
     :class="['cell-row', hasBottomBorder && 'cell-row-hasBottomBorder']"
     :style="{
       ...curCellStyle,
-      backgroundColor: isHighlight && isActive && !disabled ? activeBgColor : cellStyle.backgroundColor, borderBottomColor
+      backgroundColor: isHighlight && isActive && !disabled ? activeBgColor : cellStyle.backgroundColor,
+      ...borderBottomColor
     }"
     @click="onClick"
-    @touchstart="isActive = true"
+    @touchstart="onTouchStart"
     @touchend="isActive = false"
     @touchcancel="isActive = false"
   >
-    <div :class="['content', hasSubBottomBorder && 'content-hasSubBottomBorder']" :style="{ height, borderBottomColor }">
-      <div class="flex-row center">
+    <div :class="['content', hasSubBottomBorder && 'content-hasSubBottomBorder']" :style="[ height, borderBottomColor ]">
+      <!-- disabledCellStyle 放在顶层在iOS中无效 -->
+      <div class="flex-row center" :style="[ disabledCellStyle ]">
         <div class="function-icon-box" :style="functionIconSize" v-if="icon">
           <image :style="functionIconSize" :src="icon"></image>
         </div>
@@ -21,19 +23,21 @@
         </div>
       </div>
 
-      <div class="flex-row center right-box">
-        <slot name="right"> </slot>
+      <div class="flex-row center right-box" :style="[ disabledCellStyle ]">
+        <div v-if="useRightSlot" ref="rightSlot"><slot name="right"> </slot></div>
         <text class="right-text" :style="rightTextStyle" v-if="rightText">{{ rightText }}</text>
         <slot name="arrow">
           <image v-if="hasArrow" class="right-arrow" :src="arrowImg"></image>
         </slot>
       </div>
     </div>
-    <div class="shade" :style="disabledCellStyle" v-if="disabled" @click.stop></div>
+    <!-- <div class="shade" :style="disabledCellStyle" v-if="disabled" @click.stop></div> -->
   </div>
 </template>
 
 <script>
+const dom = weex.requireModule('dom');
+
 export default {
   props: {
     icon: {
@@ -105,10 +109,10 @@ export default {
       type: Boolean,
       default: false,
     },
-    disabledColor: {
-      type: String,
-      default: 'rgba(255, 255, 255, 0.7)',
-    },
+    // disabledColor: {
+    //   type: String,
+    //   default: 'rgba(255, 255, 255, 0.7)',
+    // },
     cellStyle: {
       type: Object,
       default: () => ({
@@ -120,16 +124,30 @@ export default {
       type: Boolean,
       default: true,
     },
+    isNoHighlightOnRightSlot: {
+      type: Boolean,
+      default: true,
+    },
     activeBgColor: {
       type: String,
       default: '#E5E5E8',
     },
+    useRightSlot:{
+      type: Boolean,
+      default: false,
+    }
   },
   name: 'ColmoCell',
   components: {},
   data () {
     return {
       isActive: false,
+      rightSlotSize: {
+        top:0,
+        bottom:0,
+        right:0,
+        left:0
+      }
     }
   },
   computed: {
@@ -142,18 +160,23 @@ export default {
       }
     },
     disabledCellStyle () {
-      const { cellStyle } = this
-      return {
-        ...cellStyle,
-        height: this.height,
-        backgroundColor: this.disabledColor,
+      if(this.disabled){
+        return {opacity:0.3}
+      }else{
+        return {opacity:1}
       }
+      // const { cellStyle } = this
+      // return {
+      //   ...cellStyle,
+      //   height: this.height,
+      //   backgroundColor: this.disabledColor,
+      // }
     },
     height () {
       if (this.cellStyle.height && this.cellStyle.height !== '0px') {
         return this.cellStyle.height
       }
-      return this.desc ? '160px' : '104px' //有一个1px的border问题，透露背景色问题（渲染机制导致）
+      return this.desc ? {height:'160px'} : {height:'104px'} //有一个1px的border问题，透露背景色问题（渲染机制导致）
     },
     functionIconSize () {
       return {
@@ -173,19 +196,44 @@ export default {
       }
     },
     borderBottomColor () {
-      return this.bottomBorderColor
+      return {borderBottomColor:this.bottomBorderColor}
     }
   },
   watch: {},
   methods: {
     onClick (e) {
-      this.$emit('cellClicked', e)
+      if(this.disabled){
+        this.$emit('cellDisabled', e)
+      }else{
+        this.$emit('cellClicked', e)
+      }
     },
+
+    onTouchStart(e) {
+      const {screenX,screenY} = e.changedTouches[0]
+      //因为在iOS中，无法阻止手势事件冒泡
+      //只要点(screenX, screenY)不在rightSlot区域内则高亮
+      if(this.rightSlotSize.top >= screenY ||
+          this.rightSlotSize.bottom <= screenY ||
+        this.rightSlotSize.left >= screenX ||
+      this.rightSlotSize.right <= screenX){
+        this.isActive = true
+        }
+    }
   },
 
   created () {},
 
-  mounted () {},
+  mounted () {
+    if(this.useRightSlot && this.isNoHighlightOnRightSlot) {
+        setTimeout(()=>{
+          dom.getComponentRect(this.$refs.rightSlot, option => {
+          this.rightSlotSize = option.size
+        });
+      },200)
+
+    }
+  },
 
   destroyed () {},
 }
