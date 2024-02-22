@@ -6,6 +6,7 @@ import BindEnv from './packages/bind-env';
 import MzCalendar from './packages/mz-calendar';
 import MzCell from './packages/mz-cell';
 import MzCollapse from './packages/mz-collapse';
+import MzDiamondTab from './packages/mz-diamond-tab';
 import MzIlluminationBar from './packages/mz-illumination-bar';
 import MzLinkList from './packages/mz-link-list';
 import MzLogList from './packages/mz-log-list';
@@ -24,6 +25,7 @@ export {
   MzCalendar,
   MzCell,
   MzCollapse,
+  MzDiamondTab,
   MzIlluminationBar,
   MzLinkList,
   MzLogList,
