@@ -17,8 +17,8 @@
       @overlayClicked="$emit('overlayClicked')"
       @popupButtonClicked="popupButtonClicked"
     >
-      <text :style="titleStyle" v-if="titleText">{{ titleText }}</text>
-      <div class="calendar">
+      <text :style="titleStyle" v-if="titleText" >{{ titleText }}</text>
+      <div class="calendar" :style="{backgroundColor:calendarBackgroundColor}">
         <div class="week-title">
           <div class="week-item" v-for="day in WEEK_DAYS" :key="day">
             <text class="text-week" :style="weekStyle">{{ day }}</text>
@@ -40,11 +40,12 @@
                 v-if="day.date() === 1"
                 >{{ day.month() + 1 }}月</text
               >
+              <div v-if="day.isSame(checkedDate, 'day')" class="dot"></div>
               <text
                 v-if="showTodayText(day)"
                 :style="todayTextStyle"
                 class="text-today"
-                >今天</text
+                >{{todayText}}</text
               >
             </div>
           </div>
@@ -112,6 +113,10 @@ module.exports = {
     popupHeight: {
       type: Number,
       default: 700,
+    },
+    calendarBackgroundColor :{
+      type: String,
+      default: "#000000",
     },
     // 日期跨度，以月为单位
     monthSpan: {
@@ -187,6 +192,10 @@ module.exports = {
     titleText: {
       type: String,
       default: "日历",
+    },
+    todayText: {
+      type: String,
+      default: '今天'
     },
     // 启用的日期列表，与禁用日期列表互斥存在
     enabledList: {
@@ -361,7 +370,7 @@ module.exports = {
 <style scoped>
 .calendar {
   position: relative;
-  height: 520px;
+  height: 521px;
 }
 
 .days-scroller {
@@ -373,7 +382,7 @@ module.exports = {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 80px;
+  height: 84px;
 }
 
 .day-item,
@@ -382,7 +391,7 @@ module.exports = {
   align-items: center;
   justify-content: center;
   width: 100px;
-  height: 80px;
+  height: 84px;
 }
 
 .text-month {
@@ -398,5 +407,13 @@ module.exports = {
   left: 0;
   width: 100px;
   text-align: center;
+}
+.dot{
+  position: absolute;
+  bottom: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: rgba(255,255,255,0.8);
 }
 </style>

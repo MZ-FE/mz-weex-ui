@@ -3,42 +3,98 @@
     :class="['cell-row', hasBottomBorder && 'cell-row-hasBottomBorder']"
     :style="{
       ...curCellStyle,
-      backgroundColor: isHighlight && isActive && !disabled ? activeBgColor : cellStyle.backgroundColor, borderBottomColor
+      backgroundColor:
+        isHighlight && isActive && !disabled
+          ? activeBgColor
+          : cellStyle.backgroundColor,
+      ...borderBottomColor,
     }"
     @click="onClick"
-    @touchstart="isActive = true"
+    @touchstart="onTouchStart"
     @touchend="isActive = false"
     @touchcancel="isActive = false"
   >
-    <div :class="['content', hasSubBottomBorder && 'content-hasSubBottomBorder']" :style="{ height, borderBottomColor }">
-      <div class="flex-row center">
-        <div class="function-icon-box" :style="functionIconSize" v-if="icon">
-          <image :style="functionIconSize" :src="icon"></image>
+    <div
+      :class="['content', hasSubBottomBorder && 'content-hasSubBottomBorder']"
+      :style="[height, borderBottomColor]"
+    >
+      <template v-if="direction === 'rtl'">
+        <div class="flex-row center right-box" :style="[disabledCellStyle]">
+          <div v-if="useRightSlot" ref="rightSlot">
+            <slot name="right"> </slot>
+          </div>
+          <text class="right-text" :style="rightTextStyle" v-if="rightText">{{
+            rightText
+          }}</text>
+          <slot name="arrow">
+            <image
+              v-if="hasArrow"
+              class="right-arrow"
+              :src="arrowImg"
+              :style="{ transform: 'scaleX(-1)' }"
+            ></image>
+          </slot>
         </div>
-        <div class="title">
-          <text :class="[centerTitle ? 'center-title' : 'left-title']" :style="{ color: titleColor }">{{ title }}</text>
-          <text v-if="desc" class="desc-text" :style="{ color: descColor }">{{ desc }}</text>
+        <!-- disabledCellStyle 放在顶层在iOS中无效 -->
+        <div class="flex-row center" :style="[disabledCellStyle]">
+          <div class="title">
+            <text
+              :class="[centerTitle ? 'center-title' : 'left-title']"
+              :style="{ color: titleColor }"
+              >{{ title }}</text
+            >
+            <text v-if="desc" class="desc-text" :style="{ color: descColor }">{{
+              desc
+            }}</text>
+          </div>
+          <div class="function-icon-box" :style="functionIconSize" v-if="icon">
+            <image :style="functionIconSize" :src="icon"></image>
+          </div>
         </div>
-      </div>
+      </template>
+      <template v-else>
+        <!-- disabledCellStyle 放在顶层在iOS中无效 -->
+        <div class="flex-row center" :style="[disabledCellStyle]">
+          <div class="function-icon-box" :style="functionIconSize" v-if="icon">
+            <image :style="functionIconSize" :src="icon"></image>
+          </div>
+          <div class="title">
+            <text
+              :class="[centerTitle ? 'center-title' : 'left-title']"
+              :style="{ color: titleColor }"
+              >{{ title }}</text
+            >
+            <text v-if="desc" class="desc-text" :style="{ color: descColor }">{{
+              desc
+            }}</text>
+          </div>
+        </div>
 
-      <div class="flex-row center right-box">
-        <slot name="right"> </slot>
-        <text class="right-text" :style="rightTextStyle" v-if="rightText">{{ rightText }}</text>
-        <slot name="arrow">
-          <image v-if="hasArrow" class="right-arrow" :src="arrowImg"></image>
-        </slot>
-      </div>
+        <div class="flex-row center right-box" :style="[disabledCellStyle]">
+          <div v-if="useRightSlot" ref="rightSlot">
+            <slot name="right"> </slot>
+          </div>
+          <text class="right-text" :style="rightTextStyle" v-if="rightText">{{
+            rightText
+          }}</text>
+          <slot name="arrow">
+            <image v-if="hasArrow" class="right-arrow" :src="arrowImg"></image>
+          </slot>
+        </div>
+      </template>
     </div>
-    <div class="shade" :style="disabledCellStyle" v-if="disabled" @click.stop></div>
+    <!-- <div class="shade" :style="disabledCellStyle" v-if="disabled" @click.stop></div> -->
   </div>
 </template>
 
 <script>
+const dom = weex.requireModule("dom");
+
 export default {
   props: {
     icon: {
       type: String,
-      default: '',
+      default: "",
     },
     iconSize: {
       type: Number,
@@ -46,11 +102,11 @@ export default {
     },
     iconBgColor: {
       type: String,
-      default: 'transparent',
+      default: "transparent",
     },
     title: {
       type: String,
-      default: '',
+      default: "",
     },
     titleBoldValue: {
       type: Number,
@@ -58,12 +114,12 @@ export default {
     },
     titleColor: {
       type: String,
-      default: '#000000',
+      default: "#000000",
     },
     arrowImg: {
       type: String,
       default:
-        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAAAOVBMVEUAAADJyc3IyMzT09PJyM3Ix8zIx8zKyM7MzMzZ2dnJyM3MzM7JyMzJyMzKyM3Ix83IyMzR0dHJx808kUS0AAAAE3RSTlMAQcMR8v/8UzIG3SXn5lbldBaAAtNjAgAAAFdJREFUeAHty8UBBCEABLAV3KH/Xk9awGXyzwUAu7uf5869L6GU8cwsKM3fUpVsbZbdtsJ2C26/6g70T2Vdx/7X65oXF/cl+fcSufdPqtz7F1OK11oA4AvF0waYqfefXQAAAABJRU5ErkJggg==',
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAAAOVBMVEUAAADJyc3IyMzT09PJyM3Ix8zIx8zKyM7MzMzZ2dnJyM3MzM7JyMzJyMzKyM3Ix83IyMzR0dHJx808kUS0AAAAE3RSTlMAQcMR8v/8UzIG3SXn5lbldBaAAtNjAgAAAFdJREFUeAHty8UBBCEABLAV3KH/Xk9awGXyzwUAu7uf5869L6GU8cwsKM3fUpVsbZbdtsJ2C26/6g70T2Vdx/7X65oXF/cl+fcSufdPqtz7F1OK11oA4AvF0waYqfefXQAAAABJRU5ErkJggg==",
     },
     hasArrow: {
       type: Boolean,
@@ -71,19 +127,19 @@ export default {
     },
     rightText: {
       type: String,
-      default: '',
+      default: "",
     },
     desc: {
       type: String,
-      default: '',
+      default: "",
     },
     descColor: {
       type: String,
-      default: '#8A8A8F',
+      default: "#8A8A8F",
     },
-    bottomBorderColor:{
-      type:String,
-      default:'#f2f2f2'
+    bottomBorderColor: {
+      type: String,
+      default: "#f2f2f2",
     },
     hasSubBottomBorder: {
       type: Boolean,
@@ -99,96 +155,145 @@ export default {
     },
     rightTextColor: {
       type: String,
-      default: '#666666',
+      default: "#666666",
     },
     disabled: {
       type: Boolean,
       default: false,
     },
-    disabledColor: {
-      type: String,
-      default: 'rgba(255, 255, 255, 0.7)',
-    },
+    // disabledColor: {
+    //   type: String,
+    //   default: 'rgba(255, 255, 255, 0.7)',
+    // },
     cellStyle: {
       type: Object,
       default: () => ({
-        height: '0px',
-        backgroundColor: '#FFFFFF',
+        height: "0px",
+        backgroundColor: "#FFFFFF",
       }),
     },
     isHighlight: {
       type: Boolean,
       default: true,
     },
+    isNoHighlightOnRightSlot: {
+      type: Boolean,
+      default: true,
+    },
     activeBgColor: {
       type: String,
-      default: '#E5E5E8',
+      default: "#E5E5E8",
+    },
+    useRightSlot: {
+      type: Boolean,
+      default: false,
+    },
+    direction: {
+      type: String,
+      default: "ltr",
     },
   },
-  name: 'ColmoCell',
+  name: "ColmoCell",
   components: {},
-  data () {
+  data() {
     return {
       isActive: false,
-    }
+      rightSlotSize: {
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+      },
+    };
   },
   computed: {
-    curCellStyle () {
-      const { cellStyle } = this
+    curCellStyle() {
+      const { cellStyle } = this;
 
       return {
         ...cellStyle,
         height: this.height,
-      }
+      };
     },
-    disabledCellStyle () {
-      const { cellStyle } = this
+    disabledCellStyle() {
+      if (this.disabled) {
+        return { opacity: 0.3 };
+      } else {
+        return { opacity: 1 };
+      }
+      // const { cellStyle } = this
+      // return {
+      //   ...cellStyle,
+      //   height: this.height,
+      //   backgroundColor: this.disabledColor,
+      // }
+    },
+    height() {
+      if (this.cellStyle.height && this.cellStyle.height !== "0px") {
+        return this.cellStyle.height;
+      }
+      return this.desc ? { height: "160px" } : { height: "104px" }; //有一个1px的border问题，透露背景色问题（渲染机制导致）
+    },
+    functionIconSize() {
       return {
-        ...cellStyle,
-        height: this.height,
-        backgroundColor: this.disabledColor,
-      }
-    },
-    height () {
-      if (this.cellStyle.height && this.cellStyle.height !== '0px') {
-        return this.cellStyle.height
-      }
-      return this.desc ? '160px' : '104px' //有一个1px的border问题，透露背景色问题（渲染机制导致）
-    },
-    functionIconSize () {
-      return {
-        width: this.iconSize + 'px',
-        height: this.iconSize + 'px',
-        borderRadius: this.iconSize / 2 + 'px',
+        width: this.iconSize + "px",
+        height: this.iconSize + "px",
+        borderRadius: this.iconSize / 2 + "px",
         backgroundColor: this.iconBgColor,
-      }
+      };
     },
-    rightTextStyle () {
+    rightTextStyle() {
       if (this.rightTextColor) {
         return {
           color: this.rightTextColor,
-        }
+        };
       } else {
-        return {}
+        return {};
       }
     },
-    borderBottomColor () {
-      return this.bottomBorderColor
-    }
+    borderBottomColor() {
+      return { borderBottomColor: this.bottomBorderColor };
+    },
   },
   watch: {},
   methods: {
-    onClick (e) {
-      this.$emit('cellClicked', e)
+    onClick(e) {
+      if (this.disabled) {
+        this.$emit("cellDisabled", e);
+      } else {
+        this.$emit("cellClicked", e);
+      }
+    },
+
+    onTouchStart(e) {
+      const { screenX, screenY } = e.changedTouches[0];
+      //因为在iOS中，无法阻止手势事件冒泡
+      //只要点(screenX, screenY)不在rightSlot区域内则高亮
+      if (
+        this.rightSlotSize.top >= screenY ||
+        this.rightSlotSize.bottom <= screenY ||
+        this.rightSlotSize.left >= screenX ||
+        this.rightSlotSize.right <= screenX
+      ) {
+        this.isActive = true;
+      }
     },
   },
 
-  created () {},
+  created() {},
 
-  mounted () {},
+  mounted() {
+    if (this.useRightSlot && this.isNoHighlightOnRightSlot) {
+      setTimeout(() => {
+        dom.getComponentRect(this.$refs.rightSlot, (option) => {
+          this.rightSlotSize = option.size;
+        });
+      }, 200);
+    }
+  },
 
-  destroyed () {},
-}
+  destroyed() {},
+};
 </script>
 
 <style scoped>

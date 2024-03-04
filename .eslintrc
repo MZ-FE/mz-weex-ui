@@ -17,6 +17,6 @@
     "semi": "off",
     "no-control-regex": "off",
     "vue/html-self-closing": "off",
-    "space-before-function-paren": 2
+    "space-before-function-paren": 0
   }
 }

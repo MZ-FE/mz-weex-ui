@@ -47,6 +47,7 @@
 | cellStyle | `Object` |`No`| `{height: '0px',backgroundColor: '#FFFFFF'}` | 自定义cell的样式 |
 | isHighlight | `Boolean` |`No`| `true` | cell列表点击是否显示背景色 |
 | activeBgColor | `String` |`No`| `#E5E5E8` | cell点中时的底色，类似:active |
+| direction | `String` |`No`| `ltr` | rtl适用于阿拉伯语言 |
 
 ## 事件
 
