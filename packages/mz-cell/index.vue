@@ -18,34 +18,70 @@
       :class="['content', hasSubBottomBorder && 'content-hasSubBottomBorder']"
       :style="[height, borderBottomColor]"
     >
-      <!-- disabledCellStyle 放在顶层在iOS中无效 -->
-      <div class="flex-row center" :style="[disabledCellStyle]">
-        <div class="function-icon-box" :style="functionIconSize" v-if="icon">
-          <image :style="functionIconSize" :src="icon"></image>
-        </div>
-        <div class="title">
-          <text
-            :class="[centerTitle ? 'center-title' : 'left-title']"
-            :style="{ color: titleColor }"
-            >{{ title }}</text
-          >
-          <text v-if="desc" class="desc-text" :style="{ color: descColor }">{{
-            desc
+      <template v-if="direction === 'rtl'">
+        <div class="flex-row center right-box" :style="[disabledCellStyle]">
+          <div v-if="useRightSlot" ref="rightSlot">
+            <slot name="right"> </slot>
+          </div>
+          <text class="right-text" :style="rightTextStyle" v-if="rightText">{{
+            rightText
           }}</text>
+          <slot name="arrow">
+            <image
+              v-if="hasArrow"
+              class="right-arrow"
+              :src="arrowImg"
+              :style="{ transform: 'scaleX(-1)' }"
+            ></image>
+          </slot>
         </div>
-      </div>
+        <!-- disabledCellStyle 放在顶层在iOS中无效 -->
+        <div class="flex-row center" :style="[disabledCellStyle]">
+          <div class="title">
+            <text
+              :class="[centerTitle ? 'center-title' : 'left-title']"
+              :style="{ color: titleColor }"
+              >{{ title }}</text
+            >
+            <text v-if="desc" class="desc-text" :style="{ color: descColor }">{{
+              desc
+            }}</text>
+          </div>
+          <div class="function-icon-box" :style="functionIconSize" v-if="icon">
+            <image :style="functionIconSize" :src="icon"></image>
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <!-- disabledCellStyle 放在顶层在iOS中无效 -->
+        <div class="flex-row center" :style="[disabledCellStyle]">
+          <div class="function-icon-box" :style="functionIconSize" v-if="icon">
+            <image :style="functionIconSize" :src="icon"></image>
+          </div>
+          <div class="title">
+            <text
+              :class="[centerTitle ? 'center-title' : 'left-title']"
+              :style="{ color: titleColor }"
+              >{{ title }}</text
+            >
+            <text v-if="desc" class="desc-text" :style="{ color: descColor }">{{
+              desc
+            }}</text>
+          </div>
+        </div>
 
-      <div class="flex-row center right-box" :style="[disabledCellStyle]">
-        <div v-if="useRightSlot" ref="rightSlot">
-          <slot name="right"> </slot>
+        <div class="flex-row center right-box" :style="[disabledCellStyle]">
+          <div v-if="useRightSlot" ref="rightSlot">
+            <slot name="right"> </slot>
+          </div>
+          <text class="right-text" :style="rightTextStyle" v-if="rightText">{{
+            rightText
+          }}</text>
+          <slot name="arrow">
+            <image v-if="hasArrow" class="right-arrow" :src="arrowImg"></image>
+          </slot>
         </div>
-        <text class="right-text" :style="rightTextStyle" v-if="rightText">{{
-          rightText
-        }}</text>
-        <slot name="arrow">
-          <image v-if="hasArrow" class="right-arrow" :src="arrowImg"></image>
-        </slot>
-      </div>
+      </template>
     </div>
     <!-- <div class="shade" :style="disabledCellStyle" v-if="disabled" @click.stop></div> -->
   </div>
@@ -151,6 +187,10 @@ export default {
     useRightSlot: {
       type: Boolean,
       default: false,
+    },
+    direction: {
+      type: String,
+      default: "ltr",
     },
   },
   name: "ColmoCell",
