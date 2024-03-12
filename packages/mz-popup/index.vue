@@ -32,7 +32,13 @@
               ...btnStyle(index),
               color: btn.textColor || '#267aff',
               backgroundColor:
-                index === btnActiveIndex ? (btn.btnActiveColor ? btn.btnActiveColor : btnActiveColor) : (btn.btnColor ? btn.btnColor : btnColor),
+                index === btnActiveIndex
+                  ? btn.btnActiveColor
+                    ? btn.btnActiveColor
+                    : btnActiveColor
+                  : btn.btnColor
+                  ? btn.btnColor
+                  : btnColor,
             }"
             @touchstart="btnActiveIndex = index"
             @touchend="btnActiveIndex = -1"
@@ -225,9 +231,20 @@ module.exports = {
       return b.top < p.top + p.height && p.top < b.top + b.height;
     },
     isIpx() {
+      /**
+     * "iPhone10,1", "iPhone10,4":                        iPhone 8
+       "iPhone10,2", "iPhone10,5":                        iPhone 8 Plus
+       "iPhone10,3", "iPhone10,6":                        iPhone X
+       "iPhone11,2":                                      iPhone Xs
+     */
       const { deviceModel } = weex.config.env;
       const match = deviceModel.match(/^iPhone(\d*),(\d*)$/);
-      return !!match && (match[1] > 10 || (match[1] === 10 && match[2] > 2));
+      return (
+        !!match &&
+        (match[1] > 10 ||
+          (match[1] == 10 && match[2] == 3) ||
+          (match[1] == 10 && match[2] == 6))
+      );
     },
   },
   mounted() {
