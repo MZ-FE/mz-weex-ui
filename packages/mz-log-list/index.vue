@@ -124,6 +124,7 @@ export default {
 }
 .item-content {
   font-family: PingFangSC-Regular;
+  height: 30px;
   font-size: 24px;
   line-height: 24px;
   font-weight: 400;
@@ -156,7 +157,7 @@ export default {
 .rightIcon {
   position: absolute;
   right: 32px;
-  top: 24px;
+  top: 30px;
 }
 .text-warn {
   color: #ff3b30;
