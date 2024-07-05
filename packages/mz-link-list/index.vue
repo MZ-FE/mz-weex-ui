@@ -1,8 +1,12 @@
 <template>
   <scroller class="link-list" scroll-direction="horizontal">
-    <text v-for="(item, index) in list" :key="index" :style="getItemStyle(item)" @click="clickLink(item)">{{
-      item.name
-    }}</text>
+    <text
+      v-for="(item, index) in list"
+      :key="index"
+      :style="getItemStyle(item)"
+      @click="clickLink(item)"
+      >{{ item.name }}</text
+    >
   </scroller>
 </template>
 
@@ -11,57 +15,65 @@ export default {
   props: {
     list: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     itemStyle: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
+    itemCheckedStyle: {
+      type: Object,
+      default: () => ({}),
+    },
   },
-  name: 'index',
+  name: "index",
   components: {},
   data() {
-    return {}
+    return {};
   },
   computed: {},
   watch: {},
   methods: {
     clickLink(item) {
-      this.$emit('select', item)
+      this.$emit("select", item);
     },
     getItemStyle(item, index) {
       let style = Object.assign(
         {
-          marginRight: index === this.list.length - 1 ? '0' : '20px',
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderColor: 'rgba(199, 199, 204, 1)',
-          fontSize: '26px',
-          lineHeight: '72px',
-          textAlign: 'center',
-          borderRadius: '36px'
+          marginRight: index === this.list.length - 1 ? "0" : "20px",
+          borderWidth: "1px",
+          borderStyle: "solid",
+          borderColor: "rgba(199, 199, 204, 1)",
+          fontSize: "26px",
+          lineHeight: "72px",
+          textAlign: "center",
+          borderRadius: "36px",
         },
         this.itemStyle
-      )
+      );
 
       if (item.checked) {
-        Object.assign(style, {
-          borderWidth: '0',
-          color: '#fff',
-          backgroundColor: '#267aff'
-        })
+        Object.assign(
+          style,
+          {
+            borderWidth: "0",
+            color: "#fff",
+            backgroundColor: "#267aff",
+          },
+          this.itemCheckedStyle
+        );
       }
 
-      return style
-    }
+      return style;
+    },
   },
 
   created() {},
 
   mounted() {},
 
-  destroyed() {}
-}
+  destroyed() {},
+};
 </script>
 
 <style scoped>
