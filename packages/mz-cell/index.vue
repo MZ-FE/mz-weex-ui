@@ -23,17 +23,18 @@
           <div v-if="useRightSlot" ref="rightSlot">
             <slot name="right"> </slot>
           </div>
-          <text class="right-text" :style="rightTextStyle" v-if="rightText">{{
-            rightText
-          }}</text>
+
           <slot name="arrow">
             <image
               v-if="hasArrow"
-              class="right-arrow"
+              class="left-arrow"
               :src="arrowImg"
               :style="{ transform: 'scaleX(-1)' }"
             ></image>
           </slot>
+          <text class="right-text" :style="rightTextStyle" v-if="rightText">{{
+            rightText
+          }}</text>
         </div>
         <!-- disabledCellStyle 放在顶层在iOS中无效 -->
         <div class="flex-row center" :style="[disabledCellStyle]">
@@ -345,6 +346,11 @@ export default {
   width: 40px;
   height: 40px;
   margin-right: -10px;
+}
+.left-arrow {
+  width: 40px;
+  height: 40px;
+  margin-left: -10px;
 }
 .right-text {
   font-family: PingFangSC-Regular;
