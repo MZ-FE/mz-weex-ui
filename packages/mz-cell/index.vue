@@ -15,11 +15,15 @@
     @touchcancel="isActive = false"
   >
     <div
-      :class="['content', hasSubBottomBorder && 'content-hasSubBottomBorder']"
+      :class="[
+        'content',
+        hasSubBottomBorder && 'content-hasSubBottomBorder',
+        direction === 'rtl' && 'rtl-content',
+      ]"
       :style="[height, borderBottomColor]"
     >
       <template v-if="direction === 'rtl'">
-        <div class="flex-row center right-box" :style="[disabledCellStyle]">
+        <div class="flex-row center left-box" :style="[disabledCellStyle]">
           <div v-if="useRightSlot" ref="rightSlot">
             <slot name="right"> </slot>
           </div>
@@ -38,17 +42,21 @@
         </div>
         <!-- disabledCellStyle 放在顶层在iOS中无效 -->
         <div class="flex-row center" :style="[disabledCellStyle]">
-          <div class="title">
+          <div class="title right-title-box">
             <text
-              :class="[centerTitle ? 'center-title' : 'left-title']"
-              :style="{ color: titleColor }"
+              :class="[centerTitle ? 'center-title' : 'right-title']"
+              :style="titleStyle"
               >{{ title }}</text
             >
-            <text v-if="desc" class="desc-text" :style="{ color: descColor }">{{
+            <text v-if="desc" class="desc-text" :style="descStyle">{{
               desc
             }}</text>
           </div>
-          <div class="function-icon-box" :style="functionIconSize" v-if="icon">
+          <div
+            class="function-icon-box rtl-function-icon-box"
+            :style="functionIconSize"
+            v-if="icon"
+          >
             <image :style="functionIconSize" :src="icon"></image>
           </div>
         </div>
@@ -59,13 +67,13 @@
           <div class="function-icon-box" :style="functionIconSize" v-if="icon">
             <image :style="functionIconSize" :src="icon"></image>
           </div>
-          <div class="title">
+          <div class="title left-title-box">
             <text
               :class="[centerTitle ? 'center-title' : 'left-title']"
-              :style="{ color: titleColor }"
+              :style="titleStyle"
               >{{ title }}</text
             >
-            <text v-if="desc" class="desc-text" :style="{ color: descColor }">{{
+            <text v-if="desc" class="desc-text" :style="descStyle">{{
               desc
             }}</text>
           </div>
@@ -109,13 +117,11 @@ export default {
       type: String,
       default: "",
     },
-    titleBoldValue: {
-      type: Number,
-      default: 400,
-    },
-    titleColor: {
-      type: String,
-      default: "#000000",
+    titleStyle: {
+      type: Object,
+      default: () => ({
+        color: "#000000",
+      }),
     },
     arrowImg: {
       type: String,
@@ -133,6 +139,10 @@ export default {
     desc: {
       type: String,
       default: "",
+    },
+    descWidth: {
+      type: Number,
+      default: 0,
     },
     descColor: {
       type: String,
@@ -255,6 +265,12 @@ export default {
     borderBottomColor() {
       return { borderBottomColor: this.bottomBorderColor };
     },
+    descStyle() {
+      return {
+        color: this.descColor,
+        width: this.descWidth !== 0 ? `${this.descWidth}px` : undefined,
+      };
+    },
   },
   watch: {},
   methods: {
@@ -305,6 +321,13 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+.right-title-box {
+  align-items: flex-end;
+}
+
+.left-title-box {
+  align-items: flex-start;
+}
 
 .center {
   justify-content: center;
@@ -321,6 +344,10 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+.rtl-content {
+  margin-left: 0px;
+  margin-right: 32px;
+}
 .content-hasSubBottomBorder {
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -333,6 +360,11 @@ export default {
 .left-title {
   font-family: PingFangSC-Regular;
   margin-right: 16px;
+  font-size: 32px;
+}
+.right-title {
+  font-family: PingFangSC-Regular;
+  margin-left: 16px;
   font-size: 32px;
 }
 .center-title {
@@ -371,8 +403,15 @@ export default {
 .function-icon-box {
   margin-right: 24px;
 }
+.rtl-function-icon-box {
+  margin-right: 0px;
+  margin-left: 24px;
+}
 .right-box {
   margin-right: 32px;
+}
+.left-box {
+  margin-left: 32px;
 }
 .shade {
   position: absolute;

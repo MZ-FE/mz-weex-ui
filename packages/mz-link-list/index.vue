@@ -40,7 +40,7 @@ export default {
     getItemStyle(item, index) {
       let style = Object.assign(
         {
-          marginRight: index === this.list.length - 1 ? "0" : "20px",
+          margin: "16px",
           borderWidth: "1px",
           borderStyle: "solid",
           borderColor: "rgba(199, 199, 204, 1)",
@@ -79,7 +79,7 @@ export default {
 <style scoped>
 .link-list {
   width: 750px;
-  padding: 24px 32px;
+  padding: 24px 16px;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
