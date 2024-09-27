@@ -38,6 +38,7 @@
 | ---- | :----------:|:----:|:-------:|
 | list |列表数据| `Array` | `[]` |
 | itemStyle | 按钮元素样式配置对象 | `Object` | `{}`
+| itemCheckedStyle | 按钮元素选中样式配置对象 | `Object` | `{}`
 
 #### list数据结构
 | Prop | Description | Type | Default |

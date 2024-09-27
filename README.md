@@ -12,7 +12,7 @@
 
 ## 文档
 
-* **[主页](https://worldsoon.github.io/mz-weex-ui/#/cn/)**
+* **[主页](https://mz-fe.github.io/mz-weex-ui/#/cn/)**
 
 ## 安装
 
