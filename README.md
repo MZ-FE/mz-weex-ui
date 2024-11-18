@@ -53,7 +53,7 @@ npm run start
 
 一旦它编译完成后，将会自动打开一个浏览器，你可以将浏览器切换到开发者模式，这时候在 console 中你可以看到一个预览二维码，直接使用你的 Weex App 扫码就可以看到 Demo 效果。
 
-### 本地发布并在隔壁项目直接调试
+### 本地发布并在其他项目直接调试
 
 全局安装 [yalc](https://github.com/wclr/yalc)
 ```shell
