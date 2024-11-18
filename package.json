@@ -1,6 +1,6 @@
 {
   "name": "mz-weex-ui",
-  "version": "1.10.2",
+  "version": "1.11.0",
   "description": "A rich interaction, lightweight, high performance UI library based on Weex",
   "main": "index.js",
   "lib": "vue",
@@ -20,7 +20,7 @@
     "serve": "anywhere -d build/example/ -p 8888",
     "start": "npm run serve > &1 & npm run watch > &1 & ",
     "doc": "docsify serve",
-    "async": "npm run build && yalc push"
+    "async": "yalc push"
   },
   "keywords": [
     "MZ Weex Ui",
@@ -72,7 +72,6 @@
   "dependencies": {
     "dayjs": "^1.8.29",
     "url-loader": "^4.1.1",
-    "url-parse": "^1.4.3",
     "weex-bindingx": "0.0.49"
   }
 }
